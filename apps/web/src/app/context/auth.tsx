@@ -10,11 +10,7 @@ import { CognitoUser } from '@aws-amplify/auth';
 import { CognitoUserSession } from 'amazon-cognito-identity-js';
 import { HubCallback } from '@aws-amplify/core/lib/Hub';
 
-interface IAuthContext {
-  user: CognitoUser | null;
-  login(username: string, password: string): Promise<CognitoUser | null>;
-  logout(): ReturnType<typeof Auth.signOut>;
-}
+//https://gist.github.com/groundedSAGE/995dc2e14845980fdc547c8ba510169c
 
 Amplify.configure({
   aws_project_region: process.env.NX_REACT_APP_REGION,
@@ -30,6 +26,12 @@ Amplify.configure({
   },
 });
 
+interface IAuthContext {
+  user: CognitoUser | null;
+  login(username: string, password: string): Promise<CognitoUser | null>;
+  logout(): ReturnType<typeof Auth.signOut>;
+}
+
 const login = (username: string, password: string): Promise<CognitoUser> =>
   Auth.signIn(username, password);
 
@@ -40,6 +42,7 @@ const getSession = (): Promise<CognitoUserSession | null> =>
 
 const useCognito = () => {
   const [user, setUser] = useState<CognitoUser | null>(null);
+
   const authListener: HubCallback = ({ payload: { event, data } }) => {
     switch (event) {
       case 'signIn':
@@ -59,7 +62,6 @@ const useCognito = () => {
         if (session && session.isValid()) {
           const user = await Auth.currentUserInfo();
           setUser(user);
-          console.log('fetched', user);
         }
       } catch (error) {
         console.error(error);

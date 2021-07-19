@@ -3,21 +3,49 @@ import { ReactComponent as Logo } from '../../assets/logo.svg';
 import { UserIcon, LockClosedIcon } from '@heroicons/react/outline';
 import { useAuth } from '../context/auth';
 
+import { Redirect, useHistory, useLocation } from 'react-router-dom';
+
+interface LocationState {
+  from: {
+    pathname: string;
+  };
+}
+
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const { login } = useAuth();
+  const { login, user } = useAuth();
+  const history = useHistory();
+  const location = useLocation<LocationState>();
+  const { from } = location.state || { from: { pathname: '/' } };
 
   const handleLogin = useCallback(
-    (event) => {
+    async (event) => {
       event.preventDefault();
 
-      login(username, password);
+      try {
+        await login(username, password);
+
+        history.replace(from);
+      } catch (e) {
+        console.error('cannot login', e);
+      }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [username, password]
   );
+
+  if (user !== null) {
+    return (
+      <Redirect
+        to={{
+          pathname: '/dashboard',
+          state: { from: location },
+        }}
+      />
+    );
+  }
 
   return (
     <div className="container mx-auto h-full min-h-screen flex flex-1 justify-center items-center px-5">
