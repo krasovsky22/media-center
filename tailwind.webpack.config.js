@@ -4,6 +4,7 @@ module.exports = (config) => {
   nrwlConfig(config);
   return {
     ...config,
+    node: { global: true, fs: 'empty' },
     plugins: [...config.plugins],
     module: {
       rules: [

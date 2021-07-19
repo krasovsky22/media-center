@@ -1,3 +1,4 @@
+import { withAuthenticator } from 'aws-amplify-react';
 import React from 'react';
 import { Navbar } from '../components';
 
@@ -11,3 +12,5 @@ const DashboardPage: React.FC = () => {
     </>
   );
 };
+
+export default DashboardPage;
