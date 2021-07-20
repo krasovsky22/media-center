@@ -8,6 +8,7 @@ import {
   RouteProps,
 } from 'react-router-dom';
 import { Loading } from './components';
+import { ROUTE_LOGOUT, ROUTE_PLAYER } from './routes';
 
 const SuspenseLoader = () => (
   <div className="h-screen flex">
@@ -43,23 +44,28 @@ const PrivateRoute = ({ children, ...rest }: RouteProps) => {
 
 const LoginPage = React.lazy(() => import('./pages/auth/login'));
 const LogoutPage = React.lazy(() => import('./pages/auth/logout'));
-const DashboardPage = React.lazy(async () => import('./pages/dashboard'));
+const PlayerPage = React.lazy(async () => import('./pages/player'));
+const NotFoundPage = React.lazy(async () => import('./pages/errors/notfound'));
+
 export function App() {
   return (
     <AuthProvider>
-      <div className="container bg-green-50 min-h-screen min-w-full">
+      <div className="container bg-green-50 min-h-screen min-w-full relative">
         <React.Suspense fallback={<SuspenseLoader />}>
           <Router>
             <Switch>
               <Route exact path="/">
                 <LoginPage />
               </Route>
-              <PrivateRoute path="/logout">
+              <PrivateRoute path={ROUTE_LOGOUT}>
                 <LogoutPage />
               </PrivateRoute>
-              <PrivateRoute path="/dashboard">
-                <DashboardPage />
+              <PrivateRoute path={ROUTE_PLAYER}>
+                <PlayerPage />
               </PrivateRoute>
+              <Route path="*">
+                <NotFoundPage />
+              </Route>
             </Switch>
           </Router>
         </React.Suspense>
