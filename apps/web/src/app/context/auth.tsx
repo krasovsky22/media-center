@@ -27,6 +27,7 @@ Amplify.configure({
 });
 
 interface IAuthContext {
+  isInitializing: boolean;
   user: CognitoUser | null;
   login(username: string, password: string): Promise<CognitoUser | null>;
   logout(): ReturnType<typeof Auth.signOut>;
@@ -42,6 +43,7 @@ const getSession = (): Promise<CognitoUserSession | null> =>
 
 const useCognito = () => {
   const [user, setUser] = useState<CognitoUser | null>(null);
+  const [isInitializing, setIsInitializing] = useState(true);
 
   const authListener: HubCallback = ({ payload: { event, data } }) => {
     switch (event) {
@@ -66,6 +68,8 @@ const useCognito = () => {
       } catch (error) {
         console.error(error);
       }
+
+      setIsInitializing(false);
     })();
   }, []);
 
@@ -74,10 +78,11 @@ const useCognito = () => {
     return () => Hub.remove('auth', authListener);
   }, []);
 
-  return { user, login, logout };
+  return { user, login, logout, isInitializing };
 };
 
 const AuthContext = createContext<IAuthContext>({
+  isInitializing: true,
   user: null,
   login,
   logout,

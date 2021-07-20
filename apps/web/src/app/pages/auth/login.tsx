@@ -1,9 +1,9 @@
-import React, { useState, useCallback, useMemo } from 'react';
-import { ReactComponent as Logo } from '../../assets/logo.svg';
-import { UserIcon, LockClosedIcon } from '@heroicons/react/outline';
-import { useAuth } from '../context/auth';
-
+import { LockClosedIcon, UserIcon } from '@heroicons/react/outline';
+import React, { useCallback, useState } from 'react';
 import { Redirect, useHistory, useLocation } from 'react-router-dom';
+import { ReactComponent as Logo } from '../../../assets/logo.svg';
+import { Loading } from '../../components';
+import { useAuth } from '../../context/auth';
 
 interface LocationState {
   from: {
@@ -15,7 +15,7 @@ const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const { login, user } = useAuth();
+  const { isInitializing, login, user } = useAuth();
   const history = useHistory();
   const location = useLocation<LocationState>();
   const { from } = location.state || { from: { pathname: '/' } };
@@ -35,6 +35,14 @@ const LoginPage: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [username, password]
   );
+
+  if (isInitializing) {
+    return (
+      <div className="flex h-screen">
+        <Loading />
+      </div>
+    );
+  }
 
   if (user !== null) {
     return (
