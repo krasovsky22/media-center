@@ -5,6 +5,7 @@ import { ReactComponent as Logo } from '../../../assets/logo.svg';
 import { Loading } from '../../components';
 import { useAuth } from '../../context/auth';
 import { ROUTE_PLAYER } from '../../routes';
+
 interface LocationState {
   from: {
     pathname: string;
@@ -17,16 +18,18 @@ const LoginPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const { isInitializing, login, user } = useAuth();
+  const { isInitializing, login, googleLogin, user } = useAuth();
   const history = useHistory();
   const location = useLocation<LocationState>();
   const { from } = location.state || { from: { pathname: '/' } };
 
-  const signUpClick = useCallback((event) => {
+  const googleLoginClick = useCallback((event) => {
     event.preventDefault();
     event.stopPropagation();
+    setIsLoading(true);
 
-    console.log('sign up clicked');
+    googleLogin();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handleLogin = useCallback(
     async (event) => {
@@ -120,10 +123,10 @@ const LoginPage: React.FC = () => {
                     Login
                   </button>
                   <button
-                    className="bg-green-200 hover:bg-green-400 text-white font-bold py-2 px-4 rounded"
-                    onClick={signUpClick}
+                    className="bg-red-300 hover:bg-red-500 text-white font-bold py-2 px-4 rounded"
+                    onClick={googleLoginClick}
                   >
-                    SignUp
+                    Google Login
                   </button>
                 </div>
               </form>

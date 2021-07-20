@@ -9,6 +9,7 @@ import Amplify, { Auth, Hub } from 'aws-amplify';
 import { CognitoUser } from '@aws-amplify/auth';
 import { CognitoUserSession } from 'amazon-cognito-identity-js';
 import { HubCallback } from '@aws-amplify/core/lib/Hub';
+import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth/lib/types';
 
 //https://gist.github.com/groundedSAGE/995dc2e14845980fdc547c8ba510169c
 
@@ -23,6 +24,14 @@ Amplify.configure({
     region: process.env.NX_REACT_APP_REGION,
     userPoolId: process.env.NX_REACT_APP_USER_POOL_ID,
     userPoolWebClientId: process.env.NX_REACT_APP_CLIENT_ID,
+
+    oauth: {
+      domain: process.env.NX_REACT_APP_COGNITO_DOMAIN,
+      scope: ['email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
+      redirectSignIn: process.env.NX_REACT_APP_APP_HOST,
+      redirectSignOut: process.env.NX_REACT_APP_APP_HOST,
+      responseType: 'code',
+    },
   },
 });
 
@@ -30,6 +39,7 @@ interface IAuthContext {
   isInitializing: boolean;
   user: CognitoUser | null;
   login(username: string, password: string): Promise<CognitoUser | null>;
+  googleLogin(): Promise<unknown>;
   logout(): ReturnType<typeof Auth.signOut>;
 }
 
@@ -37,6 +47,9 @@ const login = (username: string, password: string): Promise<CognitoUser> =>
   Auth.signIn(username, password);
 
 const logout = (): Promise<unknown> => Auth.signOut();
+
+const googleLogin = (): Promise<unknown> =>
+  Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Google });
 
 const getSession = (): Promise<CognitoUserSession | null> =>
   Auth.currentSession();
@@ -78,13 +91,14 @@ const useCognito = () => {
     return () => Hub.remove('auth', authListener);
   }, []);
 
-  return { user, login, logout, isInitializing };
+  return { user, login, logout, googleLogin, isInitializing };
 };
 
 const AuthContext = createContext<IAuthContext>({
   isInitializing: true,
   user: null,
   login,
+  googleLogin,
   logout,
 });
 
