@@ -13,6 +13,8 @@ import { CognitoUserSession } from 'amazon-cognito-identity-js';
 import { HubCallback } from '@aws-amplify/core/lib/Hub';
 import { googleAuthService } from '../services';
 import { Credentials } from 'google-auth-library';
+import { ROUTE_GOOGLE_CALLBACK } from '../routes';
+import { useEnvVariables } from '../hooks';
 
 //https://gist.github.com/groundedSAGE/995dc2e14845980fdc547c8ba510169c
 
@@ -48,7 +50,12 @@ const getSession = (): Promise<CognitoUserSession | null> =>
   Auth.currentSession();
 
 const useGoogle = () => {
-  const google = useMemo(() => googleAuthService(), []);
+  const { app_host } = useEnvVariables();
+  const appHostUrl = app_host.replace(/\/?$/, '/');
+  const google = useMemo(
+    () => googleAuthService(`${appHostUrl}${ROUTE_GOOGLE_CALLBACK}`),
+    []
+  );
   const [token, setTokens] = useState<Credentials | null>(google.token);
 
   useEffect(() => {

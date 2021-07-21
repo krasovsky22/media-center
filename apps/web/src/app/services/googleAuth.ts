@@ -9,12 +9,10 @@ const getCachedTokens = (): Credentials | null => {
 
 type Subscriber = (tokens: Credentials) => unknown;
 
-const googleAuthService = () => {
+const googleAuthService = (redirectUri: string) => {
   const scopes = ['https://www.googleapis.com/auth/youtube.readonly'];
-  const clientId =
-    '554041888337-m7qjhesfp68p9ql20qjkv5pm20oduvan.apps.googleusercontent.com';
-  const clientSecret = 'VlDI9n4eai1phbpBzkUoSSvc';
-  const redirectUri = 'http://localhost:4200/google/callback';
+  const clientId = process.env?.NX_REACT_APP_GOOGLE_CLIENT_ID ?? '';
+  const clientSecret = process.env?.NX_REACT_APP_GOOGLE_CLIENT_SECRET ?? '';
   const oAuth2Client = new OAuth2Client(clientId, clientSecret, redirectUri);
 
   let subscribers: Subscriber[] = [];
@@ -26,15 +24,15 @@ const googleAuthService = () => {
     console.log('from localstorage', tokens);
   }
 
-  oAuth2Client.on('tokens', (tokens) => {
-    console.log('event', tokens);
-    oAuth2Client.setCredentials(tokens);
+  oAuth2Client.on('tokens', (refreshedTokens) => {
+    const newTokens = { ...tokens, ...refreshedTokens };
+    oAuth2Client.setCredentials(newTokens);
 
     //update localstorage with new tokens
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(tokens));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(newTokens));
 
     //notify subscribers
-    subscribers.forEach((subscriber) => subscriber(tokens));
+    subscribers.forEach((subscriber) => subscriber(newTokens));
   });
 
   return {
@@ -55,7 +53,7 @@ const googleAuthService = () => {
         scope: scopes,
       }),
 
-    getAccessToken: async () => await oAuth2Client.getAccessToken(),
+    refreshToken: async () => await oAuth2Client.refreshAccessToken(),
 
     get token() {
       return getCachedTokens();

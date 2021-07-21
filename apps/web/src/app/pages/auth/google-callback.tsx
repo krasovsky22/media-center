@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Loading } from '../../components';
 import { useAuth } from '../../context/auth';
-import useQuery from '../../hooks/useQuery';
+import { useQuery } from '../../hooks';
 import { ROUTE_PLAYER } from '../../routes';
 
 const GoogleCallbackPage = () => {
   const [isInitializing, setIsInitializing] = useState(true);
-  const history = useHistory();
 
   const code = useQuery().get('code');
   const { google } = useAuth();
@@ -20,6 +19,7 @@ const GoogleCallbackPage = () => {
         setIsInitializing(false);
       }
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code]);
 
   if (!isInitializing) {

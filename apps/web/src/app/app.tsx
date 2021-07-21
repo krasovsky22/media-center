@@ -48,7 +48,7 @@ const PrivateRoute = ({ children, ...rest }: RouteProps) => {
 
 const LoginPage = React.lazy(() => import('./pages/auth/login'));
 const GoogleCallbackPage = React.lazy(
-  () => import('./pages/auth/googleCallback')
+  () => import('./pages/auth/google-callback')
 );
 const LogoutPage = React.lazy(() => import('./pages/auth/logout'));
 const PlayerPage = React.lazy(async () => import('./pages/player'));
