@@ -4,12 +4,15 @@ import React, {
   createContext,
   useContext,
   ReactNode,
+  useMemo,
+  useCallback,
 } from 'react';
 import Amplify, { Auth, Hub } from 'aws-amplify';
 import { CognitoUser } from '@aws-amplify/auth';
 import { CognitoUserSession } from 'amazon-cognito-identity-js';
 import { HubCallback } from '@aws-amplify/core/lib/Hub';
-import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth/lib/types';
+import { googleAuthService } from '../services';
+import { Credentials } from 'google-auth-library';
 
 //https://gist.github.com/groundedSAGE/995dc2e14845980fdc547c8ba510169c
 
@@ -24,14 +27,6 @@ Amplify.configure({
     region: process.env.NX_REACT_APP_REGION,
     userPoolId: process.env.NX_REACT_APP_USER_POOL_ID,
     userPoolWebClientId: process.env.NX_REACT_APP_CLIENT_ID,
-
-    oauth: {
-      domain: process.env.NX_REACT_APP_COGNITO_DOMAIN,
-      scope: ['email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
-      redirectSignIn: process.env.NX_REACT_APP_APP_HOST,
-      redirectSignOut: process.env.NX_REACT_APP_APP_HOST,
-      responseType: 'code',
-    },
   },
 });
 
@@ -39,20 +34,32 @@ interface IAuthContext {
   isInitializing: boolean;
   user: CognitoUser | null;
   login(username: string, password: string): Promise<CognitoUser | null>;
-  googleLogin(): Promise<unknown>;
-  logout(): ReturnType<typeof Auth.signOut>;
+  logout: () => Promise<void>;
+  isLoggedIn: boolean;
+
+  google?: ReturnType<typeof googleAuthService>;
+  googleToken: Credentials | null;
 }
 
 const login = (username: string, password: string): Promise<CognitoUser> =>
   Auth.signIn(username, password);
 
-const logout = (): Promise<unknown> => Auth.signOut();
-
-const googleLogin = (): Promise<unknown> =>
-  Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Google });
-
 const getSession = (): Promise<CognitoUserSession | null> =>
   Auth.currentSession();
+
+const useGoogle = () => {
+  const google = useMemo(() => googleAuthService(), []);
+  const [token, setTokens] = useState<Credentials | null>(google.token);
+
+  useEffect(() => {
+    google.subscribe(setTokens);
+
+    return () => google.unsubscribeAll();
+  }, []);
+
+  console.log('asda', token);
+  return { google, token };
+};
 
 const useCognito = () => {
   const [user, setUser] = useState<CognitoUser | null>(null);
@@ -73,13 +80,18 @@ const useCognito = () => {
     (async () => {
       try {
         const session = await getSession();
-
         if (session && session.isValid()) {
           const user = await Auth.currentUserInfo();
-          setUser(user);
+
+          if (Object.values(user).length > 0) {
+            setUser(user);
+          }
+
+          // const attributes = await Auth.userAttributes(user);
+          // console.log('ATTR', attributes);
         }
       } catch (error) {
-        console.error(error);
+        console.error(error.message);
       }
 
       setIsInitializing(false);
@@ -91,15 +103,18 @@ const useCognito = () => {
     return () => Hub.remove('auth', authListener);
   }, []);
 
-  return { user, login, logout, googleLogin, isInitializing };
+  return { user, login, isInitializing };
 };
 
 const AuthContext = createContext<IAuthContext>({
   isInitializing: true,
   user: null,
   login,
-  googleLogin,
-  logout,
+  isLoggedIn: false,
+  logout: async () => {
+    return;
+  },
+  googleToken: null,
 });
 
 export const useAuth = () => {
@@ -108,6 +123,21 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const auth = useCognito();
+  const { google, token } = useGoogle();
 
-  return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
+  const isLoggedIn = useMemo(() => {
+    return auth.user !== null && token !== null;
+  }, [auth.user, token]);
+
+  const logout = useCallback(async () => {
+    await Promise.all([Auth.signOut(), google?.destroySession()]);
+  }, []);
+
+  return (
+    <AuthContext.Provider
+      value={{ ...auth, google, logout, isLoggedIn, googleToken: token }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };

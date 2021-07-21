@@ -8,7 +8,9 @@ import {
   RouteProps,
 } from 'react-router-dom';
 import { Loading } from './components';
-import { ROUTE_LOGOUT, ROUTE_PLAYER } from './routes';
+import { ROUTE_LOGOUT, ROUTE_PLAYER, ROUTE_GOOGLE_CALLBACK } from './routes';
+
+import { ServicesProvider } from './context/services';
 
 const SuspenseLoader = () => (
   <div className="h-screen flex">
@@ -17,32 +19,37 @@ const SuspenseLoader = () => (
 );
 
 const PrivateRoute = ({ children, ...rest }: RouteProps) => {
-  const { isInitializing, user } = useAuth();
+  const { isInitializing, isLoggedIn } = useAuth();
 
   if (isInitializing) {
     return <SuspenseLoader />;
   }
 
   return (
-    <Route
-      {...rest}
-      render={({ location }) =>
-        user ? (
-          children
-        ) : (
-          <Redirect
-            to={{
-              pathname: '/',
-              state: { from: location },
-            }}
-          />
-        )
-      }
-    />
+    <ServicesProvider>
+      <Route
+        {...rest}
+        render={({ location }) =>
+          isLoggedIn ? (
+            children
+          ) : (
+            <Redirect
+              to={{
+                pathname: '/',
+                state: { from: location },
+              }}
+            />
+          )
+        }
+      />
+    </ServicesProvider>
   );
 };
 
 const LoginPage = React.lazy(() => import('./pages/auth/login'));
+const GoogleCallbackPage = React.lazy(
+  () => import('./pages/auth/googleCallback')
+);
 const LogoutPage = React.lazy(() => import('./pages/auth/logout'));
 const PlayerPage = React.lazy(async () => import('./pages/player'));
 const NotFoundPage = React.lazy(async () => import('./pages/errors/notfound'));
@@ -56,6 +63,9 @@ export function App() {
             <Switch>
               <Route exact path="/">
                 <LoginPage />
+              </Route>
+              <Route exact path={ROUTE_GOOGLE_CALLBACK}>
+                <GoogleCallbackPage />
               </Route>
               <PrivateRoute path={ROUTE_LOGOUT}>
                 <LogoutPage />

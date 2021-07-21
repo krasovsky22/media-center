@@ -5,12 +5,7 @@ import { ReactComponent as Logo } from '../../../assets/logo.svg';
 import { Loading } from '../../components';
 import { useAuth } from '../../context/auth';
 import { ROUTE_PLAYER } from '../../routes';
-
-interface LocationState {
-  from: {
-    pathname: string;
-  };
-}
+import { LocationState } from './commongTypes';
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -18,19 +13,15 @@ const LoginPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const { isInitializing, login, googleLogin, user } = useAuth();
-  const history = useHistory();
+  const { isInitializing, login, isLoggedIn, google } = useAuth();
   const location = useLocation<LocationState>();
-  const { from } = location.state || { from: { pathname: '/' } };
 
   const googleLoginClick = useCallback((event) => {
     event.preventDefault();
     event.stopPropagation();
     setIsLoading(true);
-
-    googleLogin();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const handleLogin = useCallback(
     async (event) => {
       event.preventDefault();
@@ -38,7 +29,12 @@ const LoginPage: React.FC = () => {
       try {
         await login(username, password);
 
-        history.replace(from);
+        // generate google access token
+        const url = google?.generateAuthUrl();
+
+        if (url) {
+          window.location.href = url;
+        }
       } catch (e) {
         console.error('cannot login', e);
         setError(e.message);
@@ -58,7 +54,7 @@ const LoginPage: React.FC = () => {
     );
   }
 
-  if (!isLoading && user !== null) {
+  if (isLoggedIn) {
     return (
       <Redirect
         to={{
@@ -122,12 +118,12 @@ const LoginPage: React.FC = () => {
                   >
                     Login
                   </button>
-                  <button
+                  {/* <button
                     className="bg-red-300 hover:bg-red-500 text-white font-bold py-2 px-4 rounded"
                     onClick={googleLoginClick}
                   >
                     Google Login
-                  </button>
+                  </button> */}
                 </div>
               </form>
             </div>

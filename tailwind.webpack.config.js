@@ -4,7 +4,15 @@ module.exports = (config) => {
   nrwlConfig(config);
   return {
     ...config,
-    node: { global: true, fs: 'empty' },
+    node: {
+      global: true,
+      fs: 'empty',
+      child_process: 'empty',
+      net: 'empty',
+      dns: 'empty',
+      tls: 'empty',
+      http2: 'empty',
+    },
     plugins: [...config.plugins],
     module: {
       rules: [
