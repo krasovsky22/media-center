@@ -5,11 +5,11 @@ import { useAuth } from './auth';
 
 type ServicesContextType = {
   youtubeService?: ReturnType<typeof youtubeServiceFactory>;
-  executeTokenRequest: <T>(arg: () => unknown) => T | null;
+  executeTokenRequest: <T>(arg: () => unknown) => Promise<T | null>;
 };
 
 const ServicesContext = createContext<ServicesContextType>({
-  executeTokenRequest: () => {
+  executeTokenRequest: async () => {
     return null;
   },
 });
