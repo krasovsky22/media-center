@@ -8,20 +8,17 @@ const YoutubePlaylistContainer: React.FC = () => {
   const [playlists, setPlaylists] = useState<YoutubePlaylistType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { google } = useAuth();
-  const { youtubeService } = useServices();
+  const { youtubeService, executeTokenRequest } = useServices();
 
   //load playlists on mount
   useEffect(() => {
     (async () => {
       setIsLoading(true);
-      try {
-        const data =
-          (await youtubeService?.getPlaylists<YoutubePlaylistType>()) ?? [];
+      const data = await executeTokenRequest<YoutubePlaylistType[]>(
+        () => youtubeService?.getPlaylists<YoutubePlaylistType>() ?? []
+      );
+      if (data) {
         setPlaylists(data);
-      } catch (e) {
-        console.error('ERROR', e);
-        google?.refreshToken();
       }
 
       setIsLoading(false);

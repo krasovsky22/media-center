@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
 import { Disclosure } from '@headlessui/react';
+import React, { useEffect, useState } from 'react';
 import { Loading } from '..';
-import { useAuth } from '../../context/auth';
 import { useServices } from '../../context/services';
 
 export type ThumbnailType = {
@@ -107,21 +106,19 @@ PlayList.Content = ({ playlistId, isOpen = false }: PlaylistContentType) => {
     []
   );
   const [isLoading, setIsLoading] = useState(true);
-  const { google } = useAuth();
-  const { youtubeService } = useServices();
+  const { youtubeService, executeTokenRequest } = useServices();
 
   useEffect(() => {
     if (isOpen && playlistVideos.length === 0) {
       (async () => {
-        try {
-          const playlistItems =
-            (await youtubeService?.getPlaylistItem<YoutubePlaylistItem>(
-              playlistId
-            )) ?? [];
+        const playlistItems = await executeTokenRequest<YoutubePlaylistItem[]>(
+          () =>
+            youtubeService?.getPlaylistItem<YoutubePlaylistItem>(playlistId) ??
+            []
+        );
+
+        if (playlistItems) {
           setPlaylistVideos(playlistItems);
-        } catch (e) {
-          console.error('ERROR', e);
-          google?.refreshToken();
         }
 
         setIsLoading(false);
