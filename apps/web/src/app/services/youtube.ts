@@ -36,7 +36,7 @@ const youtubeServiceFactory = (apiKey: string, accessToken: string) => {
 
     async getPlaylistItem<T>(playlistId: string): Promise<T[]> {
       try {
-        const { data } = await client.get('playlists', {
+        const { data } = await client.get('playlistItems', {
           params: {
             playlistId,
           },
