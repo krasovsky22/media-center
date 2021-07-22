@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Loading } from '../components';
 import PlayList, { YoutubePlaylistType } from '../components/playlist';
-import { useAuth } from '../context/auth';
 import { useServices } from '../context/services';
 
 const YoutubePlaylistContainer: React.FC = () => {

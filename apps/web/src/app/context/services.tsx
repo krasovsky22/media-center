@@ -7,12 +7,16 @@ type ServicesContextType = {
   youtubeService?: ReturnType<typeof youtubeServiceFactory>;
   executeTokenRequest: <T>(arg: () => unknown) => T | null;
 };
+
 const ServicesContext = createContext<ServicesContextType>({
   executeTokenRequest: () => {
     return null;
   },
 });
 
+/**
+ * use executeTokenRequest method to handle access_tokens automatically
+ */
 export function useServices() {
   return useContext(ServicesContext);
 }
@@ -28,11 +32,11 @@ export function ServicesProvider({ children }: withChildren) {
     const accessToken = googleToken?.access_token ?? '';
 
     return youtubeServiceFactory(youtube_api_key, accessToken);
-  }, [googleToken]);
+  }, [googleToken?.access_token, youtube_api_key]);
 
-  const executeTokenRequest = useCallback((callback) => {
+  const executeTokenRequest = useCallback(async (callback) => {
     try {
-      return callback();
+      return await callback();
     } catch (e) {
       console.error('ERROR', e);
       google?.refreshToken();
