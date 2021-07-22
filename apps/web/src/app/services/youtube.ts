@@ -1,22 +1,5 @@
 import axios from 'axios';
 
-export type YoutubePlaylistType = {
-  etag: string;
-  id: string;
-  kind: string;
-  snippet: {
-    channelId: string;
-    channelTitle: string;
-    description: string;
-    localized: {
-      title: string;
-      description: string;
-    };
-    publishedAt: string;
-    title: string;
-  };
-};
-
 const youtubeServiceFactory = (apiKey: string, accessToken: string) => {
   const client = axios.create({
     baseURL: 'https://www.googleapis.com/youtube/v3/',
@@ -33,11 +16,11 @@ const youtubeServiceFactory = (apiKey: string, accessToken: string) => {
   });
 
   return {
-    async getPlaylists(): Promise<YoutubePlaylistType[]> {
+    async getPlaylists<T>(): Promise<T[]> {
       try {
         const { data } = await client.get('playlists');
 
-        return (data?.items ?? []) as YoutubePlaylistType[];
+        return (data?.items ?? []) as T[];
       } catch (error) {
         if (error.response) {
           // Request made and server responded
@@ -51,20 +34,19 @@ const youtubeServiceFactory = (apiKey: string, accessToken: string) => {
       return [];
     },
 
-    async getPlaylistItem(playlistId: string) {
+    async getPlaylistItem<T>(playlistId: string): Promise<T[]> {
       try {
         const { data } = await client.get('playlists', {
           params: {
             playlistId,
           },
         });
-
-        console.log(data);
-
-        return data.items;
+        return data.items as T[];
       } catch (e) {
         console.error(e.message);
       }
+
+      return [];
     },
   };
 };
