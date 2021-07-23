@@ -16,7 +16,7 @@ const LoginPage: React.FC = () => {
   const { isInitializing, login, isLoggedIn, google } = useAuth();
   const location = useLocation<LocationState>();
 
-  const googleLoginClick = useCallback((event) => {
+  const signUpCallback = useCallback((event) => {
     event.preventDefault();
     event.stopPropagation();
     setIsLoading(true);
@@ -118,12 +118,12 @@ const LoginPage: React.FC = () => {
                   >
                     Login
                   </button>
-                  {/* <button
+                  <button
                     className="bg-red-300 hover:bg-red-500 text-white font-bold py-2 px-4 rounded"
-                    onClick={googleLoginClick}
+                    onClick={signUpCallback}
                   >
-                    Google Login
-                  </button> */}
+                    Sign Up
+                  </button>
                 </div>
               </form>
             </div>

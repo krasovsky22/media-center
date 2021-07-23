@@ -51,7 +51,7 @@ const getSession = (): Promise<CognitoUserSession | null> =>
 
 const useGoogle = () => {
   const { app_host } = useEnvVariables();
-  const appHostUrl = app_host.replace(/\/?$/, '/');
+  const appHostUrl = app_host.replace(/\/?$/, '');
   const google = useMemo(
     () => googleAuthService(`${appHostUrl}${ROUTE_GOOGLE_CALLBACK}`),
     []
@@ -62,9 +62,9 @@ const useGoogle = () => {
     google.subscribe(setTokens);
 
     return () => google.unsubscribeAll();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log('asda', token);
   return { google, token };
 };
 
@@ -93,9 +93,6 @@ const useCognito = () => {
           if (Object.values(user).length > 0) {
             setUser(user);
           }
-
-          // const attributes = await Auth.userAttributes(user);
-          // console.log('ATTR', attributes);
         }
       } catch (error) {
         console.error(error.message);
