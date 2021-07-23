@@ -4,9 +4,9 @@ import { Loading } from './components';
 import { useAuth } from './context/auth';
 import { ServicesProvider } from './context/services';
 
-export const ROUTE_LOGOUT = '/logout';
 export const SIGN_UP = '/signup';
 export const ROUTE_PLAYER = '/player';
+export const ROUTE_LOGOUT = '/logout';
 export const ROUTE_GOOGLE_CALLBACK = '/google/callback';
 
 type RouteType = RouteProps & {
@@ -23,6 +23,10 @@ export const Routes: RouteType[] = [
     path: ROUTE_GOOGLE_CALLBACK,
     exact: true,
     component: React.lazy(() => import('./pages/auth/google-callback')),
+  },
+  {
+    path: SIGN_UP,
+    component: React.lazy(() => import('./pages/auth/signup')),
   },
   {
     path: ROUTE_LOGOUT,

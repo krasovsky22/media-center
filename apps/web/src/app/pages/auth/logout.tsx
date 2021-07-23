@@ -14,7 +14,11 @@ const LogoutPage: React.FC = () => {
 
   useEffect(() => {
     (async () => {
-      await logout();
+      try {
+        await logout();
+      } catch (e) {
+        console.error(e);
+      }
       history.push('/');
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps

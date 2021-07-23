@@ -1,63 +1,27 @@
 import { LockClosedIcon, UserIcon } from '@heroicons/react/outline';
-import React, { useCallback, useState } from 'react';
-import { Link, Redirect, useHistory, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
 import { ReactComponent as Logo } from '../../../assets/logo.svg';
 import { Loading } from '../../components';
-import { useAuth } from '../../context/auth';
-import { ROUTE_PLAYER, SIGN_UP } from '../../routes';
-import { LocationState } from './commongTypes';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
-const LoginPage: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+type FormInputsType = {
+  username: string;
+  password: string;
+  email: string;
+};
+
+const SignUpPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
 
-  const { isInitializing, login, isLoggedIn, google } = useAuth();
-  const location = useLocation<LocationState>();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormInputsType>();
+  const onSubmit: SubmitHandler<FormInputsType> = (data) => console.log(data);
 
-  const handleLogin = useCallback(
-    async (event) => {
-      event.preventDefault();
-      setIsLoading(true);
-      try {
-        await login(username, password);
-
-        // generate google access token
-        const url = google?.generateAuthUrl();
-
-        if (url) {
-          window.location.href = url;
-        }
-      } catch (e) {
-        console.error('cannot login', e);
-        setError(e.message);
-      }
-
-      setIsLoading(false);
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [username, password]
-  );
-
-  if (isInitializing) {
-    return (
-      <div className="flex h-screen">
-        <Loading />
-      </div>
-    );
-  }
-
-  if (isLoggedIn) {
-    return (
-      <Redirect
-        to={{
-          pathname: ROUTE_PLAYER,
-          state: { from: location },
-        }}
-      />
-    );
-  }
+  console.log('esad', errors);
 
   return (
     <>
@@ -69,15 +33,18 @@ const LoginPage: React.FC = () => {
               <div className="hidden laptop:block">
                 <Logo />
               </div>
-              <form className="flex flex-col gap-4" onSubmit={handleLogin}>
-                {error && (
+              <form
+                className="flex flex-col gap-4"
+                onSubmit={handleSubmit(onSubmit)}
+              >
+                {/* {errors && (
                   <div
                     role="alert"
                     className="bg-red-100 border border-red-400 text-red-500 px-4 py-3 rounded relative text-sm"
                   >
-                    <p>{error}</p>
+                    <p>{errors}</p>
                   </div>
-                )}
+                )} */}
                 <div className="flex relative">
                   <div className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm w-10">
                     <UserIcon />
@@ -86,12 +53,10 @@ const LoginPage: React.FC = () => {
                     className="rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent focus:bg-yellow-300"
                     id="username"
                     placeholder="Username"
-                    value={username}
-                    onChange={(event) => setUsername(event.target.value)}
-                    required
+                    {...register('username', { required: true })}
                   ></input>
                 </div>
-                <div className="flex relative">
+                {/* <div className="flex relative">
                   <div className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm w-10">
                     <LockClosedIcon />
                   </div>
@@ -104,19 +69,18 @@ const LoginPage: React.FC = () => {
                     onChange={(event) => setPassword(event.target.value)}
                     required
                   ></input>
-                </div>
+                </div> */}
+                
                 <div className="flex flex-row-reverse place-content-between">
-                  <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border-blue-700 rounded"
-                    onClick={handleLogin}
-                  >
-                    Login
+                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border-blue-700 rounded">
+                    Sign Up
                   </button>
-                  <Link to={SIGN_UP}>
-                    <button className="bg-red-300 hover:bg-red-500 text-white font-bold py-2 px-4 rounded">
-                      Sign Up
-                    </button>
-                  </Link>
+                  {/* <button
+                    className="bg-red-300 hover:bg-red-500 text-white font-bold py-2 px-4 rounded"
+                    onClick={signUpCallback}
+                  >
+                    Sign Up
+                  </button> */}
                 </div>
               </form>
             </div>
@@ -127,4 +91,4 @@ const LoginPage: React.FC = () => {
   );
 };
 
-export default LoginPage;
+export default SignUpPage;
