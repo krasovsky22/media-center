@@ -1,5 +1,7 @@
+import { Box } from '@chakra-ui/react';
 import { Disclosure } from '@headlessui/react';
 import React, { useEffect, useState } from 'react';
+import ReactPlayer from 'react-player/lazy';
 import { Loading } from '..';
 import { useServices } from '../../context/services';
 
@@ -53,6 +55,7 @@ export type YoutubePlaylistItem = {
       defamediumult: ThumbnailType;
       standard: ThumbnailType;
     };
+    resourceId: { kind: string; videoId: string };
     title: string;
   };
 };
@@ -73,29 +76,30 @@ const PlayList = ({
   return (
     <Disclosure>
       {({ open }) => (
-        <div className="max-w-md  bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl relative">
-          <div className="md:flex items-center">
-            <div className="md:flex-shrink-0">
-              <Disclosure.Button>
-                <img
-                  className="w-full object-cover"
-                  src={playlist.snippet.thumbnails.default.url}
-                  height={playlist.snippet.thumbnails.default.height}
-                  width={playlist.snippet.thumbnails.default.width}
-                  alt="A cat"
-                />
-              </Disclosure.Button>
-            </div>
+        <Box
+          className="rounded-md shadow-md overflow-hidden md:max-w-2xl relative w-full m-0"
+          backgroundColor="yellow.300"
+        >
+          <div className="flex items-center flex-shrink-1 rounded-xl p-5">
+            <Disclosure.Button>
+              <img
+                className="w-full object-cover rounded-md"
+                src={playlist.snippet.thumbnails.default.url}
+                height={playlist.snippet.thumbnails.default.height}
+                width={playlist.snippet.thumbnails.default.width}
+                alt="A cat"
+              />
+            </Disclosure.Button>
             <div className="flex-grow w-full align-middle  text-center justify-center">
               <Disclosure.Button className="text-lg w-full">
                 {playlist.snippet.title}
               </Disclosure.Button>
             </div>
           </div>
-          <Disclosure.Panel className="flex-grow " unmount={false}>
+          <Disclosure.Panel className="flex-grow bg-gray-300" unmount={false}>
             {children(open)}
           </Disclosure.Panel>
-        </div>
+        </Box>
       )}
     </Disclosure>
   );
@@ -136,6 +140,14 @@ PlayList.Content = ({ playlistId, isOpen = false }: PlaylistContentType) => {
       {playlistVideos.map((video) => (
         <div key={video.id} className="p-5 border-2">
           {video.snippet.title}
+          <ReactPlayer
+            loop={true}
+            stopOnUnmount={true}
+            height={60}
+            width="auto"
+            url={`https://www.youtube.com/watch?v=${video.snippet.resourceId.videoId}`}
+            controls
+          ></ReactPlayer>
         </div>
       ))}
     </div>

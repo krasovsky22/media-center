@@ -1,3 +1,4 @@
+import { Flex, Grid, HStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { Loading } from '../components';
 import PlayList, { YoutubePlaylistType } from '../components/playlist';
@@ -28,7 +29,12 @@ const YoutubePlaylistContainer: React.FC = () => {
   return (
     <>
       {isLoading && <Loading />}
-      <div className="flex flex-col gap-1">
+      <Flex
+        flexWrap="wrap"
+        justifyContent="space-around"
+        alignItems="baseline"
+        className="flex-none gap-4"
+      >
         {playlists.map((playlist) => (
           <PlayList key={playlist.id} {...playlist}>
             {(isOpen) => (
@@ -36,7 +42,7 @@ const YoutubePlaylistContainer: React.FC = () => {
             )}
           </PlayList>
         ))}
-      </div>
+      </Flex>
     </>
   );
 };

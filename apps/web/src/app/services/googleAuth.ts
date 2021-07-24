@@ -21,7 +21,6 @@ const googleAuthService = (redirectUri: string) => {
   const tokens = getCachedTokens();
   if (tokens) {
     oAuth2Client.setCredentials(tokens);
-    console.log('from localstorage', tokens);
   }
 
   oAuth2Client.on('tokens', (refreshedTokens) => {

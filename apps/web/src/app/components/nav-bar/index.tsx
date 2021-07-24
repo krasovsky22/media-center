@@ -6,7 +6,6 @@ import { ReactComponent as Logo } from '../../../assets/logo.svg';
 
 type NavigationType = { name: string; href: string; current: boolean };
 
-console.log(Logo);
 const navigation: NavigationType[] = [
   // { name: 'Dashboard', href: '#', current: true },
   // { name: 'Team', href: '#', current: false },
