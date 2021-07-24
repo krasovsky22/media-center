@@ -42,7 +42,7 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-            - project/build
+            - project/dist
   deploy:
     executor: aws-cli/default
     steps:
