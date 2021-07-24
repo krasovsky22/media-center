@@ -1,5 +1,5 @@
 import { LockClosedIcon, UserIcon } from '@heroicons/react/outline';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useRef, useEffect } from 'react';
 import { Link, Redirect, useLocation } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../../assets/logo.svg';
 import { Loading } from '../../components';
@@ -12,9 +12,14 @@ const LoginPage: React.FC = () => {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const usernameInput = useRef<HTMLInputElement>(null);
 
   const { isInitializing, login, isLoggedIn, google } = useAuth();
   const location = useLocation<LocationState>();
+
+  useEffect(() => {
+    usernameInput.current?.focus();
+  }, []);
 
   const handleLogin = useCallback(
     async (event) => {
@@ -88,6 +93,7 @@ const LoginPage: React.FC = () => {
                     placeholder="Username"
                     value={username}
                     onChange={(event) => setUsername(event.target.value)}
+                    ref={usernameInput}
                     required
                   ></input>
                 </div>

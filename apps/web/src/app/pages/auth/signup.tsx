@@ -1,7 +1,7 @@
 import { LockClosedIcon, MailIcon, UserIcon } from '@heroicons/react/outline';
 import React, { useCallback, useState } from 'react';
 import { DeepMap, FieldError, SubmitHandler, useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../../assets/logo.svg';
 import { Loading } from '../../components';
 import { useAuth } from '../../context/auth';
@@ -166,6 +166,9 @@ const SignUpPage: React.FC = () => {
                     onClick={() => clearErrors()}
                   >
                     Sign Up
+                  </button>
+                  <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 border-yellow-700 rounded">
+                    <Link to="/">Back</Link>
                   </button>
                 </div>
               </form>

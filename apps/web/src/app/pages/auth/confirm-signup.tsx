@@ -38,7 +38,7 @@ const ConfirmSignUp: React.FC = () => {
         await confirmSignUp(username, verificationCode);
 
         setIsLoading(false);
-        history.push(ROUTE_PLAYER);
+        history.push('/');
       } catch (e) {
         setError(e.message);
       }
