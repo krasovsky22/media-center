@@ -25,7 +25,7 @@ commands:
           key: dependency-cache-{{ checksum "package.json" }}
   build-app:
     steps:
-      - run: yarn nx affected --target=build --base=$NX_BASE
+      - run: yarn nx run web:build --configuration=production && yarn nx run infrastructure:build --configuration=production
   deploy-app:
     steps:
       - run: yarn deploy

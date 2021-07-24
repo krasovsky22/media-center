@@ -22,7 +22,7 @@
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "deploy": "npm run build && cdk bootstrap && cdk deploy -v --require-approval never"
+    "deploy": "cdk bootstrap && cdk deploy -v --require-approval never"
   },
   "private": true,
   "dependencies": {
