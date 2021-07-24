@@ -8,7 +8,7 @@ import { ROUTE_PLAYER } from '../../routes';
 const GoogleCallbackPage = () => {
   const [isInitializing, setIsInitializing] = useState(true);
 
-  const code = useQuery().get('code');
+  const code = useQuery('code') as string;
   const { google } = useAuth();
 
   useEffect(() => {

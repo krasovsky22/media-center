@@ -1,27 +1,75 @@
-import { LockClosedIcon, UserIcon } from '@heroicons/react/outline';
-import React, { useState } from 'react';
+import { LockClosedIcon, MailIcon, UserIcon } from '@heroicons/react/outline';
+import React, { useCallback, useState } from 'react';
+import { DeepMap, FieldError, SubmitHandler, useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../../assets/logo.svg';
 import { Loading } from '../../components';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useAuth } from '../../context/auth';
+import { CONFIRM_SIGN_UP } from '../../routes';
 
 type FormInputsType = {
   username: string;
   password: string;
+  verifyPassword: string;
   email: string;
+  authentication: string;
+};
+
+const ErrorsContainer = ({
+  errors,
+}: {
+  errors: DeepMap<FormInputsType, FieldError>;
+}) => {
+  const errorInputs = Object.keys(errors) as (keyof FormInputsType)[];
+
+  return (
+    <div
+      role="alert"
+      className="bg-red-100 border border-red-400 text-red-500 px-4 py-3 rounded relative text-sm"
+    >
+      {errorInputs.map((input) => (
+        <li key={input}>{`${input !== 'authentication' ? input + ':' : ''} ${
+          errors[input]?.message ?? ''
+        }`}</li>
+      ))}
+    </div>
+  );
 };
 
 const SignUpPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const { signUp } = useAuth();
+  const history = useHistory();
 
   const {
+    clearErrors,
+    setError,
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<FormInputsType>();
-  const onSubmit: SubmitHandler<FormInputsType> = (data) => console.log(data);
 
-  console.log('esad', errors);
+  const onSubmit: SubmitHandler<FormInputsType> = useCallback(async (data) => {
+    setIsLoading(true);
+    if (data.password !== data.verifyPassword) {
+      setError('verifyPassword', {
+        type: 'manual',
+        message: "Passwords don't match",
+      });
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      await signUp(data.username, data.password, data.email);
+
+      history.push(`${CONFIRM_SIGN_UP}?username=${data.username}`);
+    } catch (e) {
+      setError('authentication', { type: 'manual', message: e.message });
+    }
+
+    setIsLoading(false);
+  }, []);
 
   return (
     <>
@@ -37,14 +85,12 @@ const SignUpPage: React.FC = () => {
                 className="flex flex-col gap-4"
                 onSubmit={handleSubmit(onSubmit)}
               >
-                {/* {errors && (
-                  <div
-                    role="alert"
-                    className="bg-red-100 border border-red-400 text-red-500 px-4 py-3 rounded relative text-sm"
-                  >
-                    <p>{errors}</p>
-                  </div>
-                )} */}
+                {Object.keys(errors).length > 0 && (
+                  <ErrorsContainer errors={errors} />
+                )}
+                <div className="text-center">
+                  <h1 className="font-bold">Sign Up</h1>
+                </div>
                 <div className="flex relative">
                   <div className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm w-10">
                     <UserIcon />
@@ -56,31 +102,71 @@ const SignUpPage: React.FC = () => {
                     {...register('username', { required: true })}
                   ></input>
                 </div>
-                {/* <div className="flex relative">
+
+                <div className="flex relative">
+                  <div className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm w-10">
+                    <MailIcon />
+                  </div>
+                  <input
+                    className="rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent focus:bg-yellow-300"
+                    id="email"
+                    placeholder="Email"
+                    {...register('email', {
+                      required: true,
+                      pattern: {
+                        value:
+                          /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                        message: 'Invalid email address',
+                      },
+                    })}
+                  ></input>
+                </div>
+
+                <div className="flex relative">
                   <div className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm w-10">
                     <LockClosedIcon />
                   </div>
                   <input
                     className="rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent focus:bg-yellow-300"
-                    type="password"
                     id="password"
+                    type="password"
                     placeholder="Password"
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
-                    required
+                    {...register('password', {
+                      required: true,
+                      minLength: {
+                        value: 8,
+                        message: 'Min length is 8',
+                      },
+                    })}
                   ></input>
-                </div> */}
-                
+                </div>
+
+                <div className="flex relative">
+                  <div className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm w-10">
+                    <LockClosedIcon />
+                  </div>
+                  <input
+                    className="rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent focus:bg-yellow-300"
+                    id="verifyPassword"
+                    type="password"
+                    placeholder="Password"
+                    {...register('verifyPassword', {
+                      required: true,
+                      minLength: {
+                        value: 8,
+                        message: 'Min length is 8',
+                      },
+                    })}
+                  ></input>
+                </div>
+
                 <div className="flex flex-row-reverse place-content-between">
-                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border-blue-700 rounded">
-                    Sign Up
-                  </button>
-                  {/* <button
-                    className="bg-red-300 hover:bg-red-500 text-white font-bold py-2 px-4 rounded"
-                    onClick={signUpCallback}
+                  <button
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border-blue-700 rounded"
+                    onClick={() => clearErrors()}
                   >
                     Sign Up
-                  </button> */}
+                  </button>
                 </div>
               </form>
             </div>

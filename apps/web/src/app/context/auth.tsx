@@ -32,9 +32,30 @@ Amplify.configure({
   },
 });
 
+const cognitoSignUp = async (
+  username: string,
+  password: string,
+  email: string
+) => await Auth.signUp({ username, password, attributes: { email } });
+
+const confirmSignUp = async (username: string, code: string) => {
+  await Auth.confirmSignUp(username, code);
+};
+
+const login = (username: string, password: string): Promise<CognitoUser> =>
+  Auth.signIn(username, password);
+
+const getSession = (): Promise<CognitoUserSession | null> =>
+  Auth.currentSession();
+
 interface IAuthContext {
   isInitializing: boolean;
   user: CognitoUser | null;
+  signUp(username: string, password: string, email: string): Promise<void>;
+  confirmSignUp(
+    username: string,
+    code: string
+  ): ReturnType<typeof confirmSignUp>;
   login(username: string, password: string): Promise<CognitoUser | null>;
   logout: () => Promise<void>;
   isLoggedIn: boolean;
@@ -42,12 +63,6 @@ interface IAuthContext {
   google?: ReturnType<typeof googleAuthService>;
   googleToken: Credentials | null;
 }
-
-const login = (username: string, password: string): Promise<CognitoUser> =>
-  Auth.signIn(username, password);
-
-const getSession = (): Promise<CognitoUserSession | null> =>
-  Auth.currentSession();
 
 const useGoogle = () => {
   const { app_host } = useEnvVariables();
@@ -102,18 +117,31 @@ const useCognito = () => {
     })();
   }, []);
 
+  const signUp = useCallback(
+    async (username: string, password: string, email: string) => {
+      const response = await cognitoSignUp(username, password, email);
+
+      setUser(response.user);
+    },
+    []
+  );
+
   useEffect(() => {
     Hub.listen('auth', authListener);
     return () => Hub.remove('auth', authListener);
   }, []);
 
-  return { user, login, isInitializing };
+  return { user, login, signUp, confirmSignUp, isInitializing };
 };
 
 const AuthContext = createContext<IAuthContext>({
   isInitializing: true,
   user: null,
   login,
+  signUp: async () => {
+    return;
+  },
+  confirmSignUp,
   isLoggedIn: false,
   logout: async () => {
     return;
