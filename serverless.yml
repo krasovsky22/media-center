@@ -1,7 +1,0 @@
-name: youtube-player
-website:
-  component: '@serverless/website'
-  inputs:
-    code:
-      src: dist
-      hook: yarn build
