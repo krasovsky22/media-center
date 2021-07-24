@@ -1,6 +1,6 @@
 import { LockClosedIcon, UserIcon } from '@heroicons/react/outline';
 import React, { useCallback, useState } from 'react';
-import { Link, Redirect, useHistory, useLocation } from 'react-router-dom';
+import { Link, Redirect, useLocation } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../../assets/logo.svg';
 import { Loading } from '../../components';
 import { useAuth } from '../../context/auth';
