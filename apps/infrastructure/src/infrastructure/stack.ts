@@ -127,7 +127,7 @@ export class InfrastructureStack extends cdk.Stack {
 
     // Final CloudFront URL
     new cdk.CfnOutput(this, 'CloudFront URL: ', {
-      value: distribution.distributionDomainName,
+      value: `https://${distribution.distributionDomainName}`,
     });
 
     new cdk.CfnOutput(this, 'UserPoolId: ', {

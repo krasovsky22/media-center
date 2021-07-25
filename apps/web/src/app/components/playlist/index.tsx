@@ -1,9 +1,16 @@
-import { Box } from '@chakra-ui/react';
-import { Disclosure } from '@headlessui/react';
+import {
+  AccordionButton,
+  AccordionIcon,
+  AccordionPanel,
+  Box,
+  Container,
+  Flex,
+  Image,
+  Text,
+} from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player/lazy';
-import { Loading } from '..';
-import { useServices } from '../../context/services';
+import Loading from '../loading';
 
 export type ThumbnailType = {
   height: number;
@@ -66,92 +73,85 @@ export type PlaylistContentType = {
 };
 
 type WithChildrenType = {
-  children: (arg: boolean) => React.ReactNode;
+  children: React.ReactNode | React.ReactChildren;
 };
 
-const PlayList = ({
-  children,
-  ...playlist
-}: YoutubePlaylistType & WithChildrenType) => {
+const Playlist = ({ children, ...rest }: WithChildrenType) => {
   return (
-    <Disclosure>
-      {({ open }) => (
-        <Box
-          className="rounded-md shadow-md overflow-hidden md:max-w-2xl relative w-full m-0"
-          backgroundColor="yellow.300"
-        >
-          <div className="flex items-center flex-shrink-1 rounded-xl p-5">
-            <Disclosure.Button>
-              <img
-                className="w-full object-cover rounded-md"
-                src={playlist.snippet.thumbnails.default.url}
-                height={playlist.snippet.thumbnails.default.height}
-                width={playlist.snippet.thumbnails.default.width}
-                alt="A cat"
-              />
-            </Disclosure.Button>
-            <div className="flex-grow w-full align-middle  text-center justify-center">
-              <Disclosure.Button className="text-lg w-full">
-                {playlist.snippet.title}
-              </Disclosure.Button>
-            </div>
-          </div>
-          <Disclosure.Panel className="flex-grow bg-gray-300" unmount={false}>
-            {children(open)}
-          </Disclosure.Panel>
+    <Container textAlign="center" {...rest}>
+      {children}
+    </Container>
+  );
+};
+
+Playlist.AccordionHeader = ({ children, ...rest }: WithChildrenType) => {
+  return (
+    <AccordionButton {...rest}>
+      <Box flex="1" textAlign="left">
+        {children}
+      </Box>
+      <AccordionIcon />
+    </AccordionButton>
+  );
+};
+
+Playlist.AccordionBody = ({ children, ...rest }: WithChildrenType) => {
+  return (
+    <AccordionPanel {...rest}>
+      <Box>{children}</Box>
+    </AccordionPanel>
+  );
+};
+
+Playlist.PlaylistVideoCard = ({
+  video,
+  ...rest
+}: {
+  video: YoutubePlaylistItem;
+  onClick: () => void;
+}) => {
+  return (
+    <Container cursor="pointer" marginBottom="1rem" {...rest}>
+      <Flex gap={1} alignItems="center" alignContent="center">
+        <Image
+          src={video.snippet.thumbnails?.default?.url}
+          height={video.snippet.thumbnails?.default?.height}
+          width={video.snippet.thumbnails?.default?.width}
+        />
+        <Box flexGrow={1} margin="auto">
+          <Text fontSize="md">{video.snippet.title}</Text>
         </Box>
-      )}
-    </Disclosure>
+      </Flex>
+    </Container>
   );
 };
 
-PlayList.Content = ({ playlistId, isOpen = false }: PlaylistContentType) => {
-  const [playlistVideos, setPlaylistVideos] = useState<YoutubePlaylistItem[]>(
-    []
-  );
-  const [isLoading, setIsLoading] = useState(true);
-  const { youtubeService, executeTokenRequest } = useServices();
-
+Playlist.Player = ({ videoId, ...rest }: { videoId: string }) => {
+  const [isInitializing, setIsInitializing] = useState(false);
   useEffect(() => {
-    if (isOpen && playlistVideos.length === 0) {
-      (async () => {
-        const playlistItems = await executeTokenRequest<YoutubePlaylistItem[]>(
-          () =>
-            youtubeService?.getPlaylistItem<YoutubePlaylistItem>(playlistId) ??
-            []
-        );
-
-        if (playlistItems) {
-          setPlaylistVideos(playlistItems);
-        }
-
-        setIsLoading(false);
-      })();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen, playlistId]);
-
-  if (isLoading) {
-    return <Loading />;
-  }
-
+    setIsInitializing(true);
+  }, [videoId]);
   return (
-    <div className="p-5 text-gray-500 flex flex-col w-full gap-1">
-      {playlistVideos.map((video) => (
-        <div key={video.id} className="p-5 border-2">
-          {video.snippet.title}
-          <ReactPlayer
-            loop={true}
-            stopOnUnmount={true}
-            height={60}
-            width="auto"
-            url={`https://www.youtube.com/watch?v=${video.snippet.resourceId.videoId}`}
-            controls
-          ></ReactPlayer>
-        </div>
-      ))}
-    </div>
+    <Box
+      position="fixed"
+      width="-moz-available"
+      marginBottom="5"
+      className="h-5/6"
+    >
+      {isInitializing && <Loading />}
+      <ReactPlayer
+        loop={true}
+        stopOnUnmount={true}
+        width="100%"
+        height="100%"
+        url={`https://www.youtube.com/watch?v=${videoId}`}
+        controls
+        onReady={() => setIsInitializing(false)}
+        playing={true}
+        {...rest}
+      />
+    </Box>
   );
 };
 
-export default PlayList;
+export default Playlist;
