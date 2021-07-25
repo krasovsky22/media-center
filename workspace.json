@@ -18,7 +18,13 @@
             "production": {
               "optimization": true,
               "extractLicenses": true,
-              "inspect": false
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/infrastructure/src/environments/environment.ts",
+                  "with": "apps/infrastructure/src/environments/environment.prod.ts"
+                }
+              ]
             }
           }
         },

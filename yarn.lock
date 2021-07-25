@@ -254,6 +254,19 @@
     "@aws-cdk/core" "1.115.0"
     constructs "^3.3.69"
 
+"@aws-cdk/aws-cognito@^1.115.0":
+  version "1.115.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-cognito/-/aws-cognito-1.115.0.tgz#9fabc9d2afe00c250314c5a5152ed0aeef31ee50"
+  integrity sha512-GIg79AhiVJzbf+EY8lZaQWXnMZS7FQDM4iB4bOHXbSwyQKwXdODf0Ckaz4lnLRuhZgzs1K+usdHZwJPysjtylw==
+  dependencies:
+    "@aws-cdk/aws-certificatemanager" "1.115.0"
+    "@aws-cdk/aws-iam" "1.115.0"
+    "@aws-cdk/aws-lambda" "1.115.0"
+    "@aws-cdk/core" "1.115.0"
+    "@aws-cdk/custom-resources" "1.115.0"
+    constructs "^3.3.69"
+    punycode "^2.1.1"
+
 "@aws-cdk/aws-ec2@1.115.0":
   version "1.115.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-ec2/-/aws-ec2-1.115.0.tgz#a908ae4889b2ba3c90eb082f11bde107ec5c08e3"

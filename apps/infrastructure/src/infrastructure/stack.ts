@@ -2,14 +2,20 @@ import * as cdk from '@aws-cdk/core';
 import * as s3 from '@aws-cdk/aws-s3';
 import * as s3deploy from '@aws-cdk/aws-s3-deployment';
 import * as cloudFront from '@aws-cdk/aws-cloudfront';
+import * as cognito from '@aws-cdk/aws-cognito';
 
 export class InfrastructureStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+  constructor(
+    scope: cdk.Construct,
+    id: string,
+    parameters: Record<string, string>,
+    props?: cdk.StackProps
+  ) {
     super(scope, id, props);
 
     // Add S3 Bucket
     const s3Site = new s3.Bucket(this, `aws-youtube-player`, {
-      bucketName: `krasovsky-youtube-player-s3bucket`,
+      bucketName: parameters.codeBuckedName,
       publicReadAccess: true,
       websiteIndexDocument: 'index.html',
       websiteErrorDocument: 'index.html',
@@ -19,7 +25,7 @@ export class InfrastructureStack extends cdk.Stack {
     // Create a new CloudFront Distribution
     const distribution = new cloudFront.CloudFrontWebDistribution(
       this,
-      `aws-youtube-player-cf-distribution`,
+      parameters.cloudfrontName,
       {
         originConfigs: [
           {
@@ -48,7 +54,7 @@ export class InfrastructureStack extends cdk.Stack {
             ],
           },
         ],
-        comment: `aws youtube player - CloudFront Distribution`,
+        comment: `AWS Youtube Player - CloudFront Distribution`,
         viewerProtocolPolicy: cloudFront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
       }
     );
@@ -65,9 +71,75 @@ export class InfrastructureStack extends cdk.Stack {
       }
     );
 
+    //setup cognito
+    const userPool = new cognito.UserPool(this, parameters.cognitoPoolName, {
+      selfSignUpEnabled: true, //allow users to sign up
+      autoVerify: { email: true }, // verify email addresses by sending a verification code
+      userVerification: {
+        emailSubject: 'Verify your email for YouTube Player app.',
+        emailBody:
+          'Thanks for signing up to youtube player app. Your verification code is {####}',
+        emailStyle: cognito.VerificationEmailStyle.CODE,
+      },
+      signInAliases: {
+        username: true,
+        email: true,
+      },
+      passwordPolicy: {
+        minLength: 8,
+        requireDigits: true,
+        requireSymbols: true,
+        requireUppercase: true,
+        requireLowercase: true,
+      },
+      standardAttributes: {
+        email: {
+          required: true,
+          mutable: false,
+        },
+      },
+    });
+
+    const oAuth: cognito.OAuthSettings = parameters.production
+      ? {
+          callbackUrls: [distribution.distributionDomainName],
+          logoutUrls: [distribution.distributionDomainName],
+        }
+      : {
+          callbackUrls: [
+            `https://${distribution.distributionDomainName}`,
+            process.env.NX_REACT_APP_APP_HOST ?? 'http://localhost:4200',
+          ],
+          logoutUrls: [
+            process.env.NX_REACT_APP_APP_HOST ?? 'http://localhost:4200',
+            `https://${distribution.distributionDomainName}`,
+          ],
+        };
+
+    const userPoolClient = new cognito.UserPoolClient(this, 'web', {
+      userPool,
+      generateSecret: false,
+      oAuth,
+    });
+
+    //distribution should be created before user pool
+    userPoolClient.node.addDependency(distribution);
+
     // Final CloudFront URL
-    new cdk.CfnOutput(this, 'CloudFront URL', {
+    new cdk.CfnOutput(this, 'CloudFront URL: ', {
       value: distribution.distributionDomainName,
+    });
+
+    new cdk.CfnOutput(this, 'UserPoolId: ', {
+      value: userPool.userPoolId,
+    });
+
+    new cdk.CfnOutput(this, 'UserPoolClientId: ', {
+      value: userPoolClient.userPoolClientId,
+    });
+
+    new cdk.CfnOutput(this, 'Region: ', {
+      value: this.region,
     });
   }
 

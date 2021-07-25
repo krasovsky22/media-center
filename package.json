@@ -22,11 +22,13 @@
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "deploy": "cdk bootstrap && cdk deploy -v --require-approval never"
+    "deploy": "yarn clear && yarn nx run web:build:production && yarn nx run infrastructure:build && cdk bootstrap && cdk deploy -v --require-approval never",
+    "clear": "rm -rf node_modules/.cache/nx"
   },
   "private": true,
   "dependencies": {
     "@aws-cdk/aws-cloudfront": "^1.115.0",
+    "@aws-cdk/aws-cognito": "^1.115.0",
     "@aws-cdk/aws-iam": "^1.115.0",
     "@aws-cdk/aws-s3-deployment": "^1.115.0",
     "@aws-cdk/core": "^1.115.0",

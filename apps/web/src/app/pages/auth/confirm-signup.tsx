@@ -36,11 +36,11 @@ const ConfirmSignUp: React.FC = () => {
       setIsLoading(true);
       try {
         await confirmSignUp(username, verificationCode);
-
-        setIsLoading(false);
         history.push('/');
       } catch (e) {
         setError(e.message);
+
+        setIsLoading(false);
       }
     },
     [verificationCode, username]
