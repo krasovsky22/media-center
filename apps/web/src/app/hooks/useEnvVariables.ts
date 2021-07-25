@@ -5,6 +5,5 @@ export default function useEnvVariables() {
     NX_REACT_APP_GOOGLE_CLIENT_SECRET: google_client_secret = '',
     NX_REACT_APP_GOOGLE_CLIENT_ID: google_client_id = '',
   } = process.env;
-
   return { app_host, google_client_secret, google_client_id, youtube_api_key };
 }

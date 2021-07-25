@@ -97,7 +97,7 @@ Playlist.AccordionHeader = ({ children, ...rest }: WithChildrenType) => {
 
 Playlist.AccordionBody = ({ children, ...rest }: WithChildrenType) => {
   return (
-    <AccordionPanel {...rest}>
+    <AccordionPanel padding={0} {...rest}>
       <Box>{children}</Box>
     </AccordionPanel>
   );
@@ -111,17 +111,28 @@ Playlist.PlaylistVideoCard = ({
   onClick: () => void;
 }) => {
   return (
-    <Container cursor="pointer" marginBottom="1rem" {...rest}>
-      <Flex gap={1} alignItems="center" alignContent="center">
-        <Image
-          src={video.snippet.thumbnails?.default?.url}
-          height={video.snippet.thumbnails?.default?.height}
-          width={video.snippet.thumbnails?.default?.width}
-        />
-        <Box flexGrow={1} margin="auto">
-          <Text fontSize="md">{video.snippet.title}</Text>
-        </Box>
-      </Flex>
+    <Container
+      cursor="pointer"
+      marginY="1rem"
+      className="max-h-14 flex gap-1 items-center content-center"
+      {...rest}
+    >
+      <Image
+        src={video.snippet.thumbnails?.default?.url}
+        height="auto"
+        width="auto"
+        className="max-h-14"
+      />
+      <Box margin="auto" flex={4} overflow="auto">
+        <Text
+          whiteSpace="nowrap"
+          wordBreak="break-word"
+          textOverflow="ellipsis"
+          overflow="hidden"
+        >
+          {video.snippet.title}
+        </Text>
+      </Box>
     </Container>
   );
 };
@@ -133,10 +144,9 @@ Playlist.Player = ({ videoId, ...rest }: { videoId: string }) => {
   }, [videoId]);
   return (
     <Box
-      position="fixed"
       width="-moz-available"
       marginBottom="5"
-      className="h-5/6"
+      className="h-5/6 relative md:fixed"
     >
       {isInitializing && <Loading />}
       <ReactPlayer

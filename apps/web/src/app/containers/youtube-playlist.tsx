@@ -78,7 +78,11 @@ const YoutubePlaylistContainer: React.FC = () => {
   );
 
   return (
-    <Flex className="w-full" justifyContent="center" gap={5}>
+    <Flex
+      className="w-full flex-col-reverse md:flex-row"
+      justifyContent="center"
+      gap={5}
+    >
       {isLoading && <Loading />}
       <Playlist>
         <Accordion

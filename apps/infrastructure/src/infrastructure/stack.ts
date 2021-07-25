@@ -3,6 +3,7 @@ import * as s3 from '@aws-cdk/aws-s3';
 import * as s3deploy from '@aws-cdk/aws-s3-deployment';
 import * as cloudFront from '@aws-cdk/aws-cloudfront';
 import * as cognito from '@aws-cdk/aws-cognito';
+import { CfnDistribution } from '@aws-cdk/aws-cloudfront';
 
 export class InfrastructureStack extends cdk.Stack {
   constructor(
@@ -56,6 +57,14 @@ export class InfrastructureStack extends cdk.Stack {
         ],
         comment: `AWS Youtube Player - CloudFront Distribution`,
         viewerProtocolPolicy: cloudFront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        errorConfigurations: [
+          {
+            errorCode: 403,
+            errorCachingMinTtl: 3600,
+            responseCode: 200,
+            responsePagePath: '/index.html',
+          },
+        ],
       }
     );
 

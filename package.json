@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "nx": "nx",
-    "start": "nx serve",
+    "start": "yarn clear &&  nx serve",
     "build": "nx build",
     "test": "nx test",
     "lint": "nx workspace-lint && nx lint",
@@ -22,7 +22,7 @@
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "deploy": "yarn clear && yarn nx run web:build:production && yarn nx run infrastructure:build && cdk bootstrap && cdk deploy -v --require-approval never",
+    "deploy": "yarn clear && cross-env NX_REACT_APP_APP_HOST=https://d1mhqub2mebss3.cloudfront.net yarn nx run web:build:production && yarn nx run infrastructure:build && cdk bootstrap && cdk deploy -v --require-approval never",
     "clear": "rm -rf node_modules/.cache/nx"
   },
   "private": true,
@@ -83,6 +83,7 @@
     "@typescript-eslint/parser": "4.19.0",
     "autoprefixer": "^10.3.1",
     "babel-jest": "26.2.2",
+    "cross-env": "^7.0.3",
     "cypress": "^7.3.0",
     "dotenv": "8.2.0",
     "eslint": "7.22.0",
