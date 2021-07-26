@@ -21,6 +21,11 @@ export class InfrastructureStack extends cdk.Stack {
       websiteIndexDocument: 'index.html',
       websiteErrorDocument: 'index.html',
     });
+
+    //force remove s3 bucket on destroy
+    const cfnBucket = s3Site.node.findChild('Resource') as cdk.CfnResource;
+    cfnBucket.applyRemovalPolicy(cdk.RemovalPolicy.DESTROY);
+
     this.enableCorsOnBucket(s3Site);
 
     // Create a new CloudFront Distribution
@@ -119,6 +124,8 @@ export class InfrastructureStack extends cdk.Stack {
       },
       standardAttributes,
       customAttributes,
+      //remove userpool on destroy
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
 
     const oAuth: cognito.OAuthSettings = {
