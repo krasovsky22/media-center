@@ -27,7 +27,19 @@
     ]
   },
   "projects": {
+    "auth": {
+      "tags": []
+    },
+    "components": {
+      "tags": []
+    },
+    "hooks": {
+      "tags": []
+    },
     "infrastructure": {
+      "tags": []
+    },
+    "services": {
       "tags": []
     },
     "web": {

@@ -3,7 +3,7 @@ import * as s3 from '@aws-cdk/aws-s3';
 import * as s3deploy from '@aws-cdk/aws-s3-deployment';
 import * as cloudFront from '@aws-cdk/aws-cloudfront';
 import * as cognito from '@aws-cdk/aws-cognito';
-import { CfnDistribution } from '@aws-cdk/aws-cloudfront';
+import { ClientAttributes, StringAttribute } from '@aws-cdk/aws-cognito';
 
 export class InfrastructureStack extends cdk.Stack {
   constructor(
@@ -80,6 +80,22 @@ export class InfrastructureStack extends cdk.Stack {
       }
     );
 
+    const standardAttributes = {
+      email: {
+        required: true,
+        mutable: false,
+      },
+    };
+
+    const customAttributes: { [key: string]: cognito.ICustomAttribute } = {
+      'google-refresh-token': new StringAttribute({ mutable: true }),
+    };
+    const customAttributesStrings = Object.keys(customAttributes);
+
+    const clientCustomAttributes = new ClientAttributes()
+      .withStandardAttributes({ email: true })
+      .withCustomAttributes(...customAttributesStrings);
+
     //setup cognito
     const userPool = new cognito.UserPool(this, parameters.cognitoPoolName, {
       selfSignUpEnabled: true, //allow users to sign up
@@ -101,34 +117,27 @@ export class InfrastructureStack extends cdk.Stack {
         requireUppercase: true,
         requireLowercase: true,
       },
-      standardAttributes: {
-        email: {
-          required: true,
-          mutable: false,
-        },
-      },
+      standardAttributes,
+      customAttributes,
     });
 
-    const oAuth: cognito.OAuthSettings = parameters.production
-      ? {
-          callbackUrls: [distribution.distributionDomainName],
-          logoutUrls: [distribution.distributionDomainName],
-        }
-      : {
-          callbackUrls: [
-            `https://${distribution.distributionDomainName}`,
-            process.env.NX_REACT_APP_APP_HOST ?? 'http://localhost:4200',
-          ],
-          logoutUrls: [
-            process.env.NX_REACT_APP_APP_HOST ?? 'http://localhost:4200',
-            `https://${distribution.distributionDomainName}`,
-          ],
-        };
+    const oAuth: cognito.OAuthSettings = {
+      callbackUrls: [
+        `https://${distribution.distributionDomainName}`,
+        process.env.NX_REACT_APP_APP_HOST ?? 'http://localhost:4200',
+      ],
+      logoutUrls: [
+        process.env.NX_REACT_APP_APP_HOST ?? 'http://localhost:4200',
+        `https://${distribution.distributionDomainName}`,
+      ],
+    };
 
     const userPoolClient = new cognito.UserPoolClient(this, 'web', {
       userPool,
       generateSecret: false,
       oAuth,
+      writeAttributes: clientCustomAttributes,
+      readAttributes: clientCustomAttributes,
     });
 
     //distribution should be created before user pool

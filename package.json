@@ -22,7 +22,8 @@
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "deploy": "yarn clear && cross-env NX_REACT_APP_APP_HOST=https://d1mhqub2mebss3.cloudfront.net yarn nx run web:build:production && yarn nx run infrastructure:build && cdk bootstrap && cdk deploy -v --require-approval never",
+    "deploy": "yarn clear && cross-env NX_REACT_APP_APP_HOST=https://d1mhqub2mebss3.cloudfront.net yarn nx run web:build:production && yarn deploy:infrastructure",
+    "deploy:infrastructure": "yarn clear && yarn nx run infrastructure:build && cdk bootstrap && cdk deploy -v --require-approval never",
     "clear": "rm -rf node_modules/.cache/nx"
   },
   "private": true,

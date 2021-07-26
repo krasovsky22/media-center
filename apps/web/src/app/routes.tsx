@@ -1,29 +1,24 @@
 import React from 'react';
 import { Redirect, Route, RouteProps, useLocation } from 'react-router-dom';
-import { Loading } from './components';
-import { useAuth } from './context/auth';
-import { ServicesProvider } from './context/services';
+import { useAuth } from '@youtube-player/auth';
+import { ServicesProvider } from '@youtube-player/services';
+import { Routes as ServiceRoutes } from '@youtube-player/services';
 
 export const SIGN_UP = '/signup';
 export const CONFIRM_SIGN_UP = '/confirm-signup';
 export const ROUTE_PLAYER = '/player';
 export const ROUTE_LOGOUT = '/logout';
-export const ROUTE_GOOGLE_CALLBACK = '/google/callback';
 
 type RouteType = RouteProps & {
   isSecure?: boolean;
 };
 
 export const Routes: RouteType[] = [
+  ...ServiceRoutes,
   {
     path: '/',
     exact: true,
     component: React.lazy(() => import('./pages/auth/login')),
-  },
-  {
-    path: ROUTE_GOOGLE_CALLBACK,
-    exact: true,
-    component: React.lazy(() => import('./pages/auth/google-callback')),
   },
   {
     path: SIGN_UP,
@@ -50,41 +45,21 @@ export const Routes: RouteType[] = [
   },
 ];
 
-const SuspenseLoader = () => (
-  <div className="h-screen flex">
-    <Loading />
-  </div>
-);
-
-const PrivateRoute = ({ children }: { children: React.ReactChild }) => {
-  const { isInitializing, isLoggedIn } = useAuth();
+const RouteComponent: React.FC<RouteType> = ({ isSecure = false, ...rest }) => {
+  const { isLoggedIn } = useAuth();
   const location = useLocation();
 
-  if (isInitializing) {
-    return <SuspenseLoader />;
-  }
-
-  if (!isLoggedIn) {
-    return (
-      <Redirect
-        to={{
-          pathname: '/',
-          state: { from: location },
-        }}
-      />
-    );
-  }
-
-  return <ServicesProvider>{children}</ServicesProvider>;
-};
-
-const RouteComponent: React.FC<RouteType> = ({ isSecure = false, ...rest }) => {
   if (isSecure) {
-    return (
-      <PrivateRoute>
-        <Route {...rest} />
-      </PrivateRoute>
-    );
+    if (!isLoggedIn) {
+      return (
+        <Redirect
+          to={{
+            pathname: '/',
+            state: { from: location },
+          }}
+        />
+      );
+    }
   }
 
   return <Route {...rest} />;

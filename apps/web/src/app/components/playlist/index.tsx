@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player/lazy';
-import Loading from '../loading';
+import { Loading } from '@youtube-player/components';
 
 export type ThumbnailType = {
   height: number;

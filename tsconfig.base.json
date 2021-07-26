@@ -14,7 +14,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {},
+    "paths": {
+      "@youtube-player/auth": ["libs/auth/src/index.ts"],
+      "@youtube-player/components": ["libs/components/src/index.ts"],
+      "@youtube-player/hooks": ["libs/hooks/src/index.ts"],
+      "@youtube-player/services": ["libs/services/src/index.ts"]
+    },
     "typeRoots": ["node_modules/@types"]
   },
   "exclude": ["node_modules", "tmp"]

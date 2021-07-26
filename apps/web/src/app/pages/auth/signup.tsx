@@ -3,8 +3,8 @@ import React, { useCallback, useState } from 'react';
 import { DeepMap, FieldError, SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../../assets/logo.svg';
-import { Loading } from '../../components';
-import { useAuth } from '../../context/auth';
+import { Loading } from '@youtube-player/components';
+import { useAuth } from '@youtube-player/auth';
 import { CONFIRM_SIGN_UP } from '../../routes';
 
 type FormInputsType = {

@@ -11,9 +11,9 @@ import {
 } from '@chakra-ui/react';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
-import { Loading } from '../../components';
-import { useAuth } from '../../context/auth';
-import { useQuery } from '../../hooks';
+import { Loading } from '@youtube-player/components';
+import { useAuth } from '@youtube-player/auth';
+import { useQuery } from '@youtube-player/hooks';
 import { ROUTE_PLAYER } from '../../routes';
 
 const ConfirmSignUp: React.FC = () => {

@@ -2,7 +2,9 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
 import classNames from 'classnames';
 import { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../../assets/logo.svg';
+import { ROUTE_LOGOUT } from '../../routes';
 
 type NavigationType = { name: string; href: string; current: boolean };
 
@@ -114,15 +116,15 @@ export default function Navbar() {
                             </Menu.Item>
                             <Menu.Item>
                               {({ active }) => (
-                                <a
-                                  href="/logout"
+                                <Link
+                                  to={ROUTE_LOGOUT}
                                   className={classNames(
                                     active ? 'bg-gray-100' : '',
                                     'block px-4 py-2 text-sm text-gray-700'
                                   )}
                                 >
                                   Sign out
-                                </a>
+                                </Link>
                               )}
                             </Menu.Item>
                           </Menu.Items>

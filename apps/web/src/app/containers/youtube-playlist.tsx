@@ -1,11 +1,11 @@
-import { Accordion, AccordionItem, Box, Flex, Heading } from '@chakra-ui/react';
+import { Flex, Accordion, AccordionItem, Heading, Box } from '@chakra-ui/react';
+import { Loading } from '@youtube-player/components';
+import { useServices } from '@youtube-player/services';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Loading } from '../components';
 import Playlist, {
-  YoutubePlaylistItem,
   YoutubePlaylistType,
+  YoutubePlaylistItem,
 } from '../components/playlist';
-import { useServices } from '../context/services';
 
 const YoutubePlaylistContainer: React.FC = () => {
   const [playlists, setPlaylists] = useState<YoutubePlaylistType[]>([]);
@@ -17,7 +17,7 @@ const YoutubePlaylistContainer: React.FC = () => {
     useState<YoutubePlaylistItem | null>(null);
 
   const [isLoading, setIsLoading] = useState(false);
-  const { youtubeService, executeTokenRequest } = useServices();
+  const { youtubeService } = useServices();
 
   const addPlayListItem = useCallback(
     (id: string, itemsToAdd: YoutubePlaylistItem[]) => {
@@ -34,9 +34,8 @@ const YoutubePlaylistContainer: React.FC = () => {
   useEffect(() => {
     (async () => {
       setIsLoading(true);
-      const data = await executeTokenRequest<YoutubePlaylistType[]>(
-        () => youtubeService?.getPlaylists<YoutubePlaylistType>() ?? []
-      );
+      const data =
+        (await youtubeService?.getPlaylists<YoutubePlaylistType>()) ?? [];
       if (data) {
         setPlaylists(data);
       }
@@ -54,13 +53,10 @@ const YoutubePlaylistContainer: React.FC = () => {
       //never been opened => load items
       if (!playlistItems.get(playlist.id)) {
         setIsLoading(true);
-        const fetchedPlaylistItems = await executeTokenRequest<
-          YoutubePlaylistItem[]
-        >(
-          () =>
-            youtubeService?.getPlaylistItem<YoutubePlaylistItem>(playlist.id) ??
-            []
-        );
+        const fetchedPlaylistItems =
+          (await youtubeService?.getPlaylistItem<YoutubePlaylistItem>(
+            playlist.id
+          )) ?? [];
 
         if (fetchedPlaylistItems) {
           const newPlaylistItems = new Map(playlistItems).set(
