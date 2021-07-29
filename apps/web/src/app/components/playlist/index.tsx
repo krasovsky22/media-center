@@ -143,24 +143,19 @@ Playlist.Player = ({ videoId, ...rest }: { videoId: string }) => {
     setIsInitializing(true);
   }, [videoId]);
   return (
-    <Box
-      width="-moz-available"
-      marginBottom="5"
-      className="h-5/6 relative md:fixed"
-    >
+    <>
       {isInitializing && <Loading />}
       <ReactPlayer
         loop={true}
         stopOnUnmount={true}
-        width="100%"
-        height="100%"
         url={`https://www.youtube.com/watch?v=${videoId}`}
         controls
         onReady={() => setIsInitializing(false)}
         playing={true}
+        className="h-5/6 relative md:fixed mb-5"
         {...rest}
       />
-    </Box>
+    </>
   );
 };
 
