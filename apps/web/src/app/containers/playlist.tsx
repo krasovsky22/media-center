@@ -106,7 +106,7 @@ const Playlist: React.FC<YoutubePlaylistType> = ({ id, snippet }) => {
           title={snippet.title}
           description={snippet.description}
         />
-        <PlayListComponent.HeaderButtons />
+        <PlayListComponent.HeaderButtons count={tablePlaylistData.length} />
       </PlayListComponent.Header>
       <PlayListComponent.Body>
         <PlaylistItemsTableContainer data={tablePlaylistData} />

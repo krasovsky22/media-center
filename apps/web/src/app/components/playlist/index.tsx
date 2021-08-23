@@ -72,12 +72,16 @@ Playlist.DescriptionSection = ({
   );
 };
 
-Playlist.HeaderButtons = () => {
+type HeaderButtonsType = {
+  count: number;
+};
+
+Playlist.HeaderButtons = ({ count }: HeaderButtonsType) => {
   return (
-    <Flex flexDir="column" className="gap-4">
-      <Box>
+    <Flex flexDir="column" className="gap-2">
+      <Box textAlign="center">
         <Text fontSize="smaller">
-          <em>100 tracks</em>
+          <em>{count} tracks</em>
         </Text>
       </Box>
       <Box>
