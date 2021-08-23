@@ -97,6 +97,11 @@ Playlist.HeaderButtons = () => {
 Playlist.Body = ({ children }: WithChildren) => {
   return (
     <Flex direction="column" flexGrow={3}>
+      <div>
+        <Text fontSize="medium" fontWeight="semibold">
+          <h2>Playlist Tracks</h2>
+        </Text>
+      </div>
       {children}
     </Flex>
   );
