@@ -2,6 +2,7 @@ import { Flex, Accordion, AccordionItem, Heading, Box } from '@chakra-ui/react';
 import { Loading } from '@youtube-player/components';
 import { useServices } from '@youtube-player/services';
 import React, { useCallback, useEffect, useState } from 'react';
+import { PlayListComponent, Carousel } from '../components';
 import PlaylistContainer, { YoutubePlaylistType } from './playlist';
 // import Playlist, {
 //   YoutubePlaylistItem,
@@ -82,47 +83,24 @@ const YoutubePlaylistContainer: React.FC = () => {
       gap={5}
       flexDirection="column"
       flexGrow={1}
+      paddingBottom="6"
     >
       {isLoading && <Loading />}
       <Flex flexGrow={1} flexDirection="column">
         {activePlaylist && <PlaylistContainer {...activePlaylist} />}
       </Flex>
-      <Flex>Playlist</Flex>
-      {/* <Playlist>
-        <Accordion
-          onChange={accordionOnClick}
-          allowToggle
-          className="flex flex-col gap-1"
-        >
+      <Flex direction="column">
+        <Carousel title="Playlists">
           {playlists.map((playlist) => (
-            <AccordionItem key={playlist.id}>
-              {({ isExpanded }) => (
-                <>
-                  <Playlist.AccordionHeader>
-                    <Heading fontSize="md">{playlist.snippet.title}</Heading>
-                  </Playlist.AccordionHeader>
-                  {isExpanded && playlistItems.get(playlist.id) && (
-                    <Playlist.AccordionBody>
-                      {playlistItems.get(playlist.id)?.map((video) => (
-                        <Playlist.PlaylistVideoCard
-                          key={video.id}
-                          video={video}
-                          onClick={() => setSelectedVideo(video)}
-                        />
-                      ))}
-                    </Playlist.AccordionBody>
-                  )}
-                </>
-              )}
-            </AccordionItem>
+            <Carousel.Element key={playlist.id}>
+              <PlayListComponent.BoxItem
+                thumb_url={playlist.snippet.thumbnails.standard.url}
+                title={playlist.snippet.title}
+              />
+            </Carousel.Element>
           ))}
-        </Accordion>
-      </Playlist> */}
-      {/* <Box flexGrow={1} position="relative">
-        {selectedVideo && (
-          <Playlist.Player videoId={selectedVideo.snippet.resourceId.videoId} />
-        )}
-      </Box> */}
+        </Carousel>
+      </Flex>
     </Flex>
   );
 };

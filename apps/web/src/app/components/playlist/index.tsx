@@ -1,6 +1,7 @@
 import React from 'react';
 import { Avatar, Box, Badge, Flex, Text, Button } from '@chakra-ui/react';
 import { default as Icons } from '../icons';
+import { Design } from '..';
 
 type WithChildren = {
   children: React.ReactNode;
@@ -98,11 +99,31 @@ Playlist.Body = ({ children }: WithChildren) => {
   return (
     <Flex direction="column" flexGrow={3}>
       <div>
-        <Text fontSize="medium" fontWeight="semibold">
-          <h2>Playlist Tracks</h2>
-        </Text>
+        <Design.H2>Playlist Tracks</Design.H2>
       </div>
       {children}
+    </Flex>
+  );
+};
+
+type BoxItemType = {
+  thumb_url: string;
+  title: string;
+};
+Playlist.BoxItem = ({ thumb_url, title }: BoxItemType) => {
+  return (
+    <Flex direction="column" height="100%">
+      <Box
+        backgroundImage={`url(${thumb_url})`}
+        backgroundPosition="center"
+        backgroundSize="cover"
+        width="100%"
+        height="100%"
+        flexGrow={1}
+      />
+      <Text fontWeight="semibold" textAlign="center">
+        {title}
+      </Text>
     </Flex>
   );
 };

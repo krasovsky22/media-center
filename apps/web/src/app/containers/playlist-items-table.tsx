@@ -6,16 +6,15 @@ import { Icons } from '../components';
 
 const TableText = styled.p`
   text-overflow: ellipsis;
-  max-width: 25rem;
   white-space: nowrap;
   overflow: hidden;
   min-width: 30px;
+  max-width: 30vw;
 `;
 
 const TableStyles = styled.div`
-  padding: 1rem;
-
   table {
+    table-layout: auto;
     tr {
       :last-child {
         td {
@@ -26,8 +25,6 @@ const TableStyles = styled.div`
 
     th,
     td {
-      margin: 0;
-      padding: 0.5rem;
       color: grey;
       font-weight: normal;
     }
@@ -66,14 +63,16 @@ const PlaylistItemsTableContainer: React.FC<PlaylistItemsTableContainerType> =
             return (
               <Flex alignItems="center" className="gap-1">
                 <Avatar src={row.thumbnail_url} />
-                <Text>{row.title}</Text>
+                <TableText>{row.title}</TableText>
               </Flex>
             );
           },
         },
         {
           Header: 'Description',
-          accessor: 'description',
+          accessor: (row) => {
+            return <TableText>{row.description}</TableText>;
+          },
         },
         {
           Header: 'More',
@@ -110,9 +109,7 @@ const PlaylistItemsTableContainer: React.FC<PlaylistItemsTableContainerType> =
                 <tr {...row.getRowProps()}>
                   {row.cells.map((cell) => {
                     return (
-                      <td {...cell.getCellProps()}>
-                        <TableText>{cell.render('Cell')}</TableText>
-                      </td>
+                      <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                     );
                   })}
                 </tr>

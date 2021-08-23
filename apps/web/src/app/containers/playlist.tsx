@@ -1,3 +1,4 @@
+import { Loading } from '@youtube-player/components';
 import { useServices } from '@youtube-player/services';
 import React, { useState, useEffect, useMemo } from 'react';
 import { PlayListComponent } from '../components';
@@ -62,20 +63,20 @@ type YoutubePlaylistItem = {
 };
 
 const Playlist: React.FC<YoutubePlaylistType> = ({ id, snippet }) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [playlistItems, setPlaylistItems] = useState<YoutubePlaylistItem[]>([]);
   const { youtubeService } = useServices();
 
   useEffect(() => {
     (async () => {
-      //setIsLoading(true);
+      setIsLoading(true);
       const fetchedPlaylistItems =
         (await youtubeService?.getPlaylistItem<YoutubePlaylistItem>(id)) ?? [];
 
       setPlaylistItems(fetchedPlaylistItems);
+      setIsLoading(false);
     })();
   }, [id]);
-
-  console.log(playlistItems);
 
   const tablePlaylistData: PlaylistItemDataType[] = useMemo(
     () =>
@@ -88,6 +89,10 @@ const Playlist: React.FC<YoutubePlaylistType> = ({ id, snippet }) => {
       })),
     [playlistItems]
   );
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <PlayListComponent>
