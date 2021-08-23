@@ -1,161 +1,104 @@
-import {
-  AccordionButton,
-  AccordionIcon,
-  AccordionPanel,
-  Box,
-  Container,
-  Flex,
-  Image,
-  Text,
-} from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
-import ReactPlayer from 'react-player/lazy';
-import { Loading } from '@youtube-player/components';
+import React from 'react';
+import { Avatar, Box, Badge, Flex, Text, Button } from '@chakra-ui/react';
+import { default as Icons } from '../icons';
 
-export type ThumbnailType = {
-  height: number;
-  url: string;
-  width: number;
+type WithChildren = {
+  children: React.ReactNode;
 };
 
-export type YoutubePlaylistType = {
-  etag: string;
-  id: string;
-  kind: string;
-  snippet: {
-    channelId: string;
-    channelTitle: string;
-    description: string;
-    localized: {
-      title: string;
-      description: string;
-    };
-    publishedAt: string;
-    thumbnails: {
-      default: ThumbnailType;
-      high: ThumbnailType;
-      maxres: ThumbnailType;
-      defamediumult: ThumbnailType;
-      standard: ThumbnailType;
-    };
-    title: string;
-  };
-};
-
-export type YoutubePlaylistItem = {
-  etag: string;
-  id: string;
-  kind: string;
-  snippet: {
-    channelId: string;
-    channelTitle: string;
-    description: string;
-    localized: {
-      description: string;
-      title: string;
-    };
-    publishedAt: string;
-    thumbnails: {
-      default: ThumbnailType;
-      high: ThumbnailType;
-      maxres: ThumbnailType;
-      defamediumult: ThumbnailType;
-      standard: ThumbnailType;
-    };
-    resourceId: { kind: string; videoId: string };
-    title: string;
-  };
-};
-
-export type PlaylistContentType = {
-  playlistId: string;
-  isOpen?: boolean;
-};
-
-type WithChildrenType = {
-  children: React.ReactNode | React.ReactChildren;
-};
-
-const Playlist = ({ children, ...rest }: WithChildrenType) => {
+const Playlist = ({ children }: WithChildren) => {
   return (
-    <Container textAlign="center" {...rest}>
+    <Flex direction="column" flexGrow={1} className="gap-4">
       {children}
-    </Container>
+    </Flex>
   );
 };
 
-Playlist.AccordionHeader = ({ children, ...rest }: WithChildrenType) => {
+Playlist.Header = ({ children }: WithChildren) => {
   return (
-    <AccordionButton {...rest}>
-      <Box flex="1" textAlign="left">
-        {children}
-      </Box>
-      <AccordionIcon />
-    </AccordionButton>
-  );
-};
-
-Playlist.AccordionBody = ({ children, ...rest }: WithChildrenType) => {
-  return (
-    <AccordionPanel padding={0} {...rest}>
-      <Box>{children}</Box>
-    </AccordionPanel>
-  );
-};
-
-Playlist.PlaylistVideoCard = ({
-  video,
-  ...rest
-}: {
-  video: YoutubePlaylistItem;
-  onClick: () => void;
-}) => {
-  return (
-    <Container
-      cursor="pointer"
-      marginY="1rem"
-      className="max-h-14 flex gap-1 items-center content-center"
-      {...rest}
+    <Flex
+      flexDirection="row"
+      flexWrap="nowrap"
+      className="gap-4"
+      alignItems="center"
+      flexGrow={1}
     >
-      <Image
-        src={video.snippet.thumbnails?.default?.url}
-        height="auto"
-        width="auto"
-        className="max-h-14"
+      {children}
+    </Flex>
+  );
+};
+
+type ProfileSectionType = {
+  url: string;
+  name: string;
+};
+Playlist.ProfileSection = ({ url, name }: ProfileSectionType) => {
+  return (
+    <Flex>
+      <Avatar
+        src={url}
+        name={name}
+        flexGrow={1}
+        size="2xl"
+        boxShadow="0px 1rem 1rem 0.5rem rgb(0 0 0 / 11%)"
       />
-      <Box margin="auto" flex={4} overflow="auto">
-        <Text
-          whiteSpace="nowrap"
-          wordBreak="break-word"
-          textOverflow="ellipsis"
-          overflow="hidden"
-        >
-          {video.snippet.title}
+    </Flex>
+  );
+};
+
+type DescriptionSectionType = {
+  source: 'youtube';
+  title: string;
+  description: string;
+};
+Playlist.DescriptionSection = ({
+  source,
+  title,
+  description,
+}: DescriptionSectionType) => {
+  return (
+    <Flex flexGrow={4} flexDirection="column" className="gap-1">
+      <Box>
+        <Badge colorScheme="green">{source}</Badge>
+      </Box>
+      <Box>
+        <h1 className="text-lg font-bold">{title}</h1>
+      </Box>
+      <Box>
+        <h2 className="text-sm font-light ">{description}</h2>
+      </Box>
+    </Flex>
+  );
+};
+
+Playlist.HeaderButtons = () => {
+  return (
+    <Flex flexDir="column" className="gap-4">
+      <Box>
+        <Text fontSize="smaller">
+          <em>100 tracks</em>
         </Text>
       </Box>
-    </Container>
+      <Box>
+        <Button
+          colorScheme="red"
+          borderRadius="5px"
+          leftIcon={<Icons.Play />}
+          variant="solid"
+          size="sm"
+        >
+          Play
+        </Button>
+      </Box>
+    </Flex>
   );
 };
 
-Playlist.Player = ({ videoId, ...rest }: { videoId: string }) => {
-  const [isInitializing, setIsInitializing] = useState(false);
-  useEffect(() => {
-    setIsInitializing(true);
-  }, [videoId]);
+Playlist.Body = ({ children }: WithChildren) => {
   return (
-    <>
-      {isInitializing && <Loading />}
-      <ReactPlayer
-        loop={true}
-        stopOnUnmount={true}
-        url={`https://www.youtube.com/watch?v=${videoId}`}
-        controls
-        onReady={() => setIsInitializing(false)}
-        playing={true}
-        className="h-5/6 relative md:fixed mb-5"
-        {...rest}
-      />
-    </>
+    <Flex direction="column" flexGrow={3}>
+      {children}
+    </Flex>
   );
 };
 

@@ -1,3 +1,4 @@
+import { Container } from '@chakra-ui/react';
 import React from 'react';
 import { Navbar } from '../components';
 import { YoutubePlaylistContainer } from '../containers';
@@ -6,9 +7,9 @@ const PlayerPage: React.FC = () => {
   return (
     <>
       <Navbar />
-      <main className="p-5">
+      <Container maxW="container.lg" className="px-32 flex-grow flex flex-col">
         <YoutubePlaylistContainer />
-      </main>
+      </Container>
     </>
   );
 };
