@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import { Avatar, Box, Badge, Flex, Text, Button } from '@chakra-ui/react';
 import { default as Icons } from '../icons';
 import { Design } from '..';
+import { Link } from 'react-router-dom';
 
 type WithChildren = {
   children: React.ReactNode;
@@ -114,9 +115,9 @@ type BoxItemType = {
   thumb_url: string;
   title: string;
 };
-Playlist.BoxItem = ({ thumb_url, title }: BoxItemType) => {
+Playlist.BoxItem = ({ thumb_url, title, ...rest }: BoxItemType) => {
   return (
-    <Flex direction="column" height="100%">
+    <Flex direction="column" height="100%" cursor="pointer">
       <Box
         backgroundImage={`url(${thumb_url})`}
         backgroundPosition="center"
@@ -124,6 +125,7 @@ Playlist.BoxItem = ({ thumb_url, title }: BoxItemType) => {
         width="100%"
         height="100%"
         flexGrow={1}
+        {...rest}
       />
       <Text fontWeight="semibold" textAlign="center">
         {title}

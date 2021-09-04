@@ -7,6 +7,7 @@ import { Routes as ServiceRoutes } from '@youtube-player/services';
 export const SIGN_UP = '/signup';
 export const CONFIRM_SIGN_UP = '/confirm-signup';
 export const ROUTE_PLAYER = '/player';
+export const ROUTE_PLAYER_WITH_ID = '/player/:id';
 export const ROUTE_LOGOUT = '/logout';
 
 type RouteType = RouteProps & {
@@ -34,8 +35,13 @@ export const Routes: RouteType[] = [
     component: React.lazy(() => import('./pages/auth/logout')),
   },
   {
-    path: ROUTE_PLAYER,
     exact: true,
+    path: ROUTE_PLAYER,
+    isSecure: true,
+    component: React.lazy(async () => import('./pages/player')),
+  },
+  {
+    path: ROUTE_PLAYER_WITH_ID,
     isSecure: true,
     component: React.lazy(async () => import('./pages/player')),
   },

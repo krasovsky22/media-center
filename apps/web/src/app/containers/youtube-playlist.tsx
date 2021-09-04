@@ -1,8 +1,9 @@
-import { Flex, Accordion, AccordionItem, Heading, Box } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { Loading } from '@youtube-player/components';
 import { useServices } from '@youtube-player/services';
-import React, { useCallback, useEffect, useState } from 'react';
-import { PlayListComponent, Carousel } from '../components';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { Carousel, PlayListComponent } from '../components';
 import PlaylistContainer, { YoutubePlaylistType } from './playlist';
 // import Playlist, {
 //   YoutubePlaylistItem,
@@ -10,6 +11,8 @@ import PlaylistContainer, { YoutubePlaylistType } from './playlist';
 
 const YoutubePlaylistContainer: React.FC = () => {
   const [playlists, setPlaylists] = useState<YoutubePlaylistType[]>([]);
+
+  const { id: playlistId = null } = useParams<{ id?: string }>();
   // const [playlistItems, setPlaylistItems] = useState<
   //   Map<string, YoutubePlaylistItem[]>
   // >(new Map());
@@ -74,7 +77,13 @@ const YoutubePlaylistContainer: React.FC = () => {
   //   [playlists, playlistItems]
   // );
 
-  const activePlaylist = playlists[0];
+  const activePlaylist = useMemo(() => {
+    if (playlistId === null) {
+      return playlists[0];
+    }
+
+    return playlists.find((playlist) => playlist.id === playlistId);
+  }, [playlists, playlistId]);
 
   return (
     <Flex
@@ -93,10 +102,12 @@ const YoutubePlaylistContainer: React.FC = () => {
         <Carousel title="Playlists">
           {playlists.map((playlist) => (
             <Carousel.Element key={playlist.id}>
-              <PlayListComponent.BoxItem
-                thumb_url={playlist.snippet.thumbnails.standard.url}
-                title={playlist.snippet.title}
-              />
+              <Link to={`/player/${playlist.id}`}>
+                <PlayListComponent.BoxItem
+                  thumb_url={playlist.snippet.thumbnails.standard.url}
+                  title={playlist.snippet.title}
+                />
+              </Link>
             </Carousel.Element>
           ))}
         </Carousel>
