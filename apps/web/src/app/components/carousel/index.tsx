@@ -31,7 +31,12 @@ const StyledBox = styled(Box)`
 
 Carousel.Element = ({ children }: WithChildren) => {
   return (
-    <StyledBox width="calc((100% - 6rem ) / 7)" flex="0 0 auto" height="auto">
+    <StyledBox
+      width="calc((100% - 6rem ) / 7)"
+      maxWidth="7rem"
+      flex="0 0 auto"
+      height="auto"
+    >
       {children}
     </StyledBox>
   );
