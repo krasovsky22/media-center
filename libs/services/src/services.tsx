@@ -22,7 +22,6 @@ export function ServicesProvider({ children }: ServiceProviderTypes) {
   const { youtubeRefreshToken } = useAuth();
 
   const youtubeService = useMemo(() => {
-    console.log('in services memo', youtubeRefreshToken);
     return youtubeServiceFactory(youtubeRefreshToken);
   }, [youtubeRefreshToken]);
 
