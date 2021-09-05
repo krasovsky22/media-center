@@ -5,7 +5,7 @@ import { usePlayerPageStateState } from '../context/player-page';
 const ReactPlayer = React.lazy(() => import('react-player/youtube'));
 
 const Player: React.FC = () => {
-  const { activeVideoId } = usePlayerPageStateState();
+  const { activeVideoId, playNextVideo } = usePlayerPageStateState();
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
@@ -21,6 +21,7 @@ const Player: React.FC = () => {
           fallback={<Loading />}
           height="20vh"
           onReady={() => setIsPlaying(true)}
+          onEnded={playNextVideo}
           playing={isPlaying}
         />
       </Box>

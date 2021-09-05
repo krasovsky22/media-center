@@ -1,8 +1,7 @@
-import React, { MouseEventHandler } from 'react';
-import { Avatar, Box, Badge, Flex, Text, Button } from '@chakra-ui/react';
-import { default as Icons } from '../icons';
+import { Avatar, Badge, Box, Button, Flex, Text } from '@chakra-ui/react';
+import React from 'react';
 import { Design } from '..';
-import { Link } from 'react-router-dom';
+import { default as Icons } from '../icons';
 
 type WithChildren = {
   children: React.ReactNode;
@@ -75,9 +74,10 @@ Playlist.DescriptionSection = ({
 
 type HeaderButtonsType = {
   count: number;
+  onClick: () => void;
 };
 
-Playlist.HeaderButtons = ({ count }: HeaderButtonsType) => {
+Playlist.HeaderButtons = ({ count, onClick }: HeaderButtonsType) => {
   return (
     <Flex flexDir="column" className="gap-2">
       <Box textAlign="center">
@@ -92,6 +92,7 @@ Playlist.HeaderButtons = ({ count }: HeaderButtonsType) => {
           leftIcon={<Icons.Play />}
           variant="solid"
           size="sm"
+          onClick={onClick}
         >
           Play
         </Button>

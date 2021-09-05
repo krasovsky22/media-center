@@ -18,6 +18,7 @@ type PlayerPageStateType = {
   playlists: YoutubePlaylistType[];
   activePlaylist?: YoutubePlaylistType;
   playlistItems: YoutubePlaylistItem[];
+  playNextVideo: () => void;
 };
 
 const initialState: PlayerPageStateType = {
@@ -26,6 +27,9 @@ const initialState: PlayerPageStateType = {
   isLoading: false,
   activeVideoId: null,
   setActiveVideoId: () => {
+    return null;
+  },
+  playNextVideo: () => {
     return null;
   },
 };
@@ -50,7 +54,10 @@ export const SharedPlayerPageProvider: React.FC = ({ children }) => {
     Queries.fetchPlaylists<YoutubePlaylistType>(youtubeService);
 
   const { data: playlistItems = [], isLoading: isPlaylistsItemsLoading } =
-    Queries.fetchPlaylistItems(playlistId ?? '', youtubeService);
+    Queries.fetchPlaylistItems<YoutubePlaylistItem>(
+      playlistId ?? '',
+      youtubeService
+    );
 
   const activePlaylist = useMemo(() => {
     if (playlistId === null) {
@@ -64,15 +71,33 @@ export const SharedPlayerPageProvider: React.FC = ({ children }) => {
     setIsLoading(isPlaylistsLoading || isPlaylistsItemsLoading);
   }, [isPlaylistsLoading, isPlaylistsItemsLoading]);
 
+  const playNextVideo = useCallback(() => {
+    if (!activeVideoId) {
+      setActiveVideoId(playlistItems[0]?.snippet?.resourceId?.videoId);
+      return;
+    }
+    //find index of current video in playlist
+    const index = playlistItems.findIndex(
+      (playlistItem) =>
+        playlistItem?.snippet?.resourceId?.videoId === activeVideoId
+    );
+
+    const nextIndex = index + 1;
+    if (nextIndex < playlistItems.length) {
+      setActiveVideoId(playlistItems[nextIndex]?.snippet?.resourceId?.videoId);
+    }
+  }, [playlistItems, activeVideoId]);
+
   return (
     <MyContext.Provider
       value={{
-        isLoading,
         playlists,
+        isLoading,
+        playlistItems,
         activePlaylist,
         activeVideoId,
+        playNextVideo,
         setActiveVideoId,
-        playlistItems,
       }}
     >
       {children}

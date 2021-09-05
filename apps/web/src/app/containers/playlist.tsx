@@ -1,15 +1,13 @@
-import { Loading } from '@youtube-player/components';
-import { useServices } from '@youtube-player/services';
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { PlayListComponent } from '../components';
 import { usePlayerPageStateState } from '../context/player-page';
-import { YoutubePlaylistItem, YoutubePlaylistType } from '../youtube-playlist';
+import { YoutubePlaylistType } from '../youtube-playlist';
 import PlaylistItemsTableContainer, {
   PlaylistItemDataType,
 } from './playlist-items-table';
 
 const Playlist: React.FC<YoutubePlaylistType> = ({ id, snippet }) => {
-  const { playlistItems } = usePlayerPageStateState();
+  const { playlistItems, playNextVideo } = usePlayerPageStateState();
 
   const tablePlaylistData: PlaylistItemDataType[] = useMemo(
     () =>
@@ -35,7 +33,10 @@ const Playlist: React.FC<YoutubePlaylistType> = ({ id, snippet }) => {
           title={snippet.title}
           description={snippet.description}
         />
-        <PlayListComponent.HeaderButtons count={tablePlaylistData.length} />
+        <PlayListComponent.HeaderButtons
+          count={tablePlaylistData.length}
+          onClick={playNextVideo}
+        />
       </PlayListComponent.Header>
       <PlayListComponent.Body>
         <PlaylistItemsTableContainer data={tablePlaylistData} />
