@@ -55,7 +55,7 @@ export const SharedPlayerPageProvider: React.FC = ({ children }) => {
 
   const { data: playlistItems = [], isLoading: isPlaylistsItemsLoading } =
     Queries.fetchPlaylistItems<YoutubePlaylistItem>(
-      playlistId ?? '',
+      playlistId ?? playlists[0]?.id ?? '',
       youtubeService
     );
 
