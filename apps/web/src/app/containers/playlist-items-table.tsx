@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import { useTable, Column } from 'react-table';
 import styled from 'styled-components';
 import { Icons } from '../components';
+import { usePlayerPageStateState } from '../context/player-page';
 
 const TableText = styled.p`
   text-overflow: ellipsis;
@@ -45,14 +46,19 @@ type PlaylistItemsTableContainerType = {
 
 const PlaylistItemsTableContainer: React.FC<PlaylistItemsTableContainerType> =
   ({ data }) => {
+    const { activeVideoId, setActiveVideoId } = usePlayerPageStateState();
     const columns = useMemo<Column<PlaylistItemDataType>[]>(
       () => [
         {
           Header: '#',
-          accessor: () => {
+          accessor: ({ id }) => {
             return (
-              <Button>
-                <Icons.CirclePlay size="lg" className="text-red-400" />
+              <Button onClick={() => setActiveVideoId(id)}>
+                {activeVideoId === id ? (
+                  <Icons.Pause size="lg" className="text-yellow-400" />
+                ) : (
+                  <Icons.CirclePlay size="lg" className="text-red-400" />
+                )}
               </Button>
             );
           },
@@ -79,7 +85,7 @@ const PlaylistItemsTableContainer: React.FC<PlaylistItemsTableContainerType> =
           accessor: 'time',
         },
       ],
-      []
+      [activeVideoId]
     );
 
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =

@@ -2,86 +2,19 @@ import { Loading } from '@youtube-player/components';
 import { useServices } from '@youtube-player/services';
 import React, { useState, useEffect, useMemo } from 'react';
 import { PlayListComponent } from '../components';
+import { usePlayerPageStateState } from '../context/player-page';
+import { YoutubePlaylistItem, YoutubePlaylistType } from '../youtube-playlist';
 import PlaylistItemsTableContainer, {
   PlaylistItemDataType,
 } from './playlist-items-table';
 
-type PlaylistType = {
-  thumbnail: string;
-  title: string;
-};
-
-export type ThumbnailType = {
-  height: number;
-  url: string;
-  width: number;
-};
-
-export type YoutubePlaylistType = {
-  etag: string;
-  id: string;
-  kind: string;
-  snippet: {
-    channelId: string;
-    channelTitle: string;
-    description: string;
-    localized: {
-      title: string;
-      description: string;
-    };
-    publishedAt: string;
-    thumbnails: {
-      default: ThumbnailType;
-      high: ThumbnailType;
-      maxres: ThumbnailType;
-      defamediumult: ThumbnailType;
-      standard: ThumbnailType;
-    };
-    title: string;
-  };
-};
-
-type YoutubePlaylistItem = {
-  etag: string;
-  id: string;
-  kind: string;
-  snippet: {
-    channelId: string;
-    channelTitle: string;
-    description: string;
-    publishedAt: string;
-    thumbnails: {
-      default: ThumbnailType;
-      high: ThumbnailType;
-      maxres: ThumbnailType;
-      defamediumult: ThumbnailType;
-      standard: ThumbnailType;
-    };
-    resourceId: { kind: string; videoId: string };
-    title: string;
-  };
-};
-
 const Playlist: React.FC<YoutubePlaylistType> = ({ id, snippet }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [playlistItems, setPlaylistItems] = useState<YoutubePlaylistItem[]>([]);
-  const { youtubeService } = useServices();
-
-  useEffect(() => {
-    (async () => {
-      setIsLoading(true);
-      const fetchedPlaylistItems =
-        (await youtubeService?.getPlaylistItem<YoutubePlaylistItem>(id)) ?? [];
-
-      setPlaylistItems(fetchedPlaylistItems);
-      setIsLoading(false);
-    })();
-  }, [id]);
+  const { playlistItems } = usePlayerPageStateState();
 
   const tablePlaylistData: PlaylistItemDataType[] = useMemo(
     () =>
       playlistItems.map((playListItem, index) => ({
-        id: `${index}`,
+        id: playListItem?.snippet?.resourceId?.videoId ?? '',
         title: playListItem?.snippet.title ?? '',
         description: playListItem?.snippet.description ?? '',
         time: '2:34',
@@ -89,10 +22,6 @@ const Playlist: React.FC<YoutubePlaylistType> = ({ id, snippet }) => {
       })),
     [playlistItems]
   );
-
-  if (isLoading) {
-    return <Loading />;
-  }
 
   return (
     <PlayListComponent>

@@ -2,8 +2,9 @@ import React, { createContext, useCallback, useContext, useMemo } from 'react';
 import { youtubeServiceFactory } from './factories';
 import { useAuth } from '@youtube-player/auth';
 
+export type YoutubeServiceType = ReturnType<typeof youtubeServiceFactory>;
 type ServicesContextType = {
-  youtubeService?: ReturnType<typeof youtubeServiceFactory>;
+  youtubeService?: YoutubeServiceType;
 };
 
 const ServicesContext = createContext<ServicesContextType>({});
