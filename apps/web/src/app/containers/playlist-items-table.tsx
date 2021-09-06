@@ -53,7 +53,13 @@ const PlaylistItemsTableContainer: React.FC<PlaylistItemsTableContainerType> =
           Header: '#',
           accessor: ({ id }) => {
             return (
-              <Button onClick={() => setActiveVideoId(id)}>
+              <Button
+                onClick={() =>
+                  setActiveVideoId((prevActiveId) =>
+                    prevActiveId === id ? null : id
+                  )
+                }
+              >
                 {activeVideoId === id ? (
                   <Icons.Pause size="lg" className="text-yellow-400" />
                 ) : (

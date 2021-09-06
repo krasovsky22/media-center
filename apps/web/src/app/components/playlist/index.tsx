@@ -118,17 +118,24 @@ type BoxItemType = {
 };
 Playlist.BoxItem = ({ thumb_url, title, ...rest }: BoxItemType) => {
   return (
-    <Flex direction="column" height="100%" cursor="pointer">
+    <Flex
+      direction={{ base: 'row', sm: 'column' }}
+      height="100%"
+      cursor="pointer"
+      alignItems="center"
+      justifyContent="center"
+    >
       <Box
         backgroundImage={`url(${thumb_url})`}
         backgroundPosition="center"
         backgroundSize="cover"
         width="100%"
         height="100%"
+        maxWidth={{ base: '30%', sm: '100%' }}
         flexGrow={1}
         {...rest}
       />
-      <Text fontWeight="semibold" textAlign="center">
+      <Text fontWeight="semibold" textAlign="center" flexGrow={1}>
         {title}
       </Text>
     </Flex>

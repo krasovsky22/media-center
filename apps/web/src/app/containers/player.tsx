@@ -14,7 +14,13 @@ const Player: React.FC = () => {
 
   return (
     <Suspense fallback={<Loading />}>
-      <Box position="fixed" bottom={10} right={10}>
+      <Box
+        position={{ base: 'unset', sm: 'fixed' }}
+        marginTop="1rem"
+        bottom={10}
+        right={10}
+        display={activeVideoId ? 'block' : 'none'}
+      >
         <ReactPlayer
           url={`https://www.youtube.com/watch?v=${activeVideoId}`}
           width="100%"

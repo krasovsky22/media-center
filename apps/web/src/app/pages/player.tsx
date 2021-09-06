@@ -8,7 +8,7 @@ const PlayerPage: React.FC = () => {
   return (
     <SharedPlayerPageProvider>
       <Navbar />
-      <Box className="px-32 flex-grow flex flex-col">
+      <Box className="px-2.5 md:px-32 flex-grow flex flex-col">
         <YoutubePlaylistContainer />
       </Box>
       <PlayerContainer />

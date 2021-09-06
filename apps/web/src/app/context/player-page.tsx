@@ -14,7 +14,7 @@ import { YoutubePlaylistItem, YoutubePlaylistType } from '../youtube-playlist';
 type PlayerPageStateType = {
   isLoading: boolean;
   activeVideoId: string | null;
-  setActiveVideoId: (arg: string | null) => void;
+  setActiveVideoId: React.Dispatch<React.SetStateAction<string | null>>;
   playlists: YoutubePlaylistType[];
   activePlaylist?: YoutubePlaylistType;
   playlistItems: YoutubePlaylistItem[];
