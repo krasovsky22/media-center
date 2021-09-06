@@ -27,6 +27,7 @@ export type YoutubePlaylistItem = {
     };
     resourceId: { kind: string; videoId: string };
     title: string;
+    videoOwnerChannelTitle: string;
   };
 };
 

@@ -15,7 +15,7 @@ const Playlist: React.FC<YoutubePlaylistType> = ({ id, snippet }) => {
         id: playListItem?.snippet?.resourceId?.videoId ?? '',
         title: playListItem?.snippet.title ?? '',
         description: playListItem?.snippet.description ?? '',
-        time: '2:34',
+        owner: playListItem?.snippet?.videoOwnerChannelTitle ?? '',
         thumbnail_url: playListItem?.snippet?.thumbnails?.standard?.url ?? '',
       })),
     [playlistItems]

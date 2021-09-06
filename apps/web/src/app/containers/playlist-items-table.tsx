@@ -36,7 +36,7 @@ export type PlaylistItemDataType = {
   id: string;
   title: string;
   description: string;
-  time: string;
+  owner: string;
   thumbnail_url: string;
 };
 
@@ -87,8 +87,8 @@ const PlaylistItemsTableContainer: React.FC<PlaylistItemsTableContainerType> =
           },
         },
         {
-          Header: 'More',
-          accessor: 'time',
+          Header: 'Owner',
+          accessor: 'owner',
         },
       ],
       [activeVideoId]
