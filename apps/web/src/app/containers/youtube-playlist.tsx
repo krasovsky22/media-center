@@ -28,8 +28,8 @@ const YoutubePlaylistContainer: React.FC = () => {
             <Carousel.Element key={playlist.id}>
               <Link to={`/player/${playlist.id}`}>
                 <PlayListComponent.BoxItem
-                  thumb_url={playlist.snippet.thumbnails.standard.url}
-                  title={playlist.snippet.title}
+                  thumb_url={playlist?.snippet?.thumbnails?.standard?.url ?? ''}
+                  title={playlist?.snippet?.title ?? 'unknown'}
                 />
               </Link>
             </Carousel.Element>
