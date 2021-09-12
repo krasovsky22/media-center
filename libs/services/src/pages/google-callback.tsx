@@ -31,8 +31,9 @@ const GoogleCallbackPage = () => {
             //save refresh token as cognito attribute
             const success = updateGoogleRefreshToken(refresh_token);
           }
-        } catch (e) {
-          setError(e.message);
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (e: any) {
+          setError(e?.message);
         }
 
         setIsInitializing(false);

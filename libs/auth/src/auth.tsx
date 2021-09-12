@@ -103,7 +103,8 @@ export const AuthProvider = ({
             setUser(user);
           }
         }
-      } catch (error) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
         console.error('Authentication error:' + error?.message ?? 'unknown');
       }
 
@@ -154,7 +155,8 @@ export const AuthProvider = ({
         });
 
         return true;
-      } catch (e) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (e: any) {
         console.error('Update attribute error:', e.message);
         return false;
       }

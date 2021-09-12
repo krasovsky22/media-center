@@ -1,13 +1,13 @@
+import { Container } from '@chakra-ui/react';
 import { LockClosedIcon, UserIcon } from '@heroicons/react/outline';
-import React, { useCallback, useState, useRef, useEffect } from 'react';
-import { Link, Redirect, useHistory, useLocation } from 'react-router-dom';
-import { ReactComponent as Logo } from '../../../assets/logo.svg';
-import { Loading } from '@youtube-player/components';
 import { useAuth } from '@youtube-player/auth';
+import { Loading } from '@youtube-player/components';
+import { useServices } from '@youtube-player/services';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Link, Redirect, useLocation } from 'react-router-dom';
+import { ReactComponent as Logo } from '../../../assets/logo.svg';
 import { ROUTE_PLAYER, SIGN_UP } from '../../routes';
 import { LocationState } from './commongTypes';
-import { Container } from '@chakra-ui/react';
-import { useServices } from '@youtube-player/services';
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -41,7 +41,9 @@ const LoginPage: React.FC = () => {
           );
           isRefreshTokenValid = true;
         } catch (e) {
-          console.error('Unable to validate Refresh Token: ', e.message);
+          if (e instanceof Error) {
+            console.error('Unable to validate Refresh Token: ', e.message);
+          }
         }
 
         if (!youtubeRefreshToken || !isRefreshTokenValid) {
@@ -67,10 +69,11 @@ const LoginPage: React.FC = () => {
       setIsLoading(true);
       try {
         await login(username, password);
-      } catch (e) {
-        console.error('cannot login', e);
-        setError(e.message);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (e: any) {
+        setError(e?.message ?? '');
       }
+      setIsLoading(false);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [username, password, youtubeRefreshToken, youtubeService]
@@ -81,7 +84,6 @@ const LoginPage: React.FC = () => {
   }
 
   if (isLoggedIn && tokenIsValidated && !isLoading) {
-    console.log('trying to redirect');
     return (
       <Redirect
         to={{
@@ -96,7 +98,7 @@ const LoginPage: React.FC = () => {
     <>
       {isLoading && <Loading />}
       <Container className="mx-auto h-full min-h-screen flex flex-1 justify-center items-center px-5 relative">
-        <div className="w-full max-w-lg">
+        <div className="w-full max-w-2xl">
           <div className="leading-loose">
             <div className="grid laptop:grid-cols-2 phone:grid-cols-1 phone:grid-flow-col items-center gap-5 ">
               <div className="hidden laptop:block">
