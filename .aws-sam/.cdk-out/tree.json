@@ -1,0 +1,1706 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "@aws-cdk/core.Construct",
+          "version": "1.122.0"
+        }
+      },
+      "YouTube-Player-App-Infrastructure-dev": {
+        "id": "YouTube-Player-App-Infrastructure-dev",
+        "path": "YouTube-Player-App-Infrastructure-dev",
+        "children": {
+          "aws-youtube-player": {
+            "id": "aws-youtube-player",
+            "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player",
+            "children": {
+              "Notifications": {
+                "id": "Notifications",
+                "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player/Notifications",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.Construct",
+                  "version": "1.122.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
+                  "aws:cdk:cloudformation:props": {
+                    "bucketName": "krasovsky-youtube-player-s3bucket-dev",
+                    "websiteConfiguration": {
+                      "indexDocument": "index.html",
+                      "errorDocument": "index.html"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-s3.CfnBucket",
+                  "version": "1.122.0"
+                }
+              },
+              "Policy": {
+                "id": "Policy",
+                "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player/Policy",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player/Policy/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::S3::BucketPolicy",
+                      "aws:cdk:cloudformation:props": {
+                        "bucket": {
+                          "Ref": "awsyoutubeplayerCAB25EA2"
+                        },
+                        "policyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "s3:GetObject",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "AWS": "*"
+                              },
+                              "Resource": {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "awsyoutubeplayerCAB25EA2",
+                                        "Arn"
+                                      ]
+                                    },
+                                    "/*"
+                                  ]
+                                ]
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-s3.CfnBucketPolicy",
+                      "version": "1.122.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-s3.BucketPolicy",
+                  "version": "1.122.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-s3.Bucket",
+              "version": "1.122.0"
+            }
+          },
+          "aws-youtube-player-cf-distribution-dev": {
+            "id": "aws-youtube-player-cf-distribution-dev",
+            "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-cf-distribution-dev",
+            "children": {
+              "CFDistribution": {
+                "id": "CFDistribution",
+                "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-cf-distribution-dev/CFDistribution",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::CloudFront::Distribution",
+                  "aws:cdk:cloudformation:props": {
+                    "distributionConfig": {
+                      "comment": "AWS Youtube Player - CloudFront Distribution",
+                      "enabled": true,
+                      "defaultRootObject": "index.html",
+                      "httpVersion": "http2",
+                      "priceClass": "PriceClass_100",
+                      "ipv6Enabled": true,
+                      "customErrorResponses": [
+                        {
+                          "errorCode": 403,
+                          "errorCachingMinTtl": 3600,
+                          "responseCode": 200,
+                          "responsePagePath": "/index.html"
+                        }
+                      ],
+                      "origins": [
+                        {
+                          "id": "origin1",
+                          "domainName": {
+                            "Fn::GetAtt": [
+                              "awsyoutubeplayerCAB25EA2",
+                              "RegionalDomainName"
+                            ]
+                          },
+                          "s3OriginConfig": {},
+                          "connectionAttempts": 3,
+                          "connectionTimeout": 10
+                        }
+                      ],
+                      "defaultCacheBehavior": {
+                        "allowedMethods": [
+                          "DELETE",
+                          "GET",
+                          "HEAD",
+                          "OPTIONS",
+                          "PATCH",
+                          "POST",
+                          "PUT"
+                        ],
+                        "cachedMethods": [
+                          "GET",
+                          "HEAD",
+                          "OPTIONS"
+                        ],
+                        "compress": true,
+                        "forwardedValues": {
+                          "queryString": true,
+                          "cookies": {
+                            "forward": "none"
+                          },
+                          "headers": [
+                            "Access-Control-Request-Headers",
+                            "Access-Control-Request-Method",
+                            "Origin"
+                          ]
+                        },
+                        "targetOriginId": "origin1",
+                        "viewerProtocolPolicy": "redirect-to-https"
+                      },
+                      "viewerCertificate": {
+                        "cloudFrontDefaultCertificate": true
+                      }
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-cloudfront.CfnDistribution",
+                  "version": "1.122.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-cloudfront.CloudFrontWebDistribution",
+              "version": "1.122.0"
+            }
+          },
+          "aws-youtube-player-s3bucketdeployment": {
+            "id": "aws-youtube-player-s3bucketdeployment",
+            "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-s3bucketdeployment",
+            "children": {
+              "AwsCliLayer": {
+                "id": "AwsCliLayer",
+                "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-s3bucketdeployment/AwsCliLayer",
+                "children": {
+                  "Code": {
+                    "id": "Code",
+                    "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-s3bucketdeployment/AwsCliLayer/Code",
+                    "children": {
+                      "Stage": {
+                        "id": "Stage",
+                        "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-s3bucketdeployment/AwsCliLayer/Code/Stage",
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/core.AssetStaging",
+                          "version": "1.122.0"
+                        }
+                      },
+                      "AssetBucket": {
+                        "id": "AssetBucket",
+                        "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-s3bucketdeployment/AwsCliLayer/Code/AssetBucket",
+                        "children": {
+                          "Notifications": {
+                            "id": "Notifications",
+                            "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-s3bucketdeployment/AwsCliLayer/Code/AssetBucket/Notifications",
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/core.Construct",
+                              "version": "1.122.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-s3.BucketBase",
+                          "version": "1.122.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-s3-assets.Asset",
+                      "version": "1.122.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-s3bucketdeployment/AwsCliLayer/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::LayerVersion",
+                      "aws:cdk:cloudformation:props": {
+                        "content": {
+                          "s3Bucket": {
+                            "Ref": "AssetParameterse9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68S3BucketAEADE8C7"
+                          },
+                          "s3Key": {
+                            "Fn::Join": [
+                              "",
+                              [
+                                {
+                                  "Fn::Select": [
+                                    0,
+                                    {
+                                      "Fn::Split": [
+                                        "||",
+                                        {
+                                          "Ref": "AssetParameterse9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68S3VersionKeyE415415F"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "Fn::Select": [
+                                    1,
+                                    {
+                                      "Fn::Split": [
+                                        "||",
+                                        {
+                                          "Ref": "AssetParameterse9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68S3VersionKeyE415415F"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            ]
+                          }
+                        },
+                        "description": "/opt/awscli/aws"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-lambda.CfnLayerVersion",
+                      "version": "1.122.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/lambda-layer-awscli.AwsCliLayer",
+                  "version": "1.122.0"
+                }
+              },
+              "CustomResourceHandler": {
+                "id": "CustomResourceHandler",
+                "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-s3bucketdeployment/CustomResourceHandler",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-lambda.SingletonFunction",
+                  "version": "1.122.0"
+                }
+              },
+              "Asset1": {
+                "id": "Asset1",
+                "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-s3bucketdeployment/Asset1",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-s3bucketdeployment/Asset1/Stage",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.AssetStaging",
+                      "version": "1.122.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-s3bucketdeployment/Asset1/AssetBucket",
+                    "children": {
+                      "Notifications": {
+                        "id": "Notifications",
+                        "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-s3bucketdeployment/Asset1/AssetBucket/Notifications",
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/core.Construct",
+                          "version": "1.122.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-s3.BucketBase",
+                      "version": "1.122.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-s3-assets.Asset",
+                  "version": "1.122.0"
+                }
+              },
+              "CustomResource": {
+                "id": "CustomResource",
+                "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-s3bucketdeployment/CustomResource",
+                "children": {
+                  "Default": {
+                    "id": "Default",
+                    "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-s3bucketdeployment/CustomResource/Default",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnResource",
+                      "version": "1.122.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CustomResource",
+                  "version": "1.122.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-s3-deployment.BucketDeployment",
+              "version": "1.122.0"
+            }
+          },
+          "AssetParameters": {
+            "id": "AssetParameters",
+            "path": "YouTube-Player-App-Infrastructure-dev/AssetParameters",
+            "children": {
+              "e9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68": {
+                "id": "e9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68",
+                "path": "YouTube-Player-App-Infrastructure-dev/AssetParameters/e9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68",
+                "children": {
+                  "S3Bucket": {
+                    "id": "S3Bucket",
+                    "path": "YouTube-Player-App-Infrastructure-dev/AssetParameters/e9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68/S3Bucket",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.122.0"
+                    }
+                  },
+                  "S3VersionKey": {
+                    "id": "S3VersionKey",
+                    "path": "YouTube-Player-App-Infrastructure-dev/AssetParameters/e9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68/S3VersionKey",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.122.0"
+                    }
+                  },
+                  "ArtifactHash": {
+                    "id": "ArtifactHash",
+                    "path": "YouTube-Player-App-Infrastructure-dev/AssetParameters/e9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68/ArtifactHash",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.122.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.Construct",
+                  "version": "1.122.0"
+                }
+              },
+              "1f6de40da10b415b255c07df709f791e772ffb9f7bdd14ad81fb75643aad24ea": {
+                "id": "1f6de40da10b415b255c07df709f791e772ffb9f7bdd14ad81fb75643aad24ea",
+                "path": "YouTube-Player-App-Infrastructure-dev/AssetParameters/1f6de40da10b415b255c07df709f791e772ffb9f7bdd14ad81fb75643aad24ea",
+                "children": {
+                  "S3Bucket": {
+                    "id": "S3Bucket",
+                    "path": "YouTube-Player-App-Infrastructure-dev/AssetParameters/1f6de40da10b415b255c07df709f791e772ffb9f7bdd14ad81fb75643aad24ea/S3Bucket",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.122.0"
+                    }
+                  },
+                  "S3VersionKey": {
+                    "id": "S3VersionKey",
+                    "path": "YouTube-Player-App-Infrastructure-dev/AssetParameters/1f6de40da10b415b255c07df709f791e772ffb9f7bdd14ad81fb75643aad24ea/S3VersionKey",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.122.0"
+                    }
+                  },
+                  "ArtifactHash": {
+                    "id": "ArtifactHash",
+                    "path": "YouTube-Player-App-Infrastructure-dev/AssetParameters/1f6de40da10b415b255c07df709f791e772ffb9f7bdd14ad81fb75643aad24ea/ArtifactHash",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.122.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.Construct",
+                  "version": "1.122.0"
+                }
+              },
+              "3c4380d783fb77564a74764ae7b6ec9187cd72d2636f3970d7cd49492b8718c2": {
+                "id": "3c4380d783fb77564a74764ae7b6ec9187cd72d2636f3970d7cd49492b8718c2",
+                "path": "YouTube-Player-App-Infrastructure-dev/AssetParameters/3c4380d783fb77564a74764ae7b6ec9187cd72d2636f3970d7cd49492b8718c2",
+                "children": {
+                  "S3Bucket": {
+                    "id": "S3Bucket",
+                    "path": "YouTube-Player-App-Infrastructure-dev/AssetParameters/3c4380d783fb77564a74764ae7b6ec9187cd72d2636f3970d7cd49492b8718c2/S3Bucket",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.122.0"
+                    }
+                  },
+                  "S3VersionKey": {
+                    "id": "S3VersionKey",
+                    "path": "YouTube-Player-App-Infrastructure-dev/AssetParameters/3c4380d783fb77564a74764ae7b6ec9187cd72d2636f3970d7cd49492b8718c2/S3VersionKey",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.122.0"
+                    }
+                  },
+                  "ArtifactHash": {
+                    "id": "ArtifactHash",
+                    "path": "YouTube-Player-App-Infrastructure-dev/AssetParameters/3c4380d783fb77564a74764ae7b6ec9187cd72d2636f3970d7cd49492b8718c2/ArtifactHash",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.122.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.Construct",
+                  "version": "1.122.0"
+                }
+              },
+              "9071d49331e909771c96db813093c7bebf6729ab1edeb03e3fd138f6fcc7778a": {
+                "id": "9071d49331e909771c96db813093c7bebf6729ab1edeb03e3fd138f6fcc7778a",
+                "path": "YouTube-Player-App-Infrastructure-dev/AssetParameters/9071d49331e909771c96db813093c7bebf6729ab1edeb03e3fd138f6fcc7778a",
+                "children": {
+                  "S3Bucket": {
+                    "id": "S3Bucket",
+                    "path": "YouTube-Player-App-Infrastructure-dev/AssetParameters/9071d49331e909771c96db813093c7bebf6729ab1edeb03e3fd138f6fcc7778a/S3Bucket",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.122.0"
+                    }
+                  },
+                  "S3VersionKey": {
+                    "id": "S3VersionKey",
+                    "path": "YouTube-Player-App-Infrastructure-dev/AssetParameters/9071d49331e909771c96db813093c7bebf6729ab1edeb03e3fd138f6fcc7778a/S3VersionKey",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.122.0"
+                    }
+                  },
+                  "ArtifactHash": {
+                    "id": "ArtifactHash",
+                    "path": "YouTube-Player-App-Infrastructure-dev/AssetParameters/9071d49331e909771c96db813093c7bebf6729ab1edeb03e3fd138f6fcc7778a/ArtifactHash",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.122.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.Construct",
+                  "version": "1.122.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Construct",
+              "version": "1.122.0"
+            }
+          },
+          "Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C": {
+            "id": "Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C",
+            "path": "YouTube-Player-App-Infrastructure-dev/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "YouTube-Player-App-Infrastructure-dev/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "YouTube-Player-App-Infrastructure-dev/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.CfnRole",
+                      "version": "1.122.0"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "YouTube-Player-App-Infrastructure-dev/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "YouTube-Player-App-Infrastructure-dev/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": [
+                                    "s3:GetObject*",
+                                    "s3:GetBucket*",
+                                    "s3:List*"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": [
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          "arn:",
+                                          {
+                                            "Ref": "AWS::Partition"
+                                          },
+                                          ":s3:::",
+                                          {
+                                            "Ref": "AssetParameters3c4380d783fb77564a74764ae7b6ec9187cd72d2636f3970d7cd49492b8718c2S3BucketF6700F6D"
+                                          }
+                                        ]
+                                      ]
+                                    },
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          "arn:",
+                                          {
+                                            "Ref": "AWS::Partition"
+                                          },
+                                          ":s3:::",
+                                          {
+                                            "Ref": "AssetParameters3c4380d783fb77564a74764ae7b6ec9187cd72d2636f3970d7cd49492b8718c2S3BucketF6700F6D"
+                                          },
+                                          "/*"
+                                        ]
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "Action": [
+                                    "s3:GetObject*",
+                                    "s3:GetBucket*",
+                                    "s3:List*",
+                                    "s3:DeleteObject*",
+                                    "s3:PutObject*",
+                                    "s3:Abort*"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "awsyoutubeplayerCAB25EA2",
+                                        "Arn"
+                                      ]
+                                    },
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          {
+                                            "Fn::GetAtt": [
+                                              "awsyoutubeplayerCAB25EA2",
+                                              "Arn"
+                                            ]
+                                          },
+                                          "/*"
+                                        ]
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "Action": [
+                                    "cloudfront:GetInvalidation",
+                                    "cloudfront:CreateInvalidation"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": "*"
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF",
+                            "roles": [
+                              {
+                                "Ref": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                          "version": "1.122.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.Policy",
+                      "version": "1.122.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.Role",
+                  "version": "1.122.0"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "YouTube-Player-App-Infrastructure-dev/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "YouTube-Player-App-Infrastructure-dev/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.AssetStaging",
+                      "version": "1.122.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "YouTube-Player-App-Infrastructure-dev/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Code/AssetBucket",
+                    "children": {
+                      "Notifications": {
+                        "id": "Notifications",
+                        "path": "YouTube-Player-App-Infrastructure-dev/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Code/AssetBucket/Notifications",
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/core.Construct",
+                          "version": "1.122.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-s3.BucketBase",
+                      "version": "1.122.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-s3-assets.Asset",
+                  "version": "1.122.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "YouTube-Player-App-Infrastructure-dev/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Ref": "AssetParameters1f6de40da10b415b255c07df709f791e772ffb9f7bdd14ad81fb75643aad24eaS3BucketD8D20B9A"
+                      },
+                      "s3Key": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Fn::Select": [
+                                0,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters1f6de40da10b415b255c07df709f791e772ffb9f7bdd14ad81fb75643aad24eaS3VersionKeyCD2774D3"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "Fn::Select": [
+                                1,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters1f6de40da10b415b255c07df709f791e772ffb9f7bdd14ad81fb75643aad24eaS3VersionKeyCD2774D3"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "role": {
+                      "Fn::GetAtt": [
+                        "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265",
+                        "Arn"
+                      ]
+                    },
+                    "handler": "index.handler",
+                    "layers": [
+                      {
+                        "Ref": "awsyoutubeplayers3bucketdeploymentAwsCliLayer44B37227"
+                      }
+                    ],
+                    "runtime": "python3.6",
+                    "timeout": 900
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-lambda.CfnFunction",
+                  "version": "1.122.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-lambda.Function",
+              "version": "1.122.0"
+            }
+          },
+          "aws-youtube-player-user-pool-dev": {
+            "id": "aws-youtube-player-user-pool-dev",
+            "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-user-pool-dev",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-user-pool-dev/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Cognito::UserPool",
+                  "aws:cdk:cloudformation:props": {
+                    "accountRecoverySetting": {
+                      "recoveryMechanisms": [
+                        {
+                          "name": "verified_phone_number",
+                          "priority": 1
+                        },
+                        {
+                          "name": "verified_email",
+                          "priority": 2
+                        }
+                      ]
+                    },
+                    "adminCreateUserConfig": {
+                      "allowAdminCreateUserOnly": false
+                    },
+                    "aliasAttributes": [
+                      "email"
+                    ],
+                    "autoVerifiedAttributes": [
+                      "email"
+                    ],
+                    "emailVerificationMessage": "Thanks for signing up to youtube player app. Your verification code is {####}",
+                    "emailVerificationSubject": "Verify your email for YouTube Player app.",
+                    "policies": {
+                      "passwordPolicy": {
+                        "minimumLength": 8,
+                        "requireLowercase": true,
+                        "requireUppercase": true,
+                        "requireNumbers": true,
+                        "requireSymbols": true
+                      }
+                    },
+                    "schema": [
+                      {
+                        "name": "email",
+                        "mutable": false,
+                        "required": true
+                      },
+                      {
+                        "name": "google-refresh-token",
+                        "attributeDataType": "String",
+                        "mutable": true
+                      }
+                    ],
+                    "smsVerificationMessage": "The verification code to your new account is {####}",
+                    "verificationMessageTemplate": {
+                      "defaultEmailOption": "CONFIRM_WITH_CODE",
+                      "emailMessage": "Thanks for signing up to youtube player app. Your verification code is {####}",
+                      "emailSubject": "Verify your email for YouTube Player app.",
+                      "smsMessage": "The verification code to your new account is {####}"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-cognito.CfnUserPool",
+                  "version": "1.122.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-cognito.UserPool",
+              "version": "1.122.0"
+            }
+          },
+          "web": {
+            "id": "web",
+            "path": "YouTube-Player-App-Infrastructure-dev/web",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "YouTube-Player-App-Infrastructure-dev/web/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Cognito::UserPoolClient",
+                  "aws:cdk:cloudformation:props": {
+                    "userPoolId": {
+                      "Ref": "awsyoutubeplayeruserpooldev9ECE1AC3"
+                    },
+                    "allowedOAuthFlows": [
+                      "implicit",
+                      "code"
+                    ],
+                    "allowedOAuthFlowsUserPoolClient": true,
+                    "allowedOAuthScopes": [
+                      "profile",
+                      "phone",
+                      "email",
+                      "openid",
+                      "aws.cognito.signin.user.admin"
+                    ],
+                    "callbackUrLs": [
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "https://",
+                            {
+                              "Fn::GetAtt": [
+                                "awsyoutubeplayercfdistributiondevCFDistribution716FEEF1",
+                                "DomainName"
+                              ]
+                            }
+                          ]
+                        ]
+                      },
+                      "http://localhost:4200"
+                    ],
+                    "generateSecret": false,
+                    "logoutUrLs": [
+                      "http://localhost:4200",
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "https://",
+                            {
+                              "Fn::GetAtt": [
+                                "awsyoutubeplayercfdistributiondevCFDistribution716FEEF1",
+                                "DomainName"
+                              ]
+                            }
+                          ]
+                        ]
+                      }
+                    ],
+                    "readAttributes": [
+                      "custom:google-refresh-token",
+                      "email"
+                    ],
+                    "supportedIdentityProviders": [
+                      "COGNITO"
+                    ],
+                    "writeAttributes": [
+                      "custom:google-refresh-token",
+                      "email"
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-cognito.CfnUserPoolClient",
+                  "version": "1.122.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-cognito.UserPoolClient",
+              "version": "1.122.0"
+            }
+          },
+          "aws-youtube-player-graphql-api-dev": {
+            "id": "aws-youtube-player-graphql-api-dev",
+            "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev",
+            "children": {
+              "ApiLogsRole": {
+                "id": "ApiLogsRole",
+                "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/ApiLogsRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/ApiLogsRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "appsync.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSAppSyncPushToCloudWatchLogs"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.CfnRole",
+                      "version": "1.122.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.Role",
+                  "version": "1.122.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::AppSync::GraphQLApi",
+                  "aws:cdk:cloudformation:props": {
+                    "authenticationType": "API_KEY",
+                    "name": "aws-youtube-player-graphql-api-dev",
+                    "additionalAuthenticationProviders": [
+                      {
+                        "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+                        "userPoolConfig": {
+                          "userPoolId": {
+                            "Ref": "awsyoutubeplayeruserpooldev9ECE1AC3"
+                          },
+                          "awsRegion": {
+                            "Ref": "AWS::Region"
+                          },
+                          "defaultAction": "ALLOW"
+                        }
+                      }
+                    ],
+                    "logConfig": {
+                      "cloudWatchLogsRoleArn": {
+                        "Fn::GetAtt": [
+                          "awsyoutubeplayergraphqlapidevApiLogsRole0C5462C6",
+                          "Arn"
+                        ]
+                      },
+                      "fieldLogLevel": "ALL"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-appsync.CfnGraphQLApi",
+                  "version": "1.122.0"
+                }
+              },
+              "Schema": {
+                "id": "Schema",
+                "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/Schema",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::AppSync::GraphQLSchema",
+                  "aws:cdk:cloudformation:props": {
+                    "apiId": {
+                      "Fn::GetAtt": [
+                        "awsyoutubeplayergraphqlapidev8A0C8AF2",
+                        "ApiId"
+                      ]
+                    },
+                    "definition": "type Favorite @aws_api_key @aws_cognito_user_pools {\n  id: ID!\n  username: String!\n  videoId: String!\n  source: String!\n}\n\ninput FavoriteInput {\n  id: ID\n  username: String\n  videoId: String!\n  source: String!\n}\n\ntype Query {\n  listFavorites: [Favorite] @aws_api_key\n  listFavoritesByUsername: [Favorite] @aws_cognito_user_pools\n}\n\ntype Mutation {\n  createFavorite(favorite: FavoriteInput!): Favorite @aws_cognito_user_pools\n  deleteFavorite(id: ID!): ID @aws_cognito_user_pools\n}\n"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-appsync.CfnGraphQLSchema",
+                  "version": "1.122.0"
+                }
+              },
+              "DefaultApiKey": {
+                "id": "DefaultApiKey",
+                "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/DefaultApiKey",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::AppSync::ApiKey",
+                  "aws:cdk:cloudformation:props": {
+                    "apiId": {
+                      "Fn::GetAtt": [
+                        "awsyoutubeplayergraphqlapidev8A0C8AF2",
+                        "ApiId"
+                      ]
+                    },
+                    "expires": 1663103494
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-appsync.CfnApiKey",
+                  "version": "1.122.0"
+                }
+              },
+              "lambdaDataSource": {
+                "id": "lambdaDataSource",
+                "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/lambdaDataSource",
+                "children": {
+                  "ServiceRole": {
+                    "id": "ServiceRole",
+                    "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/lambdaDataSource/ServiceRole",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/lambdaDataSource/ServiceRole/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "appsync.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-iam.CfnRole",
+                          "version": "1.122.0"
+                        }
+                      },
+                      "DefaultPolicy": {
+                        "id": "DefaultPolicy",
+                        "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/lambdaDataSource/ServiceRole/DefaultPolicy",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/lambdaDataSource/ServiceRole/DefaultPolicy/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                              "aws:cdk:cloudformation:props": {
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": "lambda:InvokeFunction",
+                                      "Effect": "Allow",
+                                      "Resource": {
+                                        "Fn::GetAtt": [
+                                          "awsyoutubeplayergraphqllambdadev74CCFC69",
+                                          "Arn"
+                                        ]
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "policyName": "awsyoutubeplayergraphqlapidevlambdaDataSourceServiceRoleDefaultPolicy5648D571",
+                                "roles": [
+                                  {
+                                    "Ref": "awsyoutubeplayergraphqlapidevlambdaDataSourceServiceRole8F7E550E"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                              "version": "1.122.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-iam.Policy",
+                          "version": "1.122.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.Role",
+                      "version": "1.122.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/lambdaDataSource/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::AppSync::DataSource",
+                      "aws:cdk:cloudformation:props": {
+                        "apiId": {
+                          "Fn::GetAtt": [
+                            "awsyoutubeplayergraphqlapidev8A0C8AF2",
+                            "ApiId"
+                          ]
+                        },
+                        "name": "lambdaDataSource",
+                        "type": "AWS_LAMBDA",
+                        "lambdaConfig": {
+                          "lambdaFunctionArn": {
+                            "Fn::GetAtt": [
+                              "awsyoutubeplayergraphqllambdadev74CCFC69",
+                              "Arn"
+                            ]
+                          }
+                        },
+                        "serviceRoleArn": {
+                          "Fn::GetAtt": [
+                            "awsyoutubeplayergraphqlapidevlambdaDataSourceServiceRole8F7E550E",
+                            "Arn"
+                          ]
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-appsync.CfnDataSource",
+                      "version": "1.122.0"
+                    }
+                  },
+                  "QuerylistFavoritesResolver": {
+                    "id": "QuerylistFavoritesResolver",
+                    "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/lambdaDataSource/QuerylistFavoritesResolver",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/lambdaDataSource/QuerylistFavoritesResolver/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::AppSync::Resolver",
+                          "aws:cdk:cloudformation:props": {
+                            "apiId": {
+                              "Fn::GetAtt": [
+                                "awsyoutubeplayergraphqlapidev8A0C8AF2",
+                                "ApiId"
+                              ]
+                            },
+                            "fieldName": "listFavorites",
+                            "typeName": "Query",
+                            "dataSourceName": "lambdaDataSource",
+                            "kind": "UNIT"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-appsync.CfnResolver",
+                          "version": "1.122.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-appsync.Resolver",
+                      "version": "1.122.0"
+                    }
+                  },
+                  "QuerylistFavoritesByUsernameResolver": {
+                    "id": "QuerylistFavoritesByUsernameResolver",
+                    "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/lambdaDataSource/QuerylistFavoritesByUsernameResolver",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/lambdaDataSource/QuerylistFavoritesByUsernameResolver/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::AppSync::Resolver",
+                          "aws:cdk:cloudformation:props": {
+                            "apiId": {
+                              "Fn::GetAtt": [
+                                "awsyoutubeplayergraphqlapidev8A0C8AF2",
+                                "ApiId"
+                              ]
+                            },
+                            "fieldName": "listFavoritesByUsername",
+                            "typeName": "Query",
+                            "dataSourceName": "lambdaDataSource",
+                            "kind": "UNIT"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-appsync.CfnResolver",
+                          "version": "1.122.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-appsync.Resolver",
+                      "version": "1.122.0"
+                    }
+                  },
+                  "MutationcreateFavoriteResolver": {
+                    "id": "MutationcreateFavoriteResolver",
+                    "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/lambdaDataSource/MutationcreateFavoriteResolver",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/lambdaDataSource/MutationcreateFavoriteResolver/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::AppSync::Resolver",
+                          "aws:cdk:cloudformation:props": {
+                            "apiId": {
+                              "Fn::GetAtt": [
+                                "awsyoutubeplayergraphqlapidev8A0C8AF2",
+                                "ApiId"
+                              ]
+                            },
+                            "fieldName": "createFavorite",
+                            "typeName": "Mutation",
+                            "dataSourceName": "lambdaDataSource",
+                            "kind": "UNIT"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-appsync.CfnResolver",
+                          "version": "1.122.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-appsync.Resolver",
+                      "version": "1.122.0"
+                    }
+                  },
+                  "MutationdeleteFavoriteResolver": {
+                    "id": "MutationdeleteFavoriteResolver",
+                    "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/lambdaDataSource/MutationdeleteFavoriteResolver",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/lambdaDataSource/MutationdeleteFavoriteResolver/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::AppSync::Resolver",
+                          "aws:cdk:cloudformation:props": {
+                            "apiId": {
+                              "Fn::GetAtt": [
+                                "awsyoutubeplayergraphqlapidev8A0C8AF2",
+                                "ApiId"
+                              ]
+                            },
+                            "fieldName": "deleteFavorite",
+                            "typeName": "Mutation",
+                            "dataSourceName": "lambdaDataSource",
+                            "kind": "UNIT"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-appsync.CfnResolver",
+                          "version": "1.122.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-appsync.Resolver",
+                      "version": "1.122.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-appsync.LambdaDataSource",
+                  "version": "1.122.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-appsync.GraphqlApi",
+              "version": "1.122.0"
+            }
+          },
+          "aws-youtube-player-graphql-lambda-dev": {
+            "id": "aws-youtube-player-graphql-lambda-dev",
+            "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-lambda-dev",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-lambda-dev/ServiceRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-lambda-dev/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.CfnRole",
+                      "version": "1.122.0"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-lambda-dev/ServiceRole/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-lambda-dev/ServiceRole/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "dynamodb:*",
+                                  "Effect": "Allow",
+                                  "Resource": [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "awsyoutubeplayerdynamodbdev9FBF3E45",
+                                        "Arn"
+                                      ]
+                                    },
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          {
+                                            "Fn::GetAtt": [
+                                              "awsyoutubeplayerdynamodbdev9FBF3E45",
+                                              "Arn"
+                                            ]
+                                          },
+                                          "/index/*"
+                                        ]
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "awsyoutubeplayergraphqllambdadevServiceRoleDefaultPolicy7E100EF8",
+                            "roles": [
+                              {
+                                "Ref": "awsyoutubeplayergraphqllambdadevServiceRoleF89F185A"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                          "version": "1.122.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.Policy",
+                      "version": "1.122.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.Role",
+                  "version": "1.122.0"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-lambda-dev/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-lambda-dev/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.AssetStaging",
+                      "version": "1.122.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-lambda-dev/Code/AssetBucket",
+                    "children": {
+                      "Notifications": {
+                        "id": "Notifications",
+                        "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-lambda-dev/Code/AssetBucket/Notifications",
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/core.Construct",
+                          "version": "1.122.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-s3.BucketBase",
+                      "version": "1.122.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-s3-assets.Asset",
+                  "version": "1.122.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-lambda-dev/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Ref": "AssetParameters9071d49331e909771c96db813093c7bebf6729ab1edeb03e3fd138f6fcc7778aS3BucketA06B6C4F"
+                      },
+                      "s3Key": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Fn::Select": [
+                                0,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters9071d49331e909771c96db813093c7bebf6729ab1edeb03e3fd138f6fcc7778aS3VersionKey3307796F"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "Fn::Select": [
+                                1,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters9071d49331e909771c96db813093c7bebf6729ab1edeb03e3fd138f6fcc7778aS3VersionKey3307796F"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "role": {
+                      "Fn::GetAtt": [
+                        "awsyoutubeplayergraphqllambdadevServiceRoleF89F185A",
+                        "Arn"
+                      ]
+                    },
+                    "environment": {
+                      "variables": {
+                        "FAVORITE_TABLE": {
+                          "Ref": "awsyoutubeplayerdynamodbdev9FBF3E45"
+                        }
+                      }
+                    },
+                    "handler": "main.handler",
+                    "memorySize": 1024,
+                    "runtime": "nodejs12.x"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-lambda.CfnFunction",
+                  "version": "1.122.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-lambda.Function",
+              "version": "1.122.0"
+            }
+          },
+          "aws-youtube-player-dynamodb-dev": {
+            "id": "aws-youtube-player-dynamodb-dev",
+            "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-dynamodb-dev",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-dynamodb-dev/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
+                  "aws:cdk:cloudformation:props": {
+                    "keySchema": [
+                      {
+                        "attributeName": "videoId",
+                        "keyType": "HASH"
+                      }
+                    ],
+                    "attributeDefinitions": [
+                      {
+                        "attributeName": "videoId",
+                        "attributeType": "S"
+                      },
+                      {
+                        "attributeName": "username",
+                        "attributeType": "S"
+                      }
+                    ],
+                    "billingMode": "PAY_PER_REQUEST",
+                    "globalSecondaryIndexes": [
+                      {
+                        "indexName": "favoritesByUsername",
+                        "keySchema": [
+                          {
+                            "attributeName": "username",
+                            "keyType": "HASH"
+                          }
+                        ],
+                        "projection": {
+                          "projectionType": "ALL"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-dynamodb.CfnTable",
+                  "version": "1.122.0"
+                }
+              },
+              "ScalingRole": {
+                "id": "ScalingRole",
+                "path": "YouTube-Player-App-Infrastructure-dev/aws-youtube-player-dynamodb-dev/ScalingRole",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.Resource",
+                  "version": "1.122.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-dynamodb.Table",
+              "version": "1.122.0"
+            }
+          },
+          "CloudFront URL: ": {
+            "id": "CloudFront URL: ",
+            "path": "YouTube-Player-App-Infrastructure-dev/CloudFront URL: ",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.CfnOutput",
+              "version": "1.122.0"
+            }
+          },
+          "UserPoolId: ": {
+            "id": "UserPoolId: ",
+            "path": "YouTube-Player-App-Infrastructure-dev/UserPoolId: ",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.CfnOutput",
+              "version": "1.122.0"
+            }
+          },
+          "UserPoolClientId: ": {
+            "id": "UserPoolClientId: ",
+            "path": "YouTube-Player-App-Infrastructure-dev/UserPoolClientId: ",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.CfnOutput",
+              "version": "1.122.0"
+            }
+          },
+          "Region: ": {
+            "id": "Region: ",
+            "path": "YouTube-Player-App-Infrastructure-dev/Region: ",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.CfnOutput",
+              "version": "1.122.0"
+            }
+          },
+          "GraphQLApiUrl: ": {
+            "id": "GraphQLApiUrl: ",
+            "path": "YouTube-Player-App-Infrastructure-dev/GraphQLApiUrl: ",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.CfnOutput",
+              "version": "1.122.0"
+            }
+          },
+          "AppSyncAPIKey: ": {
+            "id": "AppSyncAPIKey: ",
+            "path": "YouTube-Player-App-Infrastructure-dev/AppSyncAPIKey: ",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.CfnOutput",
+              "version": "1.122.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "YouTube-Player-App-Infrastructure-dev/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "YouTube-Player-App-Infrastructure-dev/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnResource",
+                  "version": "1.122.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "YouTube-Player-App-Infrastructure-dev/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnCondition",
+                  "version": "1.122.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Construct",
+              "version": "1.122.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "@aws-cdk/core.Stack",
+          "version": "1.122.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "@aws-cdk/core.App",
+      "version": "1.122.0"
+    }
+  }
+}

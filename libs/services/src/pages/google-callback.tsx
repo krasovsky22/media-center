@@ -23,17 +23,18 @@ const GoogleCallbackPage = () => {
           );
 
           const {
-            tokens: { refresh_token },
+            tokens: { refresh_token, access_token },
           } = googleTokenResponse;
 
-          console.log(refresh_token, googleTokenResponse);
           if (refresh_token) {
             //save refresh token as cognito attribute
             const success = updateGoogleRefreshToken(refresh_token);
+          } else {
+            await youtubeService?.destroySession(access_token ?? '');
           }
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (e: any) {
-          setError(e?.message);
+          setError(e?.message ?? '');
         }
 
         setIsInitializing(false);

@@ -37,7 +37,8 @@ const ConfirmSignUp: React.FC = () => {
       try {
         await confirmSignUp(username, verificationCode);
         history.push('/');
-      } catch (e) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (e: any) {
         setError(e.message);
 
         setIsLoading(false);
@@ -64,7 +65,7 @@ const ConfirmSignUp: React.FC = () => {
                   ref={codeInputField}
                   onChange={(event) => setVerificationCode(event.target.value)}
                 />
-                <Button>Submit</Button>
+                <Button onClick={onVerificationCodeSubmit}>Submit</Button>
               </HStack>
               {error && (
                 <Alert status="error">

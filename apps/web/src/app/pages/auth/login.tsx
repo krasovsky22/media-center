@@ -35,15 +35,11 @@ const LoginPage: React.FC = () => {
         try {
           const requestHeaders =
             await youtubeService?.googleClient.getRequestHeaders();
-          console.log(
-            'validating is youtube refresh token is still valid',
-            requestHeaders
-          );
+
           isRefreshTokenValid = true;
-        } catch (e) {
-          if (e instanceof Error) {
-            console.error('Unable to validate Refresh Token: ', e.message);
-          }
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (e: any) {
+          console.error('Unable to validate Refresh Token: ', e.message);
         }
 
         if (!youtubeRefreshToken || !isRefreshTokenValid) {
@@ -72,8 +68,8 @@ const LoginPage: React.FC = () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (e: any) {
         setError(e?.message ?? '');
+        setIsLoading(false);
       }
-      setIsLoading(false);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [username, password, youtubeRefreshToken, youtubeService]

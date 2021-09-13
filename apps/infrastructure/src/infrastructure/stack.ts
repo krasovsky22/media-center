@@ -207,6 +207,11 @@ export class InfrastructureStack extends cdk.Stack {
     });
 
     lambdaDs.createResolver({
+      typeName: 'Query',
+      fieldName: 'listFavoritesByUsername',
+    });
+
+    lambdaDs.createResolver({
       typeName: 'Mutation',
       fieldName: 'createFavorite',
     });
@@ -220,18 +225,19 @@ export class InfrastructureStack extends cdk.Stack {
     const favoriteTable = new ddb.Table(this, parameters.dynamoDBTableName, {
       billingMode: ddb.BillingMode.PAY_PER_REQUEST,
       partitionKey: {
-        name: 'videoId',
+        name: 'id',
+        type: ddb.AttributeType.STRING,
+      },
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
+    });
+
+    favoriteTable.addGlobalSecondaryIndex({
+      indexName: 'favoritesByUsername',
+      partitionKey: {
+        name: 'username',
         type: ddb.AttributeType.STRING,
       },
     });
-
-    // favoriteTable.addGlobalSecondaryIndex({
-    //   indexName: 'favoritesBySource',
-    //   partitionKey: {
-    //     name: 'source',
-    //     type: ddb.AttributeType.STRING,
-    //   },
-    // });
 
     favoriteTable.grantFullAccess(favoriteLambda);
 

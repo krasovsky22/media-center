@@ -1,21 +1,23 @@
 type Favorite @aws_api_key @aws_cognito_user_pools {
   id: ID!
+  username: String!
   videoId: String!
   source: String!
 }
 
 input FavoriteInput {
-  id: ID,
+  id: ID
+  username: String
   videoId: String!
   source: String!
 }
 
 type Query {
-  listFavorites: [Favorite]
-    @aws_api_key @aws_cognito_user_pools
+  listFavorites: [Favorite] @aws_api_key
+  listFavoritesByUsername: [Favorite] @aws_cognito_user_pools
 }
 
 type Mutation {
-  createFavorite(input: FavoriteInput!): Favorite @aws_cognito_user_pools
+  createFavorite(favorite: FavoriteInput!): Favorite @aws_cognito_user_pools
   deleteFavorite(id: ID!): ID @aws_cognito_user_pools
 }

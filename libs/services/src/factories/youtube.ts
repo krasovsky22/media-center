@@ -71,6 +71,10 @@ const youtubeServiceFactory = (refreshToken: string | null) => {
     get googleClient() {
       return googleClient;
     },
+
+    async destroySession(access_token: string) {
+      await googleClient.destroySession(access_token);
+    },
   };
 };
 

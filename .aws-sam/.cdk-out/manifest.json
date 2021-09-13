@@ -1,0 +1,1304 @@
+{
+  "version": "14.0.0",
+  "artifacts": {
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    },
+    "YouTube-Player-App-Infrastructure-dev": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "YouTube-Player-App-Infrastructure-dev.template.json",
+        "validateOnSynth": false
+      },
+      "metadata": {
+        "/YouTube-Player-App-Infrastructure-dev": [
+          {
+            "type": "aws:cdk:asset",
+            "data": {
+              "path": "/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/lambda-layer-awscli/lib/layer.zip",
+              "id": "e9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68",
+              "packaging": "file",
+              "sourceHash": "e9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68",
+              "s3BucketParameter": "AssetParameterse9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68S3BucketAEADE8C7",
+              "s3KeyParameter": "AssetParameterse9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68S3VersionKeyE415415F",
+              "artifactHashParameter": "AssetParameterse9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68ArtifactHashD9A515C3"
+            },
+            "trace": [
+              "ConstructNode.addMetadata (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/construct-compat.ts:252:92)",
+              "LegacyStackSynthesizer.doAddFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:161:23)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:66:19)",
+              "InfrastructureStack.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack.ts:355:29)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:70:25)",
+              "new Asset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-assets/lib/asset.ts:86:40)",
+              "AssetCode.bind (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/code.ts:180:20)",
+              "new LayerVersion (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/layers.ts:120:29)",
+              "new AwsCliLayer (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/lambda-layer-awscli/lib/awscli-layer.ts:10:5)",
+              "new BucketDeployment (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/bucket-deployment.ts:106:16)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:80:5)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          },
+          {
+            "type": "aws:cdk:asset",
+            "data": {
+              "path": "/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/lambda",
+              "id": "1f6de40da10b415b255c07df709f791e772ffb9f7bdd14ad81fb75643aad24ea",
+              "packaging": "zip",
+              "sourceHash": "1f6de40da10b415b255c07df709f791e772ffb9f7bdd14ad81fb75643aad24ea",
+              "s3BucketParameter": "AssetParameters1f6de40da10b415b255c07df709f791e772ffb9f7bdd14ad81fb75643aad24eaS3BucketD8D20B9A",
+              "s3KeyParameter": "AssetParameters1f6de40da10b415b255c07df709f791e772ffb9f7bdd14ad81fb75643aad24eaS3VersionKeyCD2774D3",
+              "artifactHashParameter": "AssetParameters1f6de40da10b415b255c07df709f791e772ffb9f7bdd14ad81fb75643aad24eaArtifactHash3943F7F3"
+            },
+            "trace": [
+              "ConstructNode.addMetadata (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/construct-compat.ts:252:92)",
+              "LegacyStackSynthesizer.doAddFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:161:23)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:66:19)",
+              "InfrastructureStack.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack.ts:355:29)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:70:25)",
+              "new Asset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-assets/lib/asset.ts:86:40)",
+              "AssetCode.bind (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/code.ts:180:20)",
+              "new Function (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/function.ts:331:29)",
+              "SingletonFunction.ensureLambda (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/singleton-lambda.ts:93:12)",
+              "new SingletonFunction (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/singleton-lambda.ts:32:32)",
+              "new BucketDeployment (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/bucket-deployment.ts:103:21)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:80:5)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          },
+          {
+            "type": "aws:cdk:asset",
+            "data": {
+              "path": "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/web",
+              "id": "3c4380d783fb77564a74764ae7b6ec9187cd72d2636f3970d7cd49492b8718c2",
+              "packaging": "zip",
+              "sourceHash": "3c4380d783fb77564a74764ae7b6ec9187cd72d2636f3970d7cd49492b8718c2",
+              "s3BucketParameter": "AssetParameters3c4380d783fb77564a74764ae7b6ec9187cd72d2636f3970d7cd49492b8718c2S3BucketF6700F6D",
+              "s3KeyParameter": "AssetParameters3c4380d783fb77564a74764ae7b6ec9187cd72d2636f3970d7cd49492b8718c2S3VersionKeyEDC935D9",
+              "artifactHashParameter": "AssetParameters3c4380d783fb77564a74764ae7b6ec9187cd72d2636f3970d7cd49492b8718c2ArtifactHash9A4D61DF"
+            },
+            "trace": [
+              "ConstructNode.addMetadata (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/construct-compat.ts:252:92)",
+              "LegacyStackSynthesizer.doAddFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:161:23)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:66:19)",
+              "InfrastructureStack.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack.ts:355:29)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:70:25)",
+              "new Asset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-assets/lib/asset.ts:86:40)",
+              "Object.bind (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/source.ts:58:23)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/bucket-deployment.ts:120:83",
+              "Array.map (<anonymous>)",
+              "new BucketDeployment (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/bucket-deployment.ts:120:51)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:80:5)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          },
+          {
+            "type": "aws:cdk:asset",
+            "data": {
+              "path": "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/lambda-functions",
+              "id": "9071d49331e909771c96db813093c7bebf6729ab1edeb03e3fd138f6fcc7778a",
+              "packaging": "zip",
+              "sourceHash": "9071d49331e909771c96db813093c7bebf6729ab1edeb03e3fd138f6fcc7778a",
+              "s3BucketParameter": "AssetParameters9071d49331e909771c96db813093c7bebf6729ab1edeb03e3fd138f6fcc7778aS3BucketA06B6C4F",
+              "s3KeyParameter": "AssetParameters9071d49331e909771c96db813093c7bebf6729ab1edeb03e3fd138f6fcc7778aS3VersionKey3307796F",
+              "artifactHashParameter": "AssetParameters9071d49331e909771c96db813093c7bebf6729ab1edeb03e3fd138f6fcc7778aArtifactHash155CFAB4"
+            },
+            "trace": [
+              "ConstructNode.addMetadata (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/construct-compat.ts:252:92)",
+              "LegacyStackSynthesizer.doAddFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:161:23)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:66:19)",
+              "InfrastructureStack.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack.ts:355:29)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:70:25)",
+              "new Asset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-assets/lib/asset.ts:86:40)",
+              "AssetCode.bind (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/code.ts:180:20)",
+              "new Function (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/function.ts:331:29)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:184:28)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/aws-youtube-player/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsyoutubeplayerCAB25EA2",
+            "trace": [
+              "new Bucket (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3/lib/bucket.ts:713:22)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:21:20)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/aws-youtube-player/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsyoutubeplayerPolicyA8AD469B",
+            "trace": [
+              "new BucketPolicy (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3/lib/bucket-policy.ts:30:21)",
+              "Bucket.addToResourcePolicy (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3/lib/bucket.ts:227:21)",
+              "Function.addToPrincipalOrResource (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-iam/lib/grant.ts:76:45)",
+              "Bucket.grantPublicAccess (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3/lib/bucket.ts:328:22)",
+              "new Bucket (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3/lib/bucket.ts:772:12)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:21:20)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/aws-youtube-player-cf-distribution-dev/CFDistribution": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsyoutubeplayercfdistributiondevCFDistribution716FEEF1",
+            "trace": [
+              "new CloudFrontWebDistribution (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-cloudfront/lib/web-distribution.ts:566:26)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:35:26)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/aws-youtube-player-s3bucketdeployment/AwsCliLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsyoutubeplayers3bucketdeploymentAwsCliLayer44B37227",
+            "trace": [
+              "new LayerVersion (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/layers.ts:128:39)",
+              "new AwsCliLayer (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/lambda-layer-awscli/lib/awscli-layer.ts:10:5)",
+              "new BucketDeployment (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/bucket-deployment.ts:106:16)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:80:5)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/aws-youtube-player-s3bucketdeployment/CustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsyoutubeplayers3bucketdeploymentCustomResourceB7E9894A",
+            "trace": [
+              "new CustomResource (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/custom-resource.ts:36:21)",
+              "new BucketDeployment (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/bucket-deployment.ts:131:5)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:80:5)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/AssetParameters/e9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68/S3Bucket": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AssetParameterse9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68S3BucketAEADE8C7",
+            "trace": [
+              "new FileAssetParameters (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/private/asset-parameters.ts:16:32)",
+              "LegacyStackSynthesizer.doAddFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:144:16)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:66:19)",
+              "InfrastructureStack.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack.ts:355:29)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:70:25)",
+              "new Asset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-assets/lib/asset.ts:86:40)",
+              "AssetCode.bind (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/code.ts:180:20)",
+              "new LayerVersion (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/layers.ts:120:29)",
+              "new AwsCliLayer (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/lambda-layer-awscli/lib/awscli-layer.ts:10:5)",
+              "new BucketDeployment (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/bucket-deployment.ts:106:16)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:80:5)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/AssetParameters/e9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68/S3VersionKey": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AssetParameterse9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68S3VersionKeyE415415F",
+            "trace": [
+              "new FileAssetParameters (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/private/asset-parameters.ts:21:31)",
+              "LegacyStackSynthesizer.doAddFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:144:16)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:66:19)",
+              "InfrastructureStack.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack.ts:355:29)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:70:25)",
+              "new Asset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-assets/lib/asset.ts:86:40)",
+              "AssetCode.bind (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/code.ts:180:20)",
+              "new LayerVersion (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/layers.ts:120:29)",
+              "new AwsCliLayer (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/lambda-layer-awscli/lib/awscli-layer.ts:10:5)",
+              "new BucketDeployment (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/bucket-deployment.ts:106:16)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:80:5)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/AssetParameters/e9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68/ArtifactHash": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AssetParameterse9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68ArtifactHashD9A515C3",
+            "trace": [
+              "new FileAssetParameters (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/private/asset-parameters.ts:26:34)",
+              "LegacyStackSynthesizer.doAddFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:144:16)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:66:19)",
+              "InfrastructureStack.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack.ts:355:29)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:70:25)",
+              "new Asset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-assets/lib/asset.ts:86:40)",
+              "AssetCode.bind (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/code.ts:180:20)",
+              "new LayerVersion (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/layers.ts:120:29)",
+              "new AwsCliLayer (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/lambda-layer-awscli/lib/awscli-layer.ts:10:5)",
+              "new BucketDeployment (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/bucket-deployment.ts:106:16)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:80:5)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/AssetParameters/1f6de40da10b415b255c07df709f791e772ffb9f7bdd14ad81fb75643aad24ea/S3Bucket": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AssetParameters1f6de40da10b415b255c07df709f791e772ffb9f7bdd14ad81fb75643aad24eaS3BucketD8D20B9A",
+            "trace": [
+              "new FileAssetParameters (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/private/asset-parameters.ts:16:32)",
+              "LegacyStackSynthesizer.doAddFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:144:16)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:66:19)",
+              "InfrastructureStack.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack.ts:355:29)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:70:25)",
+              "new Asset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-assets/lib/asset.ts:86:40)",
+              "AssetCode.bind (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/code.ts:180:20)",
+              "new Function (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/function.ts:331:29)",
+              "SingletonFunction.ensureLambda (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/singleton-lambda.ts:93:12)",
+              "new SingletonFunction (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/singleton-lambda.ts:32:32)",
+              "new BucketDeployment (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/bucket-deployment.ts:103:21)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:80:5)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/AssetParameters/1f6de40da10b415b255c07df709f791e772ffb9f7bdd14ad81fb75643aad24ea/S3VersionKey": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AssetParameters1f6de40da10b415b255c07df709f791e772ffb9f7bdd14ad81fb75643aad24eaS3VersionKeyCD2774D3",
+            "trace": [
+              "new FileAssetParameters (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/private/asset-parameters.ts:21:31)",
+              "LegacyStackSynthesizer.doAddFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:144:16)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:66:19)",
+              "InfrastructureStack.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack.ts:355:29)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:70:25)",
+              "new Asset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-assets/lib/asset.ts:86:40)",
+              "AssetCode.bind (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/code.ts:180:20)",
+              "new Function (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/function.ts:331:29)",
+              "SingletonFunction.ensureLambda (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/singleton-lambda.ts:93:12)",
+              "new SingletonFunction (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/singleton-lambda.ts:32:32)",
+              "new BucketDeployment (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/bucket-deployment.ts:103:21)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:80:5)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/AssetParameters/1f6de40da10b415b255c07df709f791e772ffb9f7bdd14ad81fb75643aad24ea/ArtifactHash": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AssetParameters1f6de40da10b415b255c07df709f791e772ffb9f7bdd14ad81fb75643aad24eaArtifactHash3943F7F3",
+            "trace": [
+              "new FileAssetParameters (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/private/asset-parameters.ts:26:34)",
+              "LegacyStackSynthesizer.doAddFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:144:16)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:66:19)",
+              "InfrastructureStack.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack.ts:355:29)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:70:25)",
+              "new Asset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-assets/lib/asset.ts:86:40)",
+              "AssetCode.bind (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/code.ts:180:20)",
+              "new Function (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/function.ts:331:29)",
+              "SingletonFunction.ensureLambda (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/singleton-lambda.ts:93:12)",
+              "new SingletonFunction (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/singleton-lambda.ts:32:32)",
+              "new BucketDeployment (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/bucket-deployment.ts:103:21)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:80:5)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/AssetParameters/3c4380d783fb77564a74764ae7b6ec9187cd72d2636f3970d7cd49492b8718c2/S3Bucket": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AssetParameters3c4380d783fb77564a74764ae7b6ec9187cd72d2636f3970d7cd49492b8718c2S3BucketF6700F6D",
+            "trace": [
+              "new FileAssetParameters (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/private/asset-parameters.ts:16:32)",
+              "LegacyStackSynthesizer.doAddFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:144:16)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:66:19)",
+              "InfrastructureStack.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack.ts:355:29)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:70:25)",
+              "new Asset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-assets/lib/asset.ts:86:40)",
+              "Object.bind (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/source.ts:58:23)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/bucket-deployment.ts:120:83",
+              "Array.map (<anonymous>)",
+              "new BucketDeployment (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/bucket-deployment.ts:120:51)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:80:5)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/AssetParameters/3c4380d783fb77564a74764ae7b6ec9187cd72d2636f3970d7cd49492b8718c2/S3VersionKey": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AssetParameters3c4380d783fb77564a74764ae7b6ec9187cd72d2636f3970d7cd49492b8718c2S3VersionKeyEDC935D9",
+            "trace": [
+              "new FileAssetParameters (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/private/asset-parameters.ts:21:31)",
+              "LegacyStackSynthesizer.doAddFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:144:16)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:66:19)",
+              "InfrastructureStack.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack.ts:355:29)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:70:25)",
+              "new Asset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-assets/lib/asset.ts:86:40)",
+              "Object.bind (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/source.ts:58:23)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/bucket-deployment.ts:120:83",
+              "Array.map (<anonymous>)",
+              "new BucketDeployment (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/bucket-deployment.ts:120:51)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:80:5)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/AssetParameters/3c4380d783fb77564a74764ae7b6ec9187cd72d2636f3970d7cd49492b8718c2/ArtifactHash": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AssetParameters3c4380d783fb77564a74764ae7b6ec9187cd72d2636f3970d7cd49492b8718c2ArtifactHash9A4D61DF",
+            "trace": [
+              "new FileAssetParameters (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/private/asset-parameters.ts:26:34)",
+              "LegacyStackSynthesizer.doAddFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:144:16)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:66:19)",
+              "InfrastructureStack.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack.ts:355:29)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:70:25)",
+              "new Asset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-assets/lib/asset.ts:86:40)",
+              "Object.bind (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/source.ts:58:23)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/bucket-deployment.ts:120:83",
+              "Array.map (<anonymous>)",
+              "new BucketDeployment (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/bucket-deployment.ts:120:51)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:80:5)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/AssetParameters/9071d49331e909771c96db813093c7bebf6729ab1edeb03e3fd138f6fcc7778a/S3Bucket": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AssetParameters9071d49331e909771c96db813093c7bebf6729ab1edeb03e3fd138f6fcc7778aS3BucketA06B6C4F",
+            "trace": [
+              "new FileAssetParameters (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/private/asset-parameters.ts:16:32)",
+              "LegacyStackSynthesizer.doAddFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:144:16)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:66:19)",
+              "InfrastructureStack.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack.ts:355:29)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:70:25)",
+              "new Asset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-assets/lib/asset.ts:86:40)",
+              "AssetCode.bind (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/code.ts:180:20)",
+              "new Function (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/function.ts:331:29)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:184:28)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/AssetParameters/9071d49331e909771c96db813093c7bebf6729ab1edeb03e3fd138f6fcc7778a/S3VersionKey": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AssetParameters9071d49331e909771c96db813093c7bebf6729ab1edeb03e3fd138f6fcc7778aS3VersionKey3307796F",
+            "trace": [
+              "new FileAssetParameters (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/private/asset-parameters.ts:21:31)",
+              "LegacyStackSynthesizer.doAddFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:144:16)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:66:19)",
+              "InfrastructureStack.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack.ts:355:29)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:70:25)",
+              "new Asset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-assets/lib/asset.ts:86:40)",
+              "AssetCode.bind (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/code.ts:180:20)",
+              "new Function (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/function.ts:331:29)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:184:28)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/AssetParameters/9071d49331e909771c96db813093c7bebf6729ab1edeb03e3fd138f6fcc7778a/ArtifactHash": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AssetParameters9071d49331e909771c96db813093c7bebf6729ab1edeb03e3fd138f6fcc7778aArtifactHash155CFAB4",
+            "trace": [
+              "new FileAssetParameters (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/private/asset-parameters.ts:26:34)",
+              "LegacyStackSynthesizer.doAddFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:144:16)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:66:19)",
+              "InfrastructureStack.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack.ts:355:29)",
+              "LegacyStackSynthesizer.addFileAsset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.ts:70:25)",
+              "new Asset (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-assets/lib/asset.ts:86:40)",
+              "AssetCode.bind (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/code.ts:180:20)",
+              "new Function (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/function.ts:331:29)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:184:28)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265",
+            "trace": [
+              "new Role (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-iam/lib/role.ts:199:18)",
+              "new Function (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/function.ts:311:31)",
+              "SingletonFunction.ensureLambda (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/singleton-lambda.ts:93:12)",
+              "new SingletonFunction (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/singleton-lambda.ts:32:32)",
+              "new BucketDeployment (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/bucket-deployment.ts:103:21)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:80:5)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF",
+            "trace": [
+              "new Policy (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-iam/lib/policy.ts:89:22)",
+              "Role.addToPrincipalPolicy (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-iam/lib/role.ts:236:28)",
+              "Function.addToPrincipal (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-iam/lib/grant.ts:92:61)",
+              "Function.addToPrincipalOrResource (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-iam/lib/grant.ts:48:26)",
+              "Import.grant (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3/lib/bucket.ts:383:27)",
+              "Import.grantRead (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3/lib/bucket.ts:280:17)",
+              "Asset.grantRead (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-assets/lib/asset.ts:128:17)",
+              "Object.bind (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/source.ts:65:15)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/bucket-deployment.ts:120:83",
+              "Array.map (<anonymous>)",
+              "new BucketDeployment (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/bucket-deployment.ts:120:51)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:80:5)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536",
+            "trace": [
+              "new Function (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/function.ts:373:35)",
+              "SingletonFunction.ensureLambda (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/singleton-lambda.ts:93:12)",
+              "new SingletonFunction (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/singleton-lambda.ts:32:32)",
+              "new BucketDeployment (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-s3-deployment/lib/bucket-deployment.ts:103:21)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:80:5)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/aws-youtube-player-user-pool-dev/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsyoutubeplayeruserpooldev9ECE1AC3",
+            "trace": [
+              "new UserPool (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-cognito/lib/user-pool.ts:444:22)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:108:22)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/web/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "web08B6E5F3",
+            "trace": [
+              "new UserPoolClient (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-cognito/lib/user-pool-client.ts:209:22)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:145:28)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/ApiLogsRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsyoutubeplayergraphqlapidevApiLogsRole0C5462C6",
+            "trace": [
+              "new Role (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-iam/lib/role.ts:199:18)",
+              "GraphqlApi.setupLogConfig (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-appsync/lib/graphqlapi.ts:303:57)",
+              "new GraphqlApi (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-appsync/lib/graphqlapi.ts:229:23)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:157:17)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsyoutubeplayergraphqlapidev8A0C8AF2",
+            "trace": [
+              "new GraphqlApi (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-appsync/lib/graphqlapi.ts:226:16)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:157:17)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/Schema": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsyoutubeplayergraphqlapidevSchema325E5C8C",
+            "trace": [
+              "Schema.bind (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-appsync/lib/schema.ts:52:21)",
+              "new GraphqlApi (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-appsync/lib/graphqlapi.ts:241:39)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:157:17)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/DefaultApiKey": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsyoutubeplayergraphqlapidevDefaultApiKeyC17F69D9",
+            "trace": [
+              "GraphqlApi.createAPIKey (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-appsync/lib/graphqlapi.ts:352:12)",
+              "new GraphqlApi (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-appsync/lib/graphqlapi.ts:247:34)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:157:17)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/lambdaDataSource/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsyoutubeplayergraphqlapidevlambdaDataSourceServiceRole8F7E550E",
+            "trace": [
+              "new Role (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-iam/lib/role.ts:199:18)",
+              "new BaseDataSource (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-appsync/lib/data-source.ts:64:47)",
+              "new BackedDataSource (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-appsync/lib/data-source.ts:103:5)",
+              "new LambdaDataSource (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-appsync/lib/data-source.ts:195:5)",
+              "GraphqlApi.addLambdaDataSource (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-appsync/lib/graphqlapi-base.ts:106:12)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:198:26)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/lambdaDataSource/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsyoutubeplayergraphqlapidevlambdaDataSourceServiceRoleDefaultPolicy5648D571",
+            "trace": [
+              "new Policy (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-iam/lib/policy.ts:89:22)",
+              "Role.addToPrincipalPolicy (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-iam/lib/role.ts:236:28)",
+              "Function.addToPrincipal (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-iam/lib/grant.ts:92:61)",
+              "Function.addToPrincipalOrResource (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-iam/lib/grant.ts:48:26)",
+              "Function.grantInvoke (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/function-base.ts:184:25)",
+              "new LambdaDataSource (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-appsync/lib/data-source.ts:201:26)",
+              "GraphqlApi.addLambdaDataSource (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-appsync/lib/graphqlapi-base.ts:106:12)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:198:26)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/lambdaDataSource/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsyoutubeplayergraphqlapidevlambdaDataSource23DCF527",
+            "trace": [
+              "new BaseDataSource (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-appsync/lib/data-source.ts:67:15)",
+              "new BackedDataSource (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-appsync/lib/data-source.ts:103:5)",
+              "new LambdaDataSource (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-appsync/lib/data-source.ts:195:5)",
+              "GraphqlApi.addLambdaDataSource (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-appsync/lib/graphqlapi-base.ts:106:12)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:198:26)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/lambdaDataSource/QuerylistFavoritesResolver/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsyoutubeplayergraphqlapidevlambdaDataSourceQuerylistFavoritesResolver55C83776",
+            "trace": [
+              "new Resolver (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-appsync/lib/resolver.ts:56:21)",
+              "LambdaDataSource.createResolver (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-appsync/lib/data-source.ts:80:12)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:204:14)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/lambdaDataSource/QuerylistFavoritesByUsernameResolver/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsyoutubeplayergraphqlapidevlambdaDataSourceQuerylistFavoritesByUsernameResolver868F891A",
+            "trace": [
+              "new Resolver (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-appsync/lib/resolver.ts:56:21)",
+              "LambdaDataSource.createResolver (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-appsync/lib/data-source.ts:80:12)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:209:14)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/lambdaDataSource/MutationcreateFavoriteResolver/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsyoutubeplayergraphqlapidevlambdaDataSourceMutationcreateFavoriteResolverA1A02B18",
+            "trace": [
+              "new Resolver (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-appsync/lib/resolver.ts:56:21)",
+              "LambdaDataSource.createResolver (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-appsync/lib/data-source.ts:80:12)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:214:14)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-api-dev/lambdaDataSource/MutationdeleteFavoriteResolver/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsyoutubeplayergraphqlapidevlambdaDataSourceMutationdeleteFavoriteResolverEDF617E5",
+            "trace": [
+              "new Resolver (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-appsync/lib/resolver.ts:56:21)",
+              "LambdaDataSource.createResolver (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-appsync/lib/data-source.ts:80:12)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:219:14)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-lambda-dev/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsyoutubeplayergraphqllambdadevServiceRoleF89F185A",
+            "trace": [
+              "new Role (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-iam/lib/role.ts:199:18)",
+              "new Function (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/function.ts:311:31)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:184:28)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-lambda-dev/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsyoutubeplayergraphqllambdadevServiceRoleDefaultPolicy7E100EF8",
+            "trace": [
+              "new Policy (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-iam/lib/policy.ts:89:22)",
+              "Role.addToPrincipalPolicy (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-iam/lib/role.ts:236:28)",
+              "Function.addToPrincipal (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-iam/lib/grant.ts:92:61)",
+              "Table.combinedGrant (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-dynamodb/lib/table.ts:522:29)",
+              "Table.grantFullAccess (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-dynamodb/lib/table.ts:355:17)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:241:19)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/aws-youtube-player-graphql-lambda-dev/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsyoutubeplayergraphqllambdadev74CCFC69",
+            "trace": [
+              "new Function (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-lambda/lib/function.ts:373:35)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:184:28)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/aws-youtube-player-dynamodb-dev/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsyoutubeplayerdynamodbdev9FBF3E45",
+            "trace": [
+              "new Table (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/aws-dynamodb/lib/table.ts:678:18)",
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:225:27)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/CloudFront URL: ": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudFrontURL",
+            "trace": [
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:246:5)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/UserPoolId: ": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserPoolId",
+            "trace": [
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:250:5)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/UserPoolClientId: ": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserPoolClientId",
+            "trace": [
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:254:5)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/Region: ": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Region",
+            "trace": [
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:258:5)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/GraphQLApiUrl: ": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GraphQLApiUrl",
+            "trace": [
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:262:5)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/AppSyncAPIKey: ": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppSyncAPIKey",
+            "trace": [
+              "new InfrastructureStack (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/infrastructure/stack.ts:266:5)",
+              "Object../apps/infrastructure/src/main.ts (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/apps/infrastructure/src/main.ts:7:1)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "Object.0 (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:392:18)",
+              "__webpack_require__ (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:19:1)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/webpack:/webpack/bootstrap:83:1",
+              "Object.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/dist/apps/infrastructure/main.js:87:10)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata",
+            "trace": [
+              "new MetadataResource (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/private/metadata-resource.ts:22:24)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/private/synthesis.ts:166:5",
+              "visit (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/private/synthesis.ts:231:5)",
+              "visit (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/private/synthesis.ts:227:5)",
+              "injectMetadataResources (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/private/synthesis.ts:157:3)",
+              "Object.synthesize (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/private/synthesis.ts:18:3)",
+              "App.synth (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stage.ts:94:23)",
+              "process.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/app.ts:64:45)",
+              "Object.onceWrapper (node:events:514:26)",
+              "process.emit (node:events:394:28)",
+              "process.emit (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/source-map-support/source-map-support.js:495:21)"
+            ]
+          }
+        ],
+        "/YouTube-Player-App-Infrastructure-dev/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable",
+            "trace": [
+              "new MetadataResource (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/private/metadata-resource.ts:31:27)",
+              "/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/private/synthesis.ts:166:5",
+              "visit (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/private/synthesis.ts:231:5)",
+              "visit (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/private/synthesis.ts:227:5)",
+              "injectMetadataResources (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/private/synthesis.ts:157:3)",
+              "Object.synthesize (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/private/synthesis.ts:18:3)",
+              "App.synth (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/stage.ts:94:23)",
+              "process.<anonymous> (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/@aws-cdk/core/lib/app.ts:64:45)",
+              "Object.onceWrapper (node:events:514:26)",
+              "process.emit (node:events:394:28)",
+              "process.emit (/Users/annmac/Vlad/dev/aws-youtube-player/node_modules/source-map-support/source-map-support.js:495:21)"
+            ]
+          }
+        ]
+      },
+      "displayName": "YouTube-Player-App-Infrastructure-dev"
+    }
+  }
+}

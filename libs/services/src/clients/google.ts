@@ -41,10 +41,11 @@ const googleAuthService = (refreshToken: string | null) => {
       return oAuth2Client.credentials.refresh_token ?? null;
     },
 
-    destroySession: async () => {
+    destroySession: async (access_token: string) => {
       try {
-        await oAuth2Client.revokeCredentials();
-      } catch (e) {
+        await oAuth2Client.revokeToken(access_token);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (e: any) {
         console.error('Destroy google session error', e.message);
       }
     },
