@@ -3,6 +3,9 @@ import * as s3 from '@aws-cdk/aws-s3';
 import * as s3deploy from '@aws-cdk/aws-s3-deployment';
 import * as cloudFront from '@aws-cdk/aws-cloudfront';
 import * as cognito from '@aws-cdk/aws-cognito';
+import * as appsync from '@aws-cdk/aws-appsync';
+import * as ddb from '@aws-cdk/aws-dynamodb';
+import * as lambda from '@aws-cdk/aws-lambda';
 import { ClientAttributes, StringAttribute } from '@aws-cdk/aws-cognito';
 
 export class InfrastructureStack extends cdk.Stack {
@@ -150,6 +153,86 @@ export class InfrastructureStack extends cdk.Stack {
     //distribution should be created before user pool
     userPoolClient.node.addDependency(distribution);
 
+    //create graphql api
+    const api = new appsync.GraphqlApi(this, parameters.graphQLApiName, {
+      name: parameters.graphQLApiName,
+      logConfig: {
+        fieldLogLevel: appsync.FieldLogLevel.ALL,
+      },
+      schema: appsync.Schema.fromAsset('./graphql/schema.graphql'),
+      authorizationConfig: {
+        defaultAuthorization: {
+          authorizationType: appsync.AuthorizationType.API_KEY,
+          apiKeyConfig: {
+            expires: cdk.Expiration.after(cdk.Duration.days(365)),
+          },
+        },
+        additionalAuthorizationModes: [
+          {
+            authorizationType: appsync.AuthorizationType.USER_POOL,
+            userPoolConfig: {
+              userPool,
+            },
+          },
+        ],
+      },
+    });
+
+    //create lambda function
+    const favoriteLambda = new lambda.Function(
+      this,
+      parameters.graphQLLambdaFunctionName,
+      {
+        runtime: lambda.Runtime.NODEJS_12_X,
+        handler: 'main.handler',
+        code: lambda.Code.fromAsset('lambda-fns'),
+        memorySize: 1024,
+      }
+    );
+
+    //set the new Lambda function as a data source for the AppSync API
+    const lambdaDs = api.addLambdaDataSource(
+      'lambdaDataSource',
+      favoriteLambda
+    );
+
+    //create resolvers
+    lambdaDs.createResolver({
+      typeName: 'Query',
+      fieldName: 'getFavoriteByVideoId',
+    });
+
+    lambdaDs.createResolver({
+      typeName: 'Mutation',
+      fieldName: 'createFavorite',
+    });
+
+    lambdaDs.createResolver({
+      typeName: 'Mutation',
+      fieldName: 'deleteFavorite',
+    });
+
+    //create dynamoDB table
+    const favoriteTable = new ddb.Table(this, parameters.dynamoDBTableName, {
+      billingMode: ddb.BillingMode.PAY_PER_REQUEST,
+      partitionKey: {
+        name: 'videoId',
+        type: ddb.AttributeType.STRING,
+      },
+    });
+
+    // favoriteTable.addGlobalSecondaryIndex({
+    //   indexName: 'favoritesBySource',
+    //   partitionKey: {
+    //     name: 'source',
+    //     type: ddb.AttributeType.STRING,
+    //   },
+    // });
+
+    favoriteTable.grantFullAccess(favoriteLambda);
+
+    favoriteLambda.addEnvironment('FAVORITE_TABLE', favoriteTable.tableName);
+
     // Final CloudFront URL
     new cdk.CfnOutput(this, 'CloudFront URL: ', {
       value: `https://${distribution.distributionDomainName}`,
@@ -165,6 +248,14 @@ export class InfrastructureStack extends cdk.Stack {
 
     new cdk.CfnOutput(this, 'Region: ', {
       value: this.region,
+    });
+
+    new cdk.CfnOutput(this, 'GraphQLApiUrl: ', {
+      value: api.graphqlUrl,
+    });
+
+    new cdk.CfnOutput(this, 'AppSyncAPIKey: ', {
+      value: api.apiKey || '',
     });
   }
 
