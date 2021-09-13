@@ -39,6 +39,9 @@
     "infrastructure": {
       "tags": []
     },
+    "lambda-functions": {
+      "tags": []
+    },
     "services": {
       "tags": []
     },

@@ -6,5 +6,6 @@ module.exports = {
     '<rootDir>/libs/services',
     '<rootDir>/libs/components',
     '<rootDir>/libs/hooks',
+    '<rootDir>/apps/lambda-functions',
   ],
 };

@@ -113,6 +113,50 @@
         }
       }
     },
+    "lambda-functions": {
+      "root": "apps/lambda-functions",
+      "sourceRoot": "apps/lambda-functions/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/lambda-functions",
+            "main": "apps/lambda-functions/src/main.ts",
+            "tsConfig": "apps/lambda-functions/tsconfig.app.json",
+            "webpackConfig": "lambda.webpack.config.js"
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "lambda-functions:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/lambda-functions/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/lambda-functions"],
+          "options": {
+            "jestConfig": "apps/lambda-functions/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "services": {
       "root": "libs/services",
       "sourceRoot": "libs/services/src",

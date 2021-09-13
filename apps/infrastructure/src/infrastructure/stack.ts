@@ -159,7 +159,9 @@ export class InfrastructureStack extends cdk.Stack {
       logConfig: {
         fieldLogLevel: appsync.FieldLogLevel.ALL,
       },
-      schema: appsync.Schema.fromAsset('./graphql/schema.graphql'),
+      schema: appsync.Schema.fromAsset(
+        process.cwd() + '/apps/infrastructure/src/graphql/schema.graphql'
+      ),
       authorizationConfig: {
         defaultAuthorization: {
           authorizationType: appsync.AuthorizationType.API_KEY,
@@ -185,7 +187,9 @@ export class InfrastructureStack extends cdk.Stack {
       {
         runtime: lambda.Runtime.NODEJS_12_X,
         handler: 'main.handler',
-        code: lambda.Code.fromAsset('lambda-fns'),
+        code: lambda.Code.fromAsset(
+          process.cwd() + '/dist/apps/lambda-functions'
+        ),
         memorySize: 1024,
       }
     );
@@ -199,7 +203,7 @@ export class InfrastructureStack extends cdk.Stack {
     //create resolvers
     lambdaDs.createResolver({
       typeName: 'Query',
-      fieldName: 'getFavoriteByVideoId',
+      fieldName: 'listFavorites',
     });
 
     lambdaDs.createResolver({
