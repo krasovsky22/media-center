@@ -33,7 +33,8 @@ const youtubeServiceFactory = (refreshToken: string | null) => {
         const { data } = await client.get('playlists');
 
         return (data?.items ?? []) as T[];
-      } catch (error) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
         if (error.response) {
           // Request made and server responded
           throw error.response;
@@ -55,7 +56,8 @@ const youtubeServiceFactory = (refreshToken: string | null) => {
           },
         });
         return data.items as T[];
-      } catch (e) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (e: any) {
         console.error(e.message);
       }
 
