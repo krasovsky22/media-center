@@ -24,6 +24,9 @@ Amplify.configure({
     userPoolId: process.env.NX_REACT_APP_USER_POOL_ID,
     userPoolWebClientId: process.env.NX_REACT_APP_CLIENT_ID,
   },
+  //app sync configuration
+  aws_appsync_graphqlEndpoint: process.env.NX_REACT_APP_GRAPHQL_API_URL,
+  aws_appsync_authenticationType: 'AMAZON_COGNITO_USER_POOLS',
 });
 
 type CognitoUserType = {

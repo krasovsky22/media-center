@@ -17,6 +17,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@youtube-player/api": ["libs/api/src/index.ts"],
       "@youtube-player/auth": ["libs/auth/src/index.ts"],
       "@youtube-player/components": ["libs/components/src/index.ts"],
       "@youtube-player/hooks": ["libs/hooks/src/index.ts"],

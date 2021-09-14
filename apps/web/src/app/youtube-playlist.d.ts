@@ -29,6 +29,7 @@ export type YoutubePlaylistItem = {
     title: string;
     videoOwnerChannelTitle: string;
   };
+  isFavorite?: boolean;
 };
 
 export type YoutubePlaylistType = {

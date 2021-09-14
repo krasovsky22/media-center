@@ -38,6 +38,7 @@ export type PlaylistItemDataType = {
   description: string;
   owner: string;
   thumbnail_url: string;
+  isFavorite: boolean;
 };
 
 type PlaylistItemsTableContainerType = {
@@ -54,6 +55,7 @@ const PlaylistItemsTableContainer: React.FC<PlaylistItemsTableContainerType> =
           accessor: ({ id }) => {
             return (
               <Button
+                backgroundColor="transparent"
                 onClick={() =>
                   setActiveVideoId((prevActiveId) =>
                     prevActiveId === id ? null : id
@@ -117,8 +119,12 @@ const PlaylistItemsTableContainer: React.FC<PlaylistItemsTableContainerType> =
           <tbody {...getTableBodyProps()}>
             {rows.map((row, i) => {
               prepareRow(row);
+              console.log('asd', row);
               return (
-                <tr {...row.getRowProps()}>
+                <tr
+                  {...row.getRowProps()}
+                  className={row.original.isFavorite ? 'bg-yellow-200' : ''}
+                >
                   {row.cells.map((cell) => {
                     return (
                       <td {...cell.getCellProps()}>{cell.render('Cell')}</td>

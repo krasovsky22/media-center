@@ -1,7 +1,7 @@
 import { Flex } from '@chakra-ui/react';
 import { Loading } from '@youtube-player/components';
-import React, { useMemo } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { Carousel, PlayListComponent } from '../components';
 import { usePlayerPageStateState } from '../context/player-page';
 import PlaylistContainer from './playlist';
