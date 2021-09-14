@@ -33,6 +33,10 @@ const fetchPlaylistItems = <T extends YoutubePlaylistItem>(
         };
       }
     });
+
+    playlistItems.sort(
+      (prev, next) => +(next?.isFavorite ?? 0) - +(prev?.isFavorite ?? 0)
+    );
   }
 
   return { isLoading: isYoutubeLoading || isApiLoading, data: playlistItems };

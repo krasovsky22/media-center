@@ -51,11 +51,33 @@ const PlaylistItemsTableContainer: React.FC<PlaylistItemsTableContainerType> =
     const columns = useMemo<Column<PlaylistItemDataType>[]>(
       () => [
         {
-          Header: '#',
+          Header: '',
+          id: 'favorite',
+          accessor: ({ isFavorite }) => {
+            return (
+              <Button
+                backgroundColor="transparent"
+                onClick={() => {
+                  return null;
+                }}
+              >
+                {isFavorite ? (
+                  <Icons.StarFilled className="text-yellow-400" />
+                ) : (
+                  <Icons.Star className="text-yellow-400" />
+                )}
+              </Button>
+            );
+          },
+        },
+        {
+          Header: '',
+          id: 'id',
           accessor: ({ id }) => {
             return (
               <Button
                 backgroundColor="transparent"
+                className="hover:bg-transparent"
                 onClick={() =>
                   setActiveVideoId((prevActiveId) =>
                     prevActiveId === id ? null : id
@@ -119,12 +141,8 @@ const PlaylistItemsTableContainer: React.FC<PlaylistItemsTableContainerType> =
           <tbody {...getTableBodyProps()}>
             {rows.map((row, i) => {
               prepareRow(row);
-              console.log('asd', row);
               return (
-                <tr
-                  {...row.getRowProps()}
-                  className={row.original.isFavorite ? 'bg-yellow-200' : ''}
-                >
+                <tr {...row.getRowProps()}>
                   {row.cells.map((cell) => {
                     return (
                       <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
