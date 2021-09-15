@@ -2,9 +2,12 @@
 import { useRef, DependencyList } from 'react';
 import { isEqual as _isEqual, cloneDeep as _cloneDeep } from 'lodash';
 
-export default function useDeepMemo<T>(factory: () => T, deps: DependencyList) {
+export default function useDeepMemo<T>(
+  factory: () => T,
+  deps: DependencyList
+): T {
   const depsRef = useRef<DependencyList>([]);
-  const valueRef = useRef<T | undefined>(undefined);
+  const valueRef = useRef<T>();
 
   const isSame =
     depsRef.current.length &&
@@ -17,7 +20,7 @@ export default function useDeepMemo<T>(factory: () => T, deps: DependencyList) {
       return _isEqual(obj, deps[index]);
     });
 
-  if (!isSame) {
+  if (!isSame || !valueRef.current) {
     //need to do deep cloning because spread creates shallow copy
     depsRef.current = _cloneDeep(deps);
     valueRef.current = factory();

@@ -9,7 +9,7 @@ const GoogleCallbackPage = () => {
   const [isInitializing, setIsInitializing] = useState(true);
   const [error, setError] = useState('');
   const { youtubeService } = useServices();
-  const { user, updateGoogleRefreshToken } = useAuth();
+  const { updateGoogleRefreshToken } = useAuth();
 
   const code = useQuery('code') as string;
 
@@ -28,7 +28,7 @@ const GoogleCallbackPage = () => {
 
           if (refresh_token) {
             //save refresh token as cognito attribute
-            const success = updateGoogleRefreshToken(refresh_token);
+            const success = await updateGoogleRefreshToken(refresh_token);
           } else {
             await youtubeService?.destroySession(access_token ?? '');
           }
@@ -48,13 +48,8 @@ const GoogleCallbackPage = () => {
   }
 
   if (!isInitializing) {
-    return (
-      <Redirect
-        to={{
-          pathname: '/',
-        }}
-      />
-    );
+    window.location.pathname = '/';
+    return null;
   }
 
   return <Loading />;
