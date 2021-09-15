@@ -10,3 +10,9 @@ export const createFavorite = gql`
     }
   }
 `;
+
+export const deleteFavorite = gql`
+  mutation deleteFavorite($id: ID!) {
+    deleteFavorite(id: $id)
+  }
+`;

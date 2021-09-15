@@ -18,6 +18,7 @@ const Playlist: React.FC<YoutubePlaylistType> = ({ id, snippet }) => {
       owner: playListItem?.snippet?.videoOwnerChannelTitle ?? '',
       thumbnail_url: playListItem?.snippet?.thumbnails?.standard?.url ?? '',
       isFavorite: playListItem?.isFavorite ?? false,
+      favoriteId: playListItem?.favoriteId,
     }));
   }, [playlistItems]);
 

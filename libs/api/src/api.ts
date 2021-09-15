@@ -34,3 +34,10 @@ export const createFavorite = async (
 
   return queryResult.data?.createFavorite ?? null;
 };
+
+export const deleteFavorite = async (id: string) => {
+  return await API.graphql({
+    query: mutations.deleteFavorite,
+    variables: { id },
+  });
+};
