@@ -1,9 +1,10 @@
-import { Avatar, Flex, Table, Text, Button } from '@chakra-ui/react';
+import { Avatar, Button, Flex, Table } from '@chakra-ui/react';
 import React, { useMemo } from 'react';
-import { useTable, Column } from 'react-table';
+import { Column, useTable } from 'react-table';
 import styled from 'styled-components';
 import { Icons } from '../components';
 import { usePlayerPageStateState } from '../context/player-page';
+import { YoutubePlaylistItem } from '../youtube-playlist';
 
 const TableText = styled.p`
   text-overflow: ellipsis;
@@ -32,14 +33,14 @@ const TableStyles = styled.div`
   }
 `;
 
-export type PlaylistItemDataType = {
+export interface PlaylistItemDataType extends Partial<YoutubePlaylistItem> {
   id: string;
   title: string;
   description: string;
   owner: string;
   thumbnail_url: string;
   isFavorite: boolean;
-};
+}
 
 type PlaylistItemsTableContainerType = {
   data: PlaylistItemDataType[];
@@ -47,19 +48,20 @@ type PlaylistItemsTableContainerType = {
 
 const PlaylistItemsTableContainer: React.FC<PlaylistItemsTableContainerType> =
   ({ data }) => {
-    const { activeVideoId, setActiveVideoId } = usePlayerPageStateState();
+    const { activeVideoId, setActiveVideoId, addOrRemoveFavorite } =
+      usePlayerPageStateState();
+
     const columns = useMemo<Column<PlaylistItemDataType>[]>(
       () => [
         {
           Header: '',
-          id: 'favorite',
-          accessor: ({ isFavorite }) => {
+          id: 'isFavorite',
+          accessor: (row) => {
+            const { isFavorite } = row;
             return (
               <Button
                 backgroundColor="transparent"
-                onClick={() => {
-                  return null;
-                }}
+                onClick={() => addOrRemoveFavorite(row)}
               >
                 {isFavorite ? (
                   <Icons.StarFilled className="text-yellow-400" />

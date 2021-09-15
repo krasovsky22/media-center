@@ -1,6 +1,6 @@
 import { YoutubeServiceType } from '@youtube-player/services';
-import { fetchFavorites } from '@youtube-player/api';
-import { useQuery } from 'react-query';
+import { fetchFavorites, createFavorite } from '@youtube-player/api';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { YoutubePlaylistItem } from '../youtube-playlist';
 
 const fetchPlaylists = <T>(service?: YoutubeServiceType) =>
@@ -14,15 +14,17 @@ const fetchPlaylistItems = <T extends YoutubePlaylistItem>(
     ['fetch-youtube-playlists-videos', playlistId],
     () => service?.getPlaylistItem<T>(playlistId)
   );
+
   const { isLoading: isApiLoading, data: favorites } = useQuery(
-    ['fetch-video-saved-favorites'],
+    'fetch-video-saved-favorites',
     fetchFavorites
   );
 
-  if (playlistItems && favorites) {
+  if (playlistItems?.length && favorites?.length) {
     favorites.forEach((favorite) => {
       const playlistItemIndex = playlistItems?.findIndex(
-        (playlistItem) => playlistItem.id === favorite.videoId
+        (playlistItem) =>
+          playlistItem?.snippet?.resourceId?.videoId === favorite.videoId
       );
 
       if (playlistItemIndex >= 0) {
@@ -39,7 +41,35 @@ const fetchPlaylistItems = <T extends YoutubePlaylistItem>(
     );
   }
 
-  return { isLoading: isYoutubeLoading || isApiLoading, data: playlistItems };
+  return {
+    isLoading: isYoutubeLoading || isApiLoading,
+    data: playlistItems,
+  };
 };
 
-export default { fetchPlaylists, fetchPlaylistItems };
+const addOrRemoveFavorite = <T extends Partial<YoutubePlaylistItem>>() => {
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    (playlistItem: T): ReturnType<typeof createFavorite> => {
+      if (playlistItem.isFavorite) {
+        return createFavorite({
+          source: 'youtube',
+          videoId: playlistItem.id ?? '',
+        });
+      } else {
+        return createFavorite({
+          source: 'youtube',
+          videoId: playlistItem.id ?? '',
+        });
+      }
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('fetch-video-saved-favorites');
+      },
+    }
+  );
+};
+
+export default { fetchPlaylists, fetchPlaylistItems, addOrRemoveFavorite };

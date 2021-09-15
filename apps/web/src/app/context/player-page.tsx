@@ -1,3 +1,4 @@
+import { FavoriteType } from '@youtube-player/api';
 import { useServices } from '@youtube-player/services';
 import React, {
   useCallback,
@@ -19,6 +20,7 @@ type PlayerPageStateType = {
   activePlaylist?: YoutubePlaylistType;
   playlistItems: YoutubePlaylistItem[];
   playNextVideo: () => void;
+  addOrRemoveFavorite: (arg: Partial<YoutubePlaylistItem>) => void;
 };
 
 const initialState: PlayerPageStateType = {
@@ -31,6 +33,9 @@ const initialState: PlayerPageStateType = {
   },
   playNextVideo: () => {
     return null;
+  },
+  addOrRemoveFavorite: async () => {
+    return;
   },
 };
 
@@ -67,10 +72,6 @@ export const SharedPlayerPageProvider: React.FC = ({ children }) => {
     return playlists.find((playlist) => playlist.id === playlistId);
   }, [playlists, playlistId]);
 
-  useEffect(() => {
-    setIsLoading(isPlaylistsLoading || isPlaylistsItemsLoading);
-  }, [isPlaylistsLoading, isPlaylistsItemsLoading]);
-
   const playNextVideo = useCallback(() => {
     if (!activeVideoId) {
       setActiveVideoId(playlistItems[0]?.snippet?.resourceId?.videoId);
@@ -88,6 +89,19 @@ export const SharedPlayerPageProvider: React.FC = ({ children }) => {
     }
   }, [playlistItems, activeVideoId]);
 
+  const { mutate } = Queries.addOrRemoveFavorite();
+
+  const addOrRemoveFavorite = useCallback(
+    async (playlistItem) => {
+      await mutate(playlistItem);
+    },
+    [playlistId]
+  );
+
+  useEffect(() => {
+    setIsLoading(isPlaylistsLoading || isPlaylistsItemsLoading);
+  }, [isPlaylistsLoading, isPlaylistsItemsLoading]);
+
   return (
     <MyContext.Provider
       value={{
@@ -98,6 +112,7 @@ export const SharedPlayerPageProvider: React.FC = ({ children }) => {
         activeVideoId,
         playNextVideo,
         setActiveVideoId,
+        addOrRemoveFavorite,
       }}
     >
       {children}
