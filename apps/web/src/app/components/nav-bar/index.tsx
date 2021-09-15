@@ -4,8 +4,14 @@ import { useAuth } from '@youtube-player/auth';
 import classNames from 'classnames';
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import Icons from '../icons';
 import { ReactComponent as Logo } from '../../../assets/logo.svg';
 import { ROUTE_LOGOUT } from '../../routes';
+import {
+  IconButton,
+  useColorMode,
+  useColorModeValue as mode,
+} from '@chakra-ui/react';
 
 type NavigationType = { name: string; href: string; current: boolean };
 
@@ -17,12 +23,13 @@ const navigation: NavigationType[] = [
 ];
 
 export default function Navbar() {
+  const { colorMode, toggleColorMode } = useColorMode();
   const { user } = useAuth();
   const username = user?.username ?? 'unknown';
 
   return (
     <nav>
-      <Disclosure as="nav" className="bg-gray-800">
+      <Disclosure as="nav" className={mode('bg-gray-800', 'bg-gray-100')}>
         {({ open }) => (
           <>
             <div className="mx-auto px-2 sm:px-4 lg:px-4">
@@ -63,6 +70,19 @@ export default function Navbar() {
                     </div>
                   </div>
                 </div>
+                <IconButton
+                  aria-label="toggle theme"
+                  icon={
+                    colorMode === 'light' ? (
+                      <Icons.Sun className="text-yellow-400" />
+                    ) : (
+                      <Icons.Moon className="text-gray-700" />
+                    )
+                  }
+                  variant="ghost"
+                  size="sm"
+                  onClick={toggleColorMode}
+                />
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   {/* Profile dropdown */}
                   <Menu as="div" className="ml-3 relative">

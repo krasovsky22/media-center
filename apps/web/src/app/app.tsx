@@ -3,7 +3,11 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { Loading } from '@youtube-player/components';
 import { AuthProvider } from '@youtube-player/auth';
 import RouteComponent, { Routes } from './routes';
-import { Box, ChakraProvider } from '@chakra-ui/react';
+import {
+  Box,
+  ChakraProvider,
+  useColorModeValue as mode,
+} from '@chakra-ui/react';
 import { ServicesProvider } from '@youtube-player/services';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
@@ -16,7 +20,10 @@ export function App() {
         <AuthProvider>
           {(isInitializing) => (
             <ServicesProvider>
-              <Box className="p-0 bg-green-50 min-h-screen min-w-full relative flex flex-col">
+              <Box
+                bgColor={mode('green.50', 'gray.700')}
+                className="p-0  min-h-screen min-w-full relative flex flex-col"
+              >
                 <React.Suspense fallback={<Loading />}>
                   {isInitializing ? (
                     <Loading />
